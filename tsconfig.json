@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "references": [
+    { "path": "packages/ui" },
+    { "path": "packages/cli" },
+    { "path": "apps/playground" }
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@masst/ui": ["packages/ui"]
+    }
+  }
+}
