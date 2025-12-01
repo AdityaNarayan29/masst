@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "mastui";
+import { Button } from "@masst/ui";
 
 export default function Home() {
   return (

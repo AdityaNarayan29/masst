@@ -1,11 +1,14 @@
 {
-  "name": "mastui",
-  "version": "0.0.4",
+  "name": "@masst/ui",
+  "version": "0.0.5",
   "description": "A minimal UI component library for modern web apps.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "author": "Aditya Narayan",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prepublishOnly": "pnpm exec cpx ../../README.md ./",
     "build": "tsup index.ts --format esm,cjs --dts",

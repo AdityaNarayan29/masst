@@ -1,6 +1,6 @@
 'use client';
 
-import { Button } from "mastui";
+import { Button } from "@masst/ui";
 import Image from "next/image";
 
 export default function Home() {
