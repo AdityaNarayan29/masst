@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      pnpm:
-        specifier: ^10.11.0
-        version: 10.24.0
     devDependencies:
       '@changesets/cli':
         specifier: ^2.28.1
@@ -6627,12 +6623,6 @@ packages:
       mlly: 1.8.0
       pathe: 2.0.3
     dev: true
-
-  /pnpm@10.24.0:
-    resolution: {integrity: sha512-Af+K5xtEGZA7ZcYPstydNM+LtuBtA73hEu8496NNaQTEJLpmvqXNzxKJAjC/OflYBHMUDtnJRv7zKLblI4o0Wg==}
-    engines: {node: '>=18.12'}
-    hasBin: true
-    dev: false
 
   /polished@4.3.1:
     resolution: {integrity: sha512-OBatVyC/N7SCW/FaDHrSd+vn0o5cS855TOmYi4OkdWUMSJCET/xip//ch8xGUvtr3i44X9LVyWwQlRMTN3pwSA==}
