@@ -1,18 +1,19 @@
-import './global.css';
-import { RootProvider } from 'fumadocs-ui/provider';
-import { Inter } from 'next/font/google';
-import type { ReactNode } from 'react';
+import type { Metadata } from 'next';
+import './globals.css';
 
-const inter = Inter({
-  subsets: ['latin'],
-});
+export const metadata: Metadata = {
+  title: 'MastUI Documentation',
+  description: 'Documentation for MastUI component library',
+};
 
-export default function Layout({ children }: { children: ReactNode }) {
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
-    <html lang="en" className={inter.className} suppressHydrationWarning>
-      <body className="flex flex-col min-h-screen">
-        <RootProvider>{children}</RootProvider>
-      </body>
+    <html lang="en">
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

@@ -1,17 +1,16 @@
 {
   "compilerOptions": {
-    "target": "es6",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
     "jsx": "react-jsx",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["packages/mast-ui/*"]
+      "@/*": ["./packages/mast-ui/*"]
     },
-    "types": ["node"],  
+    "types": ["node"]
   },
   "include": ["packages/**/*"]
 }

@@ -8,17 +8,36 @@
   "license": "MIT",
   "scripts": {
     "prepublishOnly": "pnpm exec cpx ../../README.md ./",
-    "build": "tsup index.ts --format esm,cjs --dts"
+    "build": "tsup index.ts --format esm,cjs --dts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "devDependencies": {
+    "@chromatic-com/storybook": "^3.2.6",
+    "@storybook/addon-essentials": "^8.6.12",
+    "@storybook/addon-interactions": "^8.6.12",
+    "@storybook/addon-links": "^8.6.12",
+    "@storybook/blocks": "^8.6.12",
+    "@storybook/react": "^8.6.12",
+    "@storybook/react-vite": "^8.6.12",
+    "@storybook/test": "^8.6.12",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.3.0",
     "@types/tailwindcss": "^3.1.0",
+    "@vitejs/plugin-react": "^4.5.1",
     "autoprefixer": "^10.4.21",
     "clsx": "^2.1.1",
+    "jsdom": "^26.1.0",
     "postcss": "^8.5.3",
+    "storybook": "^8.6.12",
     "tailwind-variants": "^1.0.0",
     "tailwindcss": "^4.1.7",
     "tsup": "^8.4.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.3"
   },
   "peerDependencies": {
     "react": "^19.0.0",
