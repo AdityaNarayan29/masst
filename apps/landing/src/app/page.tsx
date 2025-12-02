@@ -31,16 +31,54 @@ import {
   Textarea,
   RadioGroup,
   RadioGroupItem,
+  Alert,
+  AlertTitle,
+  AlertDescription,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+  Calendar,
+  Skeleton,
+  Toggle,
+  ToggleGroup,
+  ToggleGroupItem,
 } from '@masst/ui';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 // Integrated Demo Component - like shadcn's homepage
 function ComponentShowcase() {
   const [sliderValue, setSliderValue] = useState([33]);
+  const [date, setDate] = useState<Date | undefined>(undefined);
+  const [isClient, setIsClient] = useState(false);
+
+  // Set the date only on the client to avoid hydration mismatch
+  useEffect(() => {
+    setDate(new Date());
+    setIsClient(true);
+  }, []);
 
   return (
     <div className="w-full max-w-7xl mx-auto">
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Column 1 */}
         <div className="space-y-6">
           {/* Payment Card */}
@@ -129,58 +167,78 @@ function ComponentShowcase() {
             </CardFooter>
           </Card>
 
-          {/* Report Issue */}
+          {/* Alert Examples */}
           <Card>
             <CardHeader>
-              <CardTitle>Report an issue</CardTitle>
-              <CardDescription>What area are you having problems with?</CardDescription>
+              <CardTitle>Alerts</CardTitle>
+              <CardDescription>Display important messages.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-2">
-                  <Label>Area</Label>
-                  <Select defaultValue="billing">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="team">Team</SelectItem>
-                      <SelectItem value="billing">Billing</SelectItem>
-                      <SelectItem value="account">Account</SelectItem>
-                      <SelectItem value="deployments">Deployments</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className="space-y-2">
-                  <Label>Security Level</Label>
-                  <Select defaultValue="2">
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="1">Severity 1</SelectItem>
-                      <SelectItem value="2">Severity 2</SelectItem>
-                      <SelectItem value="3">Severity 3</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label>Subject</Label>
-                <Input placeholder="I need help with..." />
-              </div>
-              <div className="space-y-2">
-                <Label>Description</Label>
-                <Textarea
-                  placeholder="Please include all relevant information..."
-                  className="min-h-[100px]"
-                />
-              </div>
+              <Alert>
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                <AlertTitle>Heads up!</AlertTitle>
+                <AlertDescription>You can add components using the CLI.</AlertDescription>
+              </Alert>
+              <Alert variant="destructive">
+                <svg
+                  className="h-4 w-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
+                  />
+                </svg>
+                <AlertTitle>Error</AlertTitle>
+                <AlertDescription>Your session has expired.</AlertDescription>
+              </Alert>
             </CardContent>
-            <CardFooter className="flex justify-between">
-              <Button variant="ghost">Cancel</Button>
-              <Button>Submit</Button>
-            </CardFooter>
+          </Card>
+
+          {/* Accordion */}
+          <Card>
+            <CardHeader>
+              <CardTitle>FAQ</CardTitle>
+              <CardDescription>Frequently asked questions.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Accordion type="single" collapsible className="w-full">
+                <AccordionItem value="item-1">
+                  <AccordionTrigger>Is it accessible?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It adheres to the WAI-ARIA design pattern.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2">
+                  <AccordionTrigger>Is it styled?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It comes with default styles that match your theme.
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3">
+                  <AccordionTrigger>Is it animated?</AccordionTrigger>
+                  <AccordionContent>
+                    Yes. It&apos;s animated by default with smooth transitions.
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </CardContent>
           </Card>
         </div>
 
@@ -193,29 +251,6 @@ function ComponentShowcase() {
               <CardDescription>Invite your team members to collaborate.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Avatar className="h-9 w-9">
-                    <AvatarImage src="https://github.com/shadcn.png" />
-                    <AvatarFallback>SC</AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <p className="text-sm font-medium leading-none">Sofia Chen</p>
-                    <p className="text-xs text-muted-foreground">sofia@email.com</p>
-                  </div>
-                </div>
-                <Select defaultValue="owner">
-                  <SelectTrigger className="w-[100px]">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="owner">Owner</SelectItem>
-                    <SelectItem value="admin">Admin</SelectItem>
-                    <SelectItem value="member">Member</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <Separator />
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Avatar className="h-9 w-9">
@@ -296,60 +331,87 @@ function ComponentShowcase() {
                     </SelectContent>
                   </Select>
                 </div>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback>IN</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="text-sm font-medium leading-none">Isabella Nguyen</p>
-                      <p className="text-xs text-muted-foreground">i@example.com</p>
-                    </div>
-                  </div>
-                  <Select defaultValue="view">
-                    <SelectTrigger className="w-[100px]">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="edit">Can edit</SelectItem>
-                      <SelectItem value="view">Can view</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
               </div>
             </CardContent>
           </Card>
 
-          {/* Notifications */}
+          {/* Table */}
           <Card>
             <CardHeader>
-              <CardTitle>Notifications</CardTitle>
-              <CardDescription>Choose what you want to be notified about.</CardDescription>
+              <CardTitle>Recent Orders</CardTitle>
+              <CardDescription>Your latest transactions.</CardDescription>
             </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label className="text-sm">Push Notifications</Label>
-                  <p className="text-xs text-muted-foreground">Receive on device.</p>
-                </div>
-                <Switch defaultChecked />
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label className="text-sm">Email Notifications</Label>
-                  <p className="text-xs text-muted-foreground">Receive via email.</p>
-                </div>
-                <Switch defaultChecked />
-              </div>
-              <Separator />
-              <div className="flex items-center justify-between">
-                <div className="space-y-0.5">
-                  <Label className="text-sm">Marketing</Label>
-                  <p className="text-xs text-muted-foreground">New features & updates.</p>
-                </div>
-                <Switch />
-              </div>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Order</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead className="text-right">Amount</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  <TableRow>
+                    <TableCell className="font-medium">#3210</TableCell>
+                    <TableCell>
+                      <Badge variant="outline">Pending</Badge>
+                    </TableCell>
+                    <TableCell className="text-right">$250.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">#3209</TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">Shipped</Badge>
+                    </TableCell>
+                    <TableCell className="text-right">$150.00</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell className="font-medium">#3208</TableCell>
+                    <TableCell>
+                      <Badge>Delivered</Badge>
+                    </TableCell>
+                    <TableCell className="text-right">$350.00</TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
+
+          {/* Dialog Example */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Dialog</CardTitle>
+              <CardDescription>Modal dialogs for user interaction.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <Button variant="outline" className="w-full">
+                    Open Dialog
+                  </Button>
+                </DialogTrigger>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>Edit Profile</DialogTitle>
+                    <DialogDescription>
+                      Make changes to your profile here. Click save when you&apos;re done.
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="space-y-4 py-4">
+                    <div className="space-y-2">
+                      <Label htmlFor="dialog-name">Name</Label>
+                      <Input id="dialog-name" defaultValue="John Doe" />
+                    </div>
+                    <div className="space-y-2">
+                      <Label htmlFor="dialog-username">Username</Label>
+                      <Input id="dialog-username" defaultValue="@johndoe" />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    <Button type="submit">Save changes</Button>
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
             </CardContent>
           </Card>
         </div>
@@ -384,13 +446,6 @@ function ComponentShowcase() {
                 </div>
                 <Progress value={89} />
               </div>
-              <div className="space-y-2">
-                <div className="flex justify-between text-sm">
-                  <span>Team Members</span>
-                  <span className="text-muted-foreground">8 / 10</span>
-                </div>
-                <Progress value={80} />
-              </div>
             </CardContent>
             <CardFooter>
               <Button variant="outline" className="w-full">
@@ -399,55 +454,37 @@ function ComponentShowcase() {
             </CardFooter>
           </Card>
 
-          {/* Cookie Settings */}
+          {/* Notifications */}
           <Card>
             <CardHeader>
-              <CardTitle>Cookie Settings</CardTitle>
-              <CardDescription>Manage your cookie preferences.</CardDescription>
+              <CardTitle>Notifications</CardTitle>
+              <CardDescription>Choose what you want to be notified about.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              <div className="flex items-start gap-3">
-                <Checkbox id="essential" checked disabled />
-                <div className="space-y-1">
-                  <Label htmlFor="essential" className="text-sm font-medium">
-                    Strictly Necessary
-                  </Label>
-                  <p className="text-xs text-muted-foreground">Essential for site functionality.</p>
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="text-sm">Push Notifications</Label>
+                  <p className="text-xs text-muted-foreground">Receive on device.</p>
                 </div>
+                <Switch defaultChecked />
               </div>
-              <div className="flex items-start gap-3">
-                <Checkbox id="functional" defaultChecked />
-                <div className="space-y-1">
-                  <Label htmlFor="functional" className="text-sm font-medium">
-                    Functional
-                  </Label>
-                  <p className="text-xs text-muted-foreground">Enable personalized features.</p>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="text-sm">Email Notifications</Label>
+                  <p className="text-xs text-muted-foreground">Receive via email.</p>
                 </div>
+                <Switch defaultChecked />
               </div>
-              <div className="flex items-start gap-3">
-                <Checkbox id="performance" defaultChecked />
-                <div className="space-y-1">
-                  <Label htmlFor="performance" className="text-sm font-medium">
-                    Performance
-                  </Label>
-                  <p className="text-xs text-muted-foreground">Help improve our website.</p>
+              <Separator />
+              <div className="flex items-center justify-between">
+                <div className="space-y-0.5">
+                  <Label className="text-sm">Marketing</Label>
+                  <p className="text-xs text-muted-foreground">New features & updates.</p>
                 </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <Checkbox id="analytics" />
-                <div className="space-y-1">
-                  <Label htmlFor="analytics" className="text-sm font-medium">
-                    Analytics
-                  </Label>
-                  <p className="text-xs text-muted-foreground">Understand user behavior.</p>
-                </div>
+                <Switch />
               </div>
             </CardContent>
-            <CardFooter>
-              <Button variant="outline" className="w-full">
-                Save Preferences
-              </Button>
-            </CardFooter>
           </Card>
 
           {/* Appearance */}
@@ -540,6 +577,191 @@ function ComponentShowcase() {
             </CardContent>
           </Card>
 
+          {/* More Components */}
+          <Card>
+            <CardHeader>
+              <CardTitle>More Components</CardTitle>
+              <CardDescription>Tooltips, toggles, and more.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label>Tooltip</Label>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button variant="outline">Hover me</Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>This is a tooltip!</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+              <Separator />
+              <div className="space-y-2">
+                <Label>Toggle Group</Label>
+                <ToggleGroup type="single" defaultValue="center">
+                  <ToggleGroupItem value="left" aria-label="Align left">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeWidth="2" d="M4 6h16M4 12h10M4 18h16" />
+                    </svg>
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="center" aria-label="Align center">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeWidth="2" d="M4 6h16M7 12h10M4 18h16" />
+                    </svg>
+                  </ToggleGroupItem>
+                  <ToggleGroupItem value="right" aria-label="Align right">
+                    <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeWidth="2" d="M4 6h16M10 12h10M4 18h16" />
+                    </svg>
+                  </ToggleGroupItem>
+                </ToggleGroup>
+              </div>
+              <Separator />
+              <div className="space-y-2">
+                <Label>Skeleton Loading</Label>
+                <div className="flex items-center space-x-4">
+                  <Skeleton className="h-12 w-12 rounded-full" />
+                  <div className="space-y-2">
+                    <Skeleton className="h-4 w-[150px]" />
+                    <Skeleton className="h-4 w-[100px]" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Column 4 */}
+        <div className="space-y-6">
+          {/* Report Issue */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Report an issue</CardTitle>
+              <CardDescription>What area are you having problems with?</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="grid grid-cols-2 gap-3">
+                <div className="space-y-2">
+                  <Label>Area</Label>
+                  <Select defaultValue="billing">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="team">Team</SelectItem>
+                      <SelectItem value="billing">Billing</SelectItem>
+                      <SelectItem value="account">Account</SelectItem>
+                      <SelectItem value="deployments">Deployments</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div className="space-y-2">
+                  <Label>Security Level</Label>
+                  <Select defaultValue="2">
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="1">Severity 1</SelectItem>
+                      <SelectItem value="2">Severity 2</SelectItem>
+                      <SelectItem value="3">Severity 3</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+              <div className="space-y-2">
+                <Label>Subject</Label>
+                <Input placeholder="I need help with..." />
+              </div>
+              <div className="space-y-2">
+                <Label>Description</Label>
+                <Textarea
+                  placeholder="Please include all relevant information..."
+                  className="min-h-[100px]"
+                />
+              </div>
+            </CardContent>
+            <CardFooter className="flex justify-between">
+              <Button variant="ghost">Cancel</Button>
+              <Button>Submit</Button>
+            </CardFooter>
+          </Card>
+
+          {/* Cookie Settings */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Cookie Settings</CardTitle>
+              <CardDescription>Manage your cookie preferences.</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="flex items-start gap-3">
+                <Checkbox id="essential" checked disabled />
+                <div className="space-y-1">
+                  <Label htmlFor="essential" className="text-sm font-medium">
+                    Strictly Necessary
+                  </Label>
+                  <p className="text-xs text-muted-foreground">Essential for site functionality.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Checkbox id="functional" defaultChecked />
+                <div className="space-y-1">
+                  <Label htmlFor="functional" className="text-sm font-medium">
+                    Functional
+                  </Label>
+                  <p className="text-xs text-muted-foreground">Enable personalized features.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Checkbox id="performance" defaultChecked />
+                <div className="space-y-1">
+                  <Label htmlFor="performance" className="text-sm font-medium">
+                    Performance
+                  </Label>
+                  <p className="text-xs text-muted-foreground">Help improve our website.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-3">
+                <Checkbox id="analytics" />
+                <div className="space-y-1">
+                  <Label htmlFor="analytics" className="text-sm font-medium">
+                    Analytics
+                  </Label>
+                  <p className="text-xs text-muted-foreground">Understand user behavior.</p>
+                </div>
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button variant="outline" className="w-full">
+                Save Preferences
+              </Button>
+            </CardFooter>
+          </Card>
+
+          {/* Calendar */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Date Picker</CardTitle>
+              <CardDescription>Select a date from the calendar.</CardDescription>
+            </CardHeader>
+            <CardContent className="flex justify-center">
+              {isClient ? (
+                <Calendar
+                  mode="single"
+                  selected={date}
+                  onSelect={setDate}
+                  className="rounded-md border"
+                />
+              ) : (
+                <div className="h-[300px] w-[280px] rounded-md border flex items-center justify-center">
+                  <Skeleton className="h-[280px] w-[260px]" />
+                </div>
+              )}
+            </CardContent>
+          </Card>
+
           {/* Tabs Example */}
           <Card>
             <CardHeader>
@@ -596,31 +818,46 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section className="relative px-6 pt-24 pb-16 flex flex-col items-center border-b">
-        <Badge variant="outline" className="mb-6">
-          v1.0 — Now Available
-        </Badge>
+      <section className="relative px-6 pt-24 pb-16 flex flex-col items-center border-b overflow-hidden">
+        {/* Grid Background */}
+        <div className="absolute inset-0 hero-grid hero-fade" />
+        {/* Spotlight Effect */}
+        <div className="absolute inset-0 hero-spotlight" />
 
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-center mb-6 max-w-4xl">
-          Masst UI
-        </h1>
+        {/* Theme Toggle - positioned top right */}
+        <div className="absolute top-6 right-6 z-10">
+          <ThemeToggle />
+        </div>
 
-        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl text-center mb-10">
-          The foundation for your design system.
-          <br />
-          <span className="text-lg">50+ components. Open source. Production ready.</span>
-        </p>
+        {/* Content */}
+        <div className="relative z-10">
+          <div className="flex flex-col items-center">
+            <Badge variant="outline" className="mb-6">
+              v1.0 — Now Available
+            </Badge>
 
-        <div className="flex flex-col sm:flex-row gap-4 mb-6">
-          <Button size="lg" className="px-8">
-            Get Started
-          </Button>
-          <Button size="lg" variant="outline" className="px-8">
-            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-            </svg>
-            GitHub
-          </Button>
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight text-center mb-6 max-w-4xl">
+              Masst UI
+            </h1>
+
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl text-center mb-10">
+              The foundation for your design system.
+              <br />
+              <span className="text-lg">50+ components. Open source. Production ready.</span>
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <Button size="lg" className="px-8">
+                Get Started
+              </Button>
+              <Button size="lg" variant="outline" className="px-8">
+                <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                </svg>
+                GitHub
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
 
