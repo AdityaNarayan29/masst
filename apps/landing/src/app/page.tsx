@@ -414,6 +414,53 @@ function ComponentShowcase() {
               </Dialog>
             </CardContent>
           </Card>
+
+          {/* Tabs Example */}
+          <Card>
+            <CardHeader>
+              <CardTitle>Account</CardTitle>
+              <CardDescription>Manage your account settings.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Tabs defaultValue="account" className="w-full">
+                <TabsList className="grid w-full grid-cols-3">
+                  <TabsTrigger value="account">Account</TabsTrigger>
+                  <TabsTrigger value="password">Password</TabsTrigger>
+                  <TabsTrigger value="settings">Settings</TabsTrigger>
+                </TabsList>
+                <TabsContent value="account" className="mt-4 space-y-3">
+                  <div className="space-y-1">
+                    <Label>Name</Label>
+                    <Input defaultValue="John Doe" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>Email</Label>
+                    <Input defaultValue="john@example.com" />
+                  </div>
+                </TabsContent>
+                <TabsContent value="password" className="mt-4 space-y-3">
+                  <div className="space-y-1">
+                    <Label>Current Password</Label>
+                    <Input type="password" />
+                  </div>
+                  <div className="space-y-1">
+                    <Label>New Password</Label>
+                    <Input type="password" />
+                  </div>
+                </TabsContent>
+                <TabsContent value="settings" className="mt-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Label>Two-factor auth</Label>
+                    <Switch />
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <Label>Session timeout</Label>
+                    <Switch defaultChecked />
+                  </div>
+                </TabsContent>
+              </Tabs>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Column 3 */}
@@ -762,52 +809,6 @@ function ComponentShowcase() {
             </CardContent>
           </Card>
 
-          {/* Tabs Example */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Account</CardTitle>
-              <CardDescription>Manage your account settings.</CardDescription>
-            </CardHeader>
-            <CardContent>
-              <Tabs defaultValue="account" className="w-full">
-                <TabsList className="grid w-full grid-cols-3">
-                  <TabsTrigger value="account">Account</TabsTrigger>
-                  <TabsTrigger value="password">Password</TabsTrigger>
-                  <TabsTrigger value="settings">Settings</TabsTrigger>
-                </TabsList>
-                <TabsContent value="account" className="mt-4 space-y-3">
-                  <div className="space-y-1">
-                    <Label>Name</Label>
-                    <Input defaultValue="John Doe" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>Email</Label>
-                    <Input defaultValue="john@example.com" />
-                  </div>
-                </TabsContent>
-                <TabsContent value="password" className="mt-4 space-y-3">
-                  <div className="space-y-1">
-                    <Label>Current Password</Label>
-                    <Input type="password" />
-                  </div>
-                  <div className="space-y-1">
-                    <Label>New Password</Label>
-                    <Input type="password" />
-                  </div>
-                </TabsContent>
-                <TabsContent value="settings" className="mt-4 space-y-3">
-                  <div className="flex items-center justify-between">
-                    <Label>Two-factor auth</Label>
-                    <Switch />
-                  </div>
-                  <div className="flex items-center justify-between">
-                    <Label>Session timeout</Label>
-                    <Switch defaultChecked />
-                  </div>
-                </TabsContent>
-              </Tabs>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>
