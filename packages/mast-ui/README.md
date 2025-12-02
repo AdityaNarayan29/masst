@@ -1,69 +1,67 @@
-# 🌟 MastUI — Build Beautiful Interfaces, Effortlessly
+# Masst UI — Build Beautiful Interfaces, Effortlessly
 
 > A modern, **motion-first** UI component library built with **ShadCN UI**, **Magic UI (Framer Motion)**, and **Tailwind CSS**.
-> MastUI empowers developers to craft elegant, fast, and accessible React applications — one component at a time.
+> Masst UI empowers developers to craft elegant, fast, and accessible React applications — one component at a time.
 
-![npm](https://img.shields.io/npm/v/mastui?style=flat-square)
-![license](https://img.shields.io/github/license/yourgithub/mastui?style=flat-square)
-![types](https://img.shields.io/npm/types/mastui?style=flat-square)
-![build](https://img.shields.io/github/actions/workflow/status/yourgithub/mastui/ci.yml?style=flat-square)
+![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)
+![license](https://img.shields.io/github/license/AdityaNarayan29/mast?style=flat-square)
+![types](https://img.shields.io/npm/types/@masst/ui?style=flat-square)
+![build](https://img.shields.io/github/actions/workflow/status/AdityaNarayan29/mast/ci.yml?style=flat-square)
 
 ---
 
-## 📦 Monorepo Structure (If using monorepo)
+## Monorepo Structure
 
 ```
 root/
 ├── apps/
-│   ├── docs/                 # Fumadocs-powered documentation site
-│   ├── landing/              # MastUI landing page
-│   └── playground/           # Tests components in environment
+│   ├── docs/                 # Documentation site
+│   ├── landing/              # Masst UI landing page
+│   └── playground/           # Component testing environment
 ├── packages/
 │   ├── eslint-config/        # Shared ESLint config
-│   ├── mastui/               # Component library (ShadCN + Magic UI)
+│   ├── mast-ui/              # Component library (@masst/ui)
 │   ├── tailwind-config/      # Shared Tailwind config
 │   └── typescript-config/    # Shared TypeScript config
 ```
 
 ---
 
-## ✨ MastUI Highlights
+## Highlights
 
-* 🎨 **Variants & Sizes** powered by [`cva`](https://github.com/joe-bell/cva)
-* 🎬 **Fluid Animations** with Magic UI (Framer Motion)
-* ⚡ **Tree-shakable**: Import only what you need
-* 💅 **Dark Mode & Theming** built on Tailwind CSS
-* ✅ **Accessibility** ensured via Radix UI Primitives
-* 🔧 **Composable & Extendable** components
-* 🔥 **Modern DX** with TypeScript, Tailwind, and React
+* **Variants & Sizes** powered by [`cva`](https://github.com/joe-bell/cva)
+* **Fluid Animations** with Magic UI (Framer Motion)
+* **Tree-shakable**: Import only what you need
+* **Dark Mode & Theming** built on Tailwind CSS
+* **Accessibility** ensured via Radix UI Primitives
+* **Composable & Extendable** components
+* **Modern DX** with TypeScript, Tailwind, and React
 
 ---
 
-## 📦 Installation
-
-Install MastUI components via npm:
+## Installation
 
 ```bash
-npm install mastui
+npm install @masst/ui
 ```
 
 Also install peer dependencies:
 
 ```bash
-npm install tailwindcss framer-motion class-variance-authority tailwind-merge
+npm install tailwindcss class-variance-authority tailwind-merge
 ```
 
 ---
 
-## 🛠 Quick Usage
+## Quick Usage
 
 ```tsx
-import { Button } from "mastui";
+import { Button } from "@masst/ui";
 
 export default function App() {
   return (
     <div className="p-4">
-      <Button variant="default" size="md" animate>
+      <Button variant="default" size="default">
         Click Me
       </Button>
     </div>
@@ -71,7 +69,7 @@ export default function App() {
 }
 ```
 
-## 🧪 Local Development (For monorepo)
+## Local Development
 
 ```bash
 pnpm install
@@ -84,35 +82,35 @@ Build all packages:
 pnpm build
 ```
 
----
-
-## 🌐 Docs & Playground
-
-* Documentation powered by [Nextra](https://nextra.site) — typically under `/apps/docs`
-* Landing page in Next.js — typically `/apps/landing`
-
----
-
-## 🔧 Remote Caching with Turborepo + Vercel
-
-Speed up builds with remote caching:
+Run tests:
 
 ```bash
-npx turbo login
-npx turbo link
+pnpm test
 ```
 
-Learn more: [Turborepo Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
+Run Storybook:
+
+```bash
+cd packages/mast-ui && pnpm storybook
+```
 
 ---
 
-## 📜 License
+## Docs & Playground
 
-MIT License © Made with ❤️ by [Aditya Narayan](https://github.com/adityanarayan29)
+* Documentation — `/apps/docs`
+* Landing page — `/apps/landing`
+* Component playground — `/apps/playground`
 
 ---
 
-## 🔗 Useful Links
+## License
+
+MIT License © Made with love by [Aditya Narayan](https://github.com/adityanarayan29)
+
+---
+
+## Useful Links
 
 * [Turborepo Documentation](https://turborepo.com/docs)
 * [ShadCN UI](https://ui.shadcn.com)
@@ -120,4 +118,3 @@ MIT License © Made with ❤️ by [Aditya Narayan](https://github.com/adityanar
 * [Framer Motion](https://www.framer.com/motion/)
 * [Tailwind CSS](https://tailwindcss.com)
 * [Radix UI Primitives](https://www.radix-ui.com/)
-
