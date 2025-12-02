@@ -1,12 +1,11 @@
-import { type FC, type ReactNode } from 'react'
-import { Button as ShadButton, type buttonVariants } from '../../components/ui/Button'
-import type { VariantProps } from 'class-variance-authority'
+import { type FC, type ReactNode } from 'react';
+import { Button as ShadButton, type buttonVariants } from '../../components/ui/Button';
+import type { VariantProps } from 'class-variance-authority';
 
 export interface MastUIButtonProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
-    VariantProps<typeof buttonVariants> {
-  children: ReactNode
-  asChild?: boolean
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>, VariantProps<typeof buttonVariants> {
+  children: ReactNode;
+  asChild?: boolean;
 }
 
 export const Button: FC<MastUIButtonProps> = ({
@@ -18,14 +17,8 @@ export const Button: FC<MastUIButtonProps> = ({
   ...props
 }) => {
   return (
-    <ShadButton
-      variant={variant}
-      size={size}
-      asChild={asChild}
-      className={className}
-      {...props}
-    >
+    <ShadButton variant={variant} size={size} asChild={asChild} className={className} {...props}>
       {children}
     </ShadButton>
-  )
-}
+  );
+};

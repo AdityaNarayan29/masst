@@ -1,4 +1,3 @@
-
 # 🛠 Contributing Guidelines & Code Standards for MastUI
 
 Welcome, contributor! Whether you're working on `mastui` (the npm package), `landing`, or `docs`, this document outlines our coding and commit conventions to ensure consistency across the monorepo.
@@ -18,11 +17,11 @@ We follow **Conventional Commits** with scoped packages.
 ### 🔧 Types
 
 | Type     | Description                                     |
-|----------|-------------------------------------------------|
-| feat     | ✨ New feature                                   |
+| -------- | ----------------------------------------------- |
+| feat     | ✨ New feature                                  |
 | fix      | 🐛 Bug fix                                      |
 | chore    | 🔧 Build or tooling update (no src changes)     |
-| docs     | 📝 Documentation only changes                    |
+| docs     | 📝 Documentation only changes                   |
 | refactor | ♻️ Code restructuring without behavior change   |
 | style    | 💄 Code style (formatting, missing semi-colons) |
 | test     | ✅ Adding or updating tests                     |
@@ -31,13 +30,13 @@ We follow **Conventional Commits** with scoped packages.
 
 ### 📁 Scopes (Project Targets)
 
-| Scope    | Target Project                      |
-|----------|-------------------------------------|
-| mastui   | The component library (npm package) |
-| landing  | The marketing site                  |
-| docs     | The documentation site              |
-| config   | Shared ESLint / TS configs          |
-| setup    | Project tooling / Turborepo configs |
+| Scope   | Target Project                      |
+| ------- | ----------------------------------- |
+| mastui  | The component library (npm package) |
+| landing | The marketing site                  |
+| docs    | The documentation site              |
+| config  | Shared ESLint / TS configs          |
+| setup   | Project tooling / Turborepo configs |
 
 > 💡 Example:  
 > `feat(mastui): add animated Accordion component`  
@@ -57,6 +56,7 @@ Use consistent and descriptive branch names:
 ```
 
 Examples:
+
 - `feat/mastui-animated-button`
 - `fix/docs-typo-links`
 - `chore/config-vercel-update`
@@ -102,4 +102,3 @@ Examples:
 
 Thanks for helping us build MastUI — your contributions make it better! 🧡  
 _— Aditya & MastUI Team_
-

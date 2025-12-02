@@ -29,13 +29,13 @@ root/
 
 ## Highlights
 
-* **Variants & Sizes** powered by [`cva`](https://github.com/joe-bell/cva)
-* **Fluid Animations** with Magic UI (Framer Motion)
-* **Tree-shakable**: Import only what you need
-* **Dark Mode & Theming** built on Tailwind CSS
-* **Accessibility** ensured via Radix UI Primitives
-* **Composable & Extendable** components
-* **Modern DX** with TypeScript, Tailwind, and React
+- **Variants & Sizes** powered by [`cva`](https://github.com/joe-bell/cva)
+- **Fluid Animations** with Magic UI (Framer Motion)
+- **Tree-shakable**: Import only what you need
+- **Dark Mode & Theming** built on Tailwind CSS
+- **Accessibility** ensured via Radix UI Primitives
+- **Composable & Extendable** components
+- **Modern DX** with TypeScript, Tailwind, and React
 
 ---
 
@@ -56,7 +56,7 @@ npm install tailwindcss class-variance-authority tailwind-merge
 ## Quick Usage
 
 ```tsx
-import { Button } from "@masst/ui";
+import { Button } from '@masst/ui';
 
 export default function App() {
   return (
@@ -98,9 +98,9 @@ cd packages/mast-ui && pnpm storybook
 
 ## Docs & Playground
 
-* Documentation — `/apps/docs`
-* Landing page — `/apps/landing`
-* Component playground — `/apps/playground`
+- Documentation — `/apps/docs`
+- Landing page — `/apps/landing`
+- Component playground — `/apps/playground`
 
 ---
 
@@ -112,9 +112,9 @@ MIT License © Made with love by [Aditya Narayan](https://github.com/adityanaray
 
 ## Useful Links
 
-* [Turborepo Documentation](https://turborepo.com/docs)
-* [ShadCN UI](https://ui.shadcn.com)
-* [Magic UI](https://magicui.design)
-* [Framer Motion](https://www.framer.com/motion/)
-* [Tailwind CSS](https://tailwindcss.com)
-* [Radix UI Primitives](https://www.radix-ui.com/)
+- [Turborepo Documentation](https://turborepo.com/docs)
+- [ShadCN UI](https://ui.shadcn.com)
+- [Magic UI](https://magicui.design)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Tailwind CSS](https://tailwindcss.com)
+- [Radix UI Primitives](https://www.radix-ui.com/)
