@@ -1,5 +1,5 @@
 {
   "framework": null,
-  "installCommand": "npm i -g pnpm@8.15.9 && pnpm install",
-  "buildCommand": "pnpm build"
+  "installCommand": "npm install",
+  "buildCommand": "npm run build"
 }
