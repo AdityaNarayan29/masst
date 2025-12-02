@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from '@masst/ui';
 
 export default function Home() {
