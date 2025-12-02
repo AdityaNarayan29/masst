@@ -10,7 +10,7 @@
     "access": "public"
   },
   "scripts": {
-    "prepublishOnly": "pnpm exec cpx ../../README.md ./",
+    "prepublishOnly": "npx cpx ../../README.md ./",
     "build": "tsup index.ts --format esm,cjs --dts",
     "test": "vitest run",
     "test:watch": "vitest",
