@@ -14,7 +14,8 @@
     "check-types": "turbo run check-types",
     "changeset": "changeset",
     "version-packages": "changeset version",
-    "release": "pnpm build && changeset publish"
+    "release": "pnpm build && changeset publish",
+    "mst": "pnpm --filter @masst/cli run dev"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",

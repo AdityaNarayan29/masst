@@ -1,0 +1,28 @@
+{
+  "name": "@masst/cli",
+  "version": "0.0.1",
+  "type": "module",
+  "bin": {
+    "mst": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "lint": "eslint .",
+    "check-types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "commander": "^11.1.0"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/typescript-config": "workspace:*",
+    "@types/node": "^22.15.3",
+    "eslint": "^9.28.0",
+    "typescript": "^5.8.2"
+  }
+}
