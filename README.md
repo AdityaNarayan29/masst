@@ -1,120 +1,177 @@
-# Masst UI — Build Beautiful Interfaces, Effortlessly
+# Masst UI
 
-> A modern, **motion-first** UI component library built with **ShadCN UI**, **Magic UI (Framer Motion)**, and **Tailwind CSS**.
-> Masst UI empowers developers to craft elegant, fast, and accessible React applications — one component at a time.
+> A modern, motion-first UI component library built with ShadCN UI, Radix Primitives, and Tailwind CSS.
 
-![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)
-![license](https://img.shields.io/github/license/AdityaNarayan29/mast?style=flat-square)
-![types](https://img.shields.io/npm/types/@masst/ui?style=flat-square)
-![build](https://img.shields.io/github/actions/workflow/status/AdityaNarayan29/mast/ci.yml?style=flat-square)
+[![npm version](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui)
+[![license](https://img.shields.io/github/license/AdityaNarayan29/masst?style=flat-square)](LICENSE)
+[![TypeScript](https://img.shields.io/npm/types/@masst/ui?style=flat-square)](https://www.typescriptlang.org/)
+[![CI](https://img.shields.io/github/actions/workflow/status/AdityaNarayan29/masst/ci.yml?style=flat-square)](https://github.com/AdityaNarayan29/masst/actions)
+
+---
+
+## Features
+
+- **50+ Components** - Accordion, Button, Card, Dialog, Form, Table, and more
+- **Accessible** - Built on Radix UI primitives for full ARIA compliance
+- **Customizable** - Powered by Tailwind CSS and CVA for easy theming
+- **Tree-shakable** - Import only what you need
+- **Dark Mode** - Built-in theme support
+- **TypeScript** - Full type definitions included
+- **Tested** - Comprehensive test coverage with Vitest
+
+---
+
+## Quick Start
+
+### Installation
+
+```bash
+npm install @masst/ui
+# or
+pnpm add @masst/ui
+# or
+yarn add @masst/ui
+```
+
+### Peer Dependencies
+
+```bash
+npm install react react-dom tailwindcss class-variance-authority tailwind-merge
+```
+
+### Usage
+
+```tsx
+import { Button } from "@masst/ui";
+
+export default function App() {
+  return (
+    <Button variant="default" size="default">
+      Click Me
+    </Button>
+  );
+}
+```
 
 ---
 
 ## Monorepo Structure
 
+This is a Turborepo monorepo with the following structure:
+
 ```
-root/
+masst/
 ├── apps/
-│   ├── docs/                 # Documentation site
-│   ├── landing/              # Masst UI landing page
-│   └── playground/           # Component testing environment
+│   ├── landing/          # Marketing website
+│   └── playground/       # Component testing environment
 ├── packages/
-│   ├── eslint-config/        # Shared ESLint config
-│   ├── mast-ui/              # Component library (@masst/ui)
-│   ├── tailwind-config/      # Shared Tailwind config
-│   └── typescript-config/    # Shared TypeScript config
+│   ├── mast-ui/          # Core UI library (@masst/ui)
+│   ├── cli/              # CLI tool (@masst/cli)
+│   ├── eslint-config/    # Shared ESLint configuration
+│   ├── typescript-config/# Shared TypeScript configuration
+│   └── tailwind-config/  # Shared Tailwind configuration
 ```
+
+### Apps
+
+| App | Description | Port |
+|-----|-------------|------|
+| [landing](apps/landing/) | Marketing/landing page for Masst UI | 3000 |
+| [playground](apps/playground/) | Component testing and demo environment | 3001 |
+
+### Packages
+
+| Package | Description | npm |
+|---------|-------------|-----|
+| [@masst/ui](packages/mast-ui/) | Core UI component library | [![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui) |
+| [@masst/cli](packages/cli/) | CLI tool for Masst | - |
+| [@repo/eslint-config](packages/eslint-config/) | Shared ESLint config | - |
+| [@repo/typescript-config](packages/typescript-config/) | Shared TypeScript config | - |
 
 ---
 
-## Highlights
+## Development
 
-- **Variants & Sizes** powered by [`cva`](https://github.com/joe-bell/cva)
-- **Fluid Animations** with Magic UI (Framer Motion)
-- **Tree-shakable**: Import only what you need
-- **Dark Mode & Theming** built on Tailwind CSS
-- **Accessibility** ensured via Radix UI Primitives
-- **Composable & Extendable** components
-- **Modern DX** with TypeScript, Tailwind, and React
+### Prerequisites
 
----
+- Node.js >= 18
+- pnpm 9.x
 
-## Installation
+### Setup
 
 ```bash
-npm install @masst/ui
-```
+# Clone the repository
+git clone https://github.com/AdityaNarayan29/masst.git
+cd masst
 
-Also install peer dependencies:
-
-```bash
-npm install tailwindcss class-variance-authority tailwind-merge
-```
-
----
-
-## Quick Usage
-
-```tsx
-import { Button } from '@masst/ui';
-
-export default function App() {
-  return (
-    <div className="p-4">
-      <Button variant="default" size="default">
-        Click Me
-      </Button>
-    </div>
-  );
-}
-```
-
-## Local Development
-
-```bash
+# Install dependencies
 pnpm install
+
+# Start development servers
 pnpm dev
 ```
 
-Build all packages:
+### Commands
+
+| Command | Description |
+|---------|-------------|
+| `pnpm dev` | Start all apps in development mode |
+| `pnpm dev:landing` | Start landing page only |
+| `pnpm dev:playground` | Start playground only |
+| `pnpm build` | Build all packages and apps |
+| `pnpm test` | Run tests |
+| `pnpm lint` | Run ESLint |
+| `pnpm format` | Format code with Prettier |
+| `pnpm check-types` | TypeScript type checking |
+| `pnpm storybook` | Start Storybook for component development |
+| `pnpm clean` | Clean all build artifacts |
+
+### Releasing
+
+This project uses [Changesets](https://github.com/changesets/changesets) for version management:
 
 ```bash
-pnpm build
-```
+# Create a changeset
+pnpm changeset
 
-Run tests:
+# Version packages
+pnpm version-packages
 
-```bash
-pnpm test
-```
-
-Run Storybook:
-
-```bash
-cd packages/mast-ui && pnpm storybook
+# Publish to npm
+pnpm release
 ```
 
 ---
 
-## Docs & Playground
+## Tech Stack
 
-- Documentation — `/apps/docs`
-- Landing page — `/apps/landing`
-- Component playground — `/apps/playground`
+- **Build System**: [Turborepo](https://turbo.build/)
+- **Package Manager**: [pnpm](https://pnpm.io/)
+- **Framework**: [React 19](https://react.dev/) + [Next.js 15](https://nextjs.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Components**: [Radix UI](https://www.radix-ui.com/) + [ShadCN UI](https://ui.shadcn.com/)
+- **Variants**: [Class Variance Authority](https://cva.style/)
+- **Testing**: [Vitest](https://vitest.dev/) + [Testing Library](https://testing-library.com/)
+- **Documentation**: [Storybook](https://storybook.js.org/)
+
+---
+
+## Contributing
+
+We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
 ---
 
 ## License
 
-MIT License © Made with love by [Aditya Narayan](https://github.com/adityanarayan29)
+MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
-## Useful Links
-
-- [Turborepo Documentation](https://turborepo.com/docs)
-- [ShadCN UI](https://ui.shadcn.com)
-- [Magic UI](https://magicui.design)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Radix UI Primitives](https://www.radix-ui.com/)
+Made with love by [Aditya Narayan](https://github.com/adityanarayan29)

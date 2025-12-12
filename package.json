@@ -1,21 +1,31 @@
 {
-  "name": "mastui",
+  "name": "masst",
   "private": true,
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ],
+  "description": "Masst UI - A modern, motion-first UI component library",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdityaNarayan29/masst.git"
+  },
+  "author": "Aditya Narayan",
+  "license": "MIT",
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:landing": "turbo run dev --filter=@masst/landing",
+    "dev:playground": "turbo run dev --filter=playground",
     "lint": "turbo run lint",
+    "lint:fix": "turbo run lint -- --fix",
     "test": "turbo run test",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "test:watch": "turbo run test:watch",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "check-types": "turbo run check-types",
+    "clean": "turbo run clean && rm -rf node_modules .turbo",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish",
-    "mst": "pnpm --filter @masst/cli run dev"
+    "storybook": "pnpm --filter @masst/ui storybook",
+    "build-storybook": "pnpm --filter @masst/ui build-storybook"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.1",
@@ -25,8 +35,6 @@
     "@typescript-eslint/eslint-plugin": "^8.34.0",
     "@typescript-eslint/parser": "^8.34.0",
     "autoprefixer": "^10.4.21",
-    "chalk": "^5.4.1",
-    "cpy": "^11.1.0",
     "eslint": "^9.28.0",
     "eslint-config-prettier": "^10.1.1",
     "eslint-plugin-prettier": "^5.4.1",

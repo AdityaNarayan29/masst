@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Masst UI Playground
 
-## Getting Started
+Interactive testing environment for @masst/ui components.
 
-First, run the development server:
+## Purpose
+
+This app serves as a development playground for testing and demonstrating components from the Masst UI library before they're documented.
+
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **UI Library**: @masst/ui (workspace dependency)
+- **Styling**: Tailwind CSS 4
+- **Icons**: Lucide React
+
+## Development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# From monorepo root
+pnpm dev:playground
+
+# Or from this directory
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The app runs on [http://localhost:3001](http://localhost:3001).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Usage
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Use this app to:
 
-## Learn More
+1. Test new components during development
+2. Verify component integration
+3. Debug styling issues
+4. Demo components before documentation
 
-To learn more about Next.js, take a look at the following resources:
+## Adding Components
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Import components directly from `@masst/ui`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```tsx
+import { Button, Card, Input } from "@masst/ui";
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export default function Page() {
+  return (
+    <Card>
+      <Input placeholder="Enter text..." />
+      <Button>Submit</Button>
+    </Card>
+  );
+}
+```

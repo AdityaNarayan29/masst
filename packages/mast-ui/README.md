@@ -1,120 +1,84 @@
-# Masst UI — Build Beautiful Interfaces, Effortlessly
+# @masst/ui
 
-> A modern, **motion-first** UI component library built with **ShadCN UI**, **Magic UI (Framer Motion)**, and **Tailwind CSS**.
-> Masst UI empowers developers to craft elegant, fast, and accessible React applications — one component at a time.
+> A modern, accessible UI component library built with Radix Primitives and Tailwind CSS.
 
-![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)
-![license](https://img.shields.io/github/license/AdityaNarayan29/mast?style=flat-square)
-![types](https://img.shields.io/npm/types/@masst/ui?style=flat-square)
-![build](https://img.shields.io/github/actions/workflow/status/AdityaNarayan29/mast/ci.yml?style=flat-square)
-
----
-
-## Monorepo Structure
-
-```
-root/
-├── apps/
-│   ├── docs/                 # Documentation site
-│   ├── landing/              # Masst UI landing page
-│   └── playground/           # Component testing environment
-├── packages/
-│   ├── eslint-config/        # Shared ESLint config
-│   ├── mast-ui/              # Component library (@masst/ui)
-│   ├── tailwind-config/      # Shared Tailwind config
-│   └── typescript-config/    # Shared TypeScript config
-```
-
----
-
-## Highlights
-
-- **Variants & Sizes** powered by [`cva`](https://github.com/joe-bell/cva)
-- **Fluid Animations** with Magic UI (Framer Motion)
-- **Tree-shakable**: Import only what you need
-- **Dark Mode & Theming** built on Tailwind CSS
-- **Accessibility** ensured via Radix UI Primitives
-- **Composable & Extendable** components
-- **Modern DX** with TypeScript, Tailwind, and React
-
----
+[![npm version](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui)
+[![license](https://img.shields.io/github/license/AdityaNarayan29/masst?style=flat-square)](../../LICENSE)
+[![TypeScript](https://img.shields.io/npm/types/@masst/ui?style=flat-square)](https://www.typescriptlang.org/)
 
 ## Installation
 
 ```bash
 npm install @masst/ui
+# or
+pnpm add @masst/ui
+# or
+yarn add @masst/ui
 ```
 
-Also install peer dependencies:
+### Peer Dependencies
 
 ```bash
-npm install tailwindcss class-variance-authority tailwind-merge
+npm install react react-dom tailwindcss class-variance-authority tailwind-merge
 ```
 
----
-
-## Quick Usage
+## Usage
 
 ```tsx
-import { Button } from '@masst/ui';
+import { Button, Card, Input } from "@masst/ui";
 
 export default function App() {
   return (
-    <div className="p-4">
+    <Card className="p-6">
+      <Input placeholder="Enter your name" />
       <Button variant="default" size="default">
-        Click Me
+        Submit
       </Button>
-    </div>
+    </Card>
   );
 }
 ```
 
-## Local Development
+## Components
+
+This library includes 50+ components:
+
+**Layout**: Card, Separator, AspectRatio, ScrollArea, ResizablePanels
+
+**Forms**: Button, Input, Textarea, Checkbox, Radio, Select, Switch, Slider, Form
+
+**Feedback**: Alert, AlertDialog, Dialog, Drawer, Popover, Tooltip, Sonner (Toast)
+
+**Data Display**: Accordion, Avatar, Badge, Calendar, Carousel, Chart, Progress, Table, Tabs
+
+**Navigation**: Breadcrumb, Command, ContextMenu, DropdownMenu, Menubar, NavigationMenu, Pagination
+
+**Overlay**: Dialog, Drawer, HoverCard, Popover, Sheet, Tooltip
+
+## Features
+
+- **Accessible** - Built on Radix UI primitives with full ARIA support
+- **Customizable** - Style with Tailwind CSS classes
+- **Tree-shakable** - Import only what you need
+- **TypeScript** - Full type definitions included
+- **Dark Mode** - Built-in theme support via `next-themes`
+
+## Development
 
 ```bash
-pnpm install
-pnpm dev
-```
-
-Build all packages:
-
-```bash
+# Build
 pnpm build
-```
 
-Run tests:
-
-```bash
+# Run tests
 pnpm test
+
+# Watch tests
+pnpm test:watch
+
+# Run Storybook
+pnpm storybook
 ```
-
-Run Storybook:
-
-```bash
-cd packages/mast-ui && pnpm storybook
-```
-
----
-
-## Docs & Playground
-
-- Documentation — `/apps/docs`
-- Landing page — `/apps/landing`
-- Component playground — `/apps/playground`
-
----
 
 ## License
 
-MIT License © Made with love by [Aditya Narayan](https://github.com/adityanarayan29)
-
----
-
-## Useful Links
-
-- [Turborepo Documentation](https://turborepo.com/docs)
-- [ShadCN UI](https://ui.shadcn.com)
-- [Magic UI](https://magicui.design)
-- [Framer Motion](https://www.framer.com/motion/)
-- [Tailwind CSS](https://tailwindcss.com)
-- [Radix UI Primitives](https://www.radix-ui.com/)
+MIT License - see [LICENSE](../../LICENSE) for details.
