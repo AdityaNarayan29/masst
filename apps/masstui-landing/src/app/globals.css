@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@source "../../../../packages/mast-ui/src/**/*.{js,ts,jsx,tsx}";
+@source "../../../../packages/masst-ui/src/**/*.{js,ts,jsx,tsx}";
 
 @custom-variant dark (&:is(.dark *));
 
