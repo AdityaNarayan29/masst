@@ -1,57 +1,18 @@
-# Masst UI
+# Masst
 
-> A modern, motion-first UI component library built with ShadCN UI, Radix Primitives, and Tailwind CSS.
+> A modern development ecosystem featuring UI components, CLI tools, and more.
 
-[![npm version](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui)
 [![license](https://img.shields.io/github/license/AdityaNarayan29/masst?style=flat-square)](LICENSE)
-[![TypeScript](https://img.shields.io/npm/types/@masst/ui?style=flat-square)](https://www.typescriptlang.org/)
 [![CI](https://img.shields.io/github/actions/workflow/status/AdityaNarayan29/masst/ci.yml?style=flat-square)](https://github.com/AdityaNarayan29/masst/actions)
 
 ---
 
-## Features
+## What's Inside
 
-- **50+ Components** - Accordion, Button, Card, Dialog, Form, Table, and more
-- **Accessible** - Built on Radix UI primitives for full ARIA compliance
-- **Customizable** - Powered by Tailwind CSS and CVA for easy theming
-- **Tree-shakable** - Import only what you need
-- **Dark Mode** - Built-in theme support
-- **TypeScript** - Full type definitions included
-- **Tested** - Comprehensive test coverage with Vitest
-
----
-
-## Quick Start
-
-### Installation
-
-```bash
-npm install @masst/ui
-# or
-pnpm add @masst/ui
-# or
-yarn add @masst/ui
-```
-
-### Peer Dependencies
-
-```bash
-npm install react react-dom tailwindcss class-variance-authority tailwind-merge
-```
-
-### Usage
-
-```tsx
-import { Button } from "@masst/ui";
-
-export default function App() {
-  return (
-    <Button variant="default" size="default">
-      Click Me
-    </Button>
-  );
-}
-```
+- **@masst/ui** - A modern UI component library with 50+ accessible components
+- **@masst/cli** - CLI tool for project scaffolding and setup
+- **Landing** - Marketing website
+- **Playground** - Component testing environment
 
 ---
 
@@ -65,8 +26,8 @@ masst/
 │   ├── landing/          # Marketing website
 │   └── playground/       # Component testing environment
 ├── packages/
-│   ├── mast-ui/          # Core UI library (@masst/ui)
-│   ├── cli/              # CLI tool (@masst/cli)
+│   ├── masst-ui/         # Core UI library (@masst/ui)
+│   ├── masst-cli/        # CLI tool (@masst/cli)
 │   ├── eslint-config/    # Shared ESLint configuration
 │   ├── typescript-config/# Shared TypeScript configuration
 │   └── tailwind-config/  # Shared Tailwind configuration
@@ -83,8 +44,8 @@ masst/
 
 | Package | Description | npm |
 |---------|-------------|-----|
-| [@masst/ui](packages/mast-ui/) | Core UI component library | [![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui) |
-| [@masst/cli](packages/cli/) | CLI tool for Masst | - |
+| [@masst/ui](packages/masst-ui/) | Core UI component library | [![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui) |
+| [@masst/cli](packages/masst-cli/) | CLI tool for Masst | - |
 | [@repo/eslint-config](packages/eslint-config/) | Shared ESLint config | - |
 | [@repo/typescript-config](packages/typescript-config/) | Shared TypeScript config | - |
 

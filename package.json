@@ -1,7 +1,7 @@
 {
   "name": "masst",
   "private": true,
-  "description": "Masst UI - A modern, motion-first UI component library",
+  "description": "Masst - A modern development ecosystem featuring UI components, CLI tools, and more",
   "repository": {
     "type": "git",
     "url": "https://github.com/AdityaNarayan29/masst.git"
