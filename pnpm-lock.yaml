@@ -29,12 +29,6 @@ importers:
       autoprefixer:
         specifier: ^10.4.21
         version: 10.4.22(postcss@8.5.6)
-      chalk:
-        specifier: ^5.4.1
-        version: 5.6.2
-      cpy:
-        specifier: ^11.1.0
-        version: 11.1.0
       eslint:
         specifier: ^9.28.0
         version: 9.39.1(jiti@2.6.1)
@@ -167,31 +161,6 @@ importers:
         specifier: ^5
         version: 5.8.2
 
-  packages/cli:
-    dependencies:
-      chalk:
-        specifier: ^5.4.1
-        version: 5.6.2
-      commander:
-        specifier: ^11.1.0
-        version: 11.1.0
-    devDependencies:
-      '@repo/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@repo/typescript-config':
-        specifier: workspace:*
-        version: link:../typescript-config
-      '@types/node':
-        specifier: ^22.15.3
-        version: 22.19.1
-      eslint:
-        specifier: ^9.28.0
-        version: 9.39.1(jiti@2.6.1)
-      typescript:
-        specifier: ^5.8.2
-        version: 5.8.2
-
   packages/eslint-config:
     devDependencies:
       '@eslint/js':
@@ -228,7 +197,32 @@ importers:
         specifier: ^8.31.0
         version: 8.48.0(eslint@9.39.1(jiti@2.6.1))(typescript@5.8.2)
 
-  packages/mast-ui:
+  packages/masst-cli:
+    dependencies:
+      chalk:
+        specifier: ^5.4.1
+        version: 5.6.2
+      commander:
+        specifier: ^11.1.0
+        version: 11.1.0
+    devDependencies:
+      '@repo/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@repo/typescript-config':
+        specifier: workspace:*
+        version: link:../typescript-config
+      '@types/node':
+        specifier: ^22.15.3
+        version: 22.19.1
+      eslint:
+        specifier: ^9.28.0
+        version: 9.39.1(jiti@2.6.1)
+      typescript:
+        specifier: ^5.8.2
+        version: 5.8.2
+
+  packages/masst-ui:
     dependencies:
       '@hookform/resolvers':
         specifier: ^5.2.2
