@@ -11,7 +11,8 @@
 
 - **@masst/ui** - A modern UI component library with 50+ accessible components
 - **@masst/cli** - CLI tool for project scaffolding and setup
-- **Landing** - Marketing website
+- **Masst Landing** - Masst ecosystem marketing website
+- **MasstUI Landing** - UI library showcase and demo
 - **Playground** - Component testing environment
 
 ---
@@ -23,7 +24,8 @@ This is a Turborepo monorepo with the following structure:
 ```
 masst/
 ├── apps/
-│   ├── landing/          # Marketing website
+│   ├── landing/          # Masst ecosystem marketing website
+│   ├── masstui-landing/  # UI library showcase
 │   └── playground/       # Component testing environment
 ├── packages/
 │   ├── masst-ui/         # Core UI library (@masst/ui)
@@ -37,8 +39,9 @@ masst/
 
 | App | Description | Port |
 |-----|-------------|------|
-| [landing](apps/landing/) | Marketing/landing page for Masst UI | 3000 |
-| [playground](apps/playground/) | Component testing and demo environment | 3001 |
+| [landing](apps/landing/) | Masst ecosystem marketing website | 3000 |
+| [masstui-landing](apps/masstui-landing/) | UI library showcase and demo | 3002 |
+| [playground](apps/playground/) | Component testing environment | 3001 |
 
 ### Packages
 
@@ -77,7 +80,8 @@ pnpm dev
 | Command | Description |
 |---------|-------------|
 | `pnpm dev` | Start all apps in development mode |
-| `pnpm dev:landing` | Start landing page only |
+| `pnpm dev:landing` | Start Masst landing only |
+| `pnpm dev:ui-landing` | Start MasstUI landing only |
 | `pnpm dev:playground` | Start playground only |
 | `pnpm build` | Build all packages and apps |
 | `pnpm test` | Run tests |

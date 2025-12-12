@@ -12,6 +12,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "dev:landing": "turbo run dev --filter=@masst/landing",
+    "dev:ui-landing": "turbo run dev --filter=@masst/ui-landing",
     "dev:playground": "turbo run dev --filter=playground",
     "lint": "turbo run lint",
     "lint:fix": "turbo run lint -- --fix",
