@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   title: "Masst - Dev tools you'll actually love using",
   description:
     'A modern ecosystem of handcrafted developer tools — minimal, fast, and growing with you.',
+  icons: {
+    icon: '/logo.png',
+    shortcut: '/logo.png',
+    apple: '/logo.png',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
