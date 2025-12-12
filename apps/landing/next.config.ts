@@ -1,10 +1,7 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
-  transpilePackages: ['@masst/ui'],
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
+  output: 'standalone',
 };
 
 export default nextConfig;

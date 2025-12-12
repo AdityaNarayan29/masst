@@ -1,22 +1,42 @@
 import type { Metadata } from 'next';
-import { ThemeProvider } from '@/components/theme-provider';
+import { Inter } from 'next/font/google';
 import './globals.css';
 
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+});
+
 export const metadata: Metadata = {
-  title: 'Masst UI - Component Library',
-  description: 'A beautiful React component library built on shadcn/ui',
+  title: "Masst - Dev tools you'll actually love using",
+  description:
+    'A modern ecosystem of handcrafted developer tools — minimal, fast, and growing with you.',
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className="antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
-      </body>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var darkMode = localStorage.getItem('darkMode');
+                  if (darkMode === null || JSON.parse(darkMode) === true) {
+                    document.documentElement.classList.add('dark');
+                  } else {
+                    document.documentElement.classList.remove('dark');
+                  }
+                } catch (e) {
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className={`${inter.variable} font-sans antialiased`}>{children}</body>
     </html>
   );
 }

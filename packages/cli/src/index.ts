@@ -13,10 +13,7 @@ function detectPackageManager(): 'pnpm' | 'yarn' | 'npm' {
   return 'pnpm'; // fallback default
 }
 
-program
-  .name('mst')
-  .description('Masst CLI tool for scaffolding and utilities')
-  .version('0.0.1');
+program.name('mst').description('Masst CLI tool for scaffolding and utilities').version('0.0.1');
 
 // 🎯 Command: mst i ui
 program
@@ -75,11 +72,16 @@ program
   });
 
 // Help text
-program.addHelpText('beforeAll', `
+program.addHelpText(
+  'beforeAll',
+  `
 ${chalk.bold.blue('Masst CLI')} - scaffolding and utilities
-`);
+`
+);
 
-program.addHelpText('afterAll', `
+program.addHelpText(
+  'afterAll',
+  `
 ${chalk.green('Examples:')}
   ${chalk.cyan('$ mst init')}
   ${chalk.cyan('$ mst i ui')}
@@ -88,7 +90,8 @@ ${chalk.green('Examples:')}
   ${chalk.cyan('$ mst pnpm install lodash')}
 
 ${chalk.yellow('Use "mst help <command>" for detailed info about a command.')}
-`);
+`
+);
 
 // Parse args
 program.parse(process.argv);
