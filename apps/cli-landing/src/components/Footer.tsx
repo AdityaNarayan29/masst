@@ -14,7 +14,7 @@ const footerLinks = {
   ],
   resources: [
     { label: 'Documentation', href: 'https://docs.masst.dev', icon: BookOpen },
-    { label: 'GitHub', href: 'https://github.com/masst/masst', icon: Github },
+    { label: 'GitHub', href: 'https://github.com/AdityaNarayan29/masst', icon: Github },
     { label: 'NPM', href: 'https://www.npmjs.com/package/@masst/cli', icon: Package },
   ],
 };

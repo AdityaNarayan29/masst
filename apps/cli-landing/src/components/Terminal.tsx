@@ -190,7 +190,11 @@ export default function Terminal({
                   )}
                 </div>
               ) : (
-                <pre className={`pl-6 whitespace-pre m-0 ${line.color || 'text-white/60'}`}>{line.content}</pre>
+                <pre
+                className={`pl-6 whitespace-pre m-0 ${line.color || 'text-white/60'}`}
+              >
+                {line.content}
+              </pre>
               )}
             </div>
           ))}
@@ -214,7 +218,15 @@ export default function Terminal({
 
 function getOutputColor(line: string): string {
   // ASCII art logo
-  if (line.includes('███') || line.includes('╔') || line.includes('║') || line.includes('╩') || line.includes('╠') || line.includes('╚═╝')) return 'text-emerald-400';
+  if (
+    line.includes('███') ||
+    line.includes('╔') ||
+    line.includes('║') ||
+    line.includes('╩') ||
+    line.includes('╠') ||
+    line.includes('╚═╝')
+  )
+    return 'text-emerald-400';
   // Success indicators
   if (line.includes('✅') || line.includes('✓')) return 'text-emerald-400';
   if (line.includes('✨')) return 'text-amber-300';
@@ -223,11 +235,27 @@ function getOutputColor(line: string): string {
   if (line.includes('→')) return 'text-white/70';
   if (line.includes('http://') || line.includes('https://')) return 'text-cyan-400';
   // Info
-  if (line.includes('Demo:') || line.includes('demo@') || line.includes('Demo credentials')) return 'text-amber-400';
-  if (line.includes('Project:') || line.includes('Database:') || line.includes('Redis:')) return 'text-white/50';
+  if (
+    line.includes('Demo:') ||
+    line.includes('demo@') ||
+    line.includes('Demo credentials')
+  )
+    return 'text-amber-400';
+  if (
+    line.includes('Project:') ||
+    line.includes('Database:') ||
+    line.includes('Redis:')
+  )
+    return 'text-white/50';
   if (line.includes('Next steps:')) return 'text-white/70';
   // Progress
-  if (line.includes('Creating') || line.includes('Initializing') || line.includes('Installing') || line.includes('Starting')) return 'text-white/60';
+  if (
+    line.includes('Creating') ||
+    line.includes('Initializing') ||
+    line.includes('Installing') ||
+    line.includes('Starting')
+  )
+    return 'text-white/60';
   return 'text-white/60';
 }
 

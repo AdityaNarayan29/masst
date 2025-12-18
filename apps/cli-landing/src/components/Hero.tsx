@@ -179,7 +179,7 @@ export default function Hero() {
               </a>
 
               <a
-                href="https://github.com/masst/masst"
+                href="https://github.com/AdityaNarayan29/masst"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative px-7 py-4 rounded-xl font-mono text-sm font-medium overflow-hidden transition-all duration-300 hover:scale-[1.02]"

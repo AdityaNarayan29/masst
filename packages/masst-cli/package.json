@@ -1,7 +1,26 @@
 {
   "name": "@masst/cli",
-  "version": "0.0.2",
+  "version": "0.0.3",
+  "description": "SaaS Starter Kit Generator - scaffold production-ready monorepos in seconds",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AdityaNarayan29/masst.git",
+    "directory": "packages/masst-cli"
+  },
+  "author": "Aditya Narayan",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "saas",
+    "starter",
+    "generator",
+    "nextjs",
+    "nestjs",
+    "prisma",
+    "monorepo",
+    "turborepo"
+  ],
   "bin": {
     "mst": "dist/index.js"
   },

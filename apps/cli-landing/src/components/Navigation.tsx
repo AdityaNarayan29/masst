@@ -152,7 +152,7 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }: Naviga
             <div className="w-px h-4 bg-border mx-2" />
 
             <a
-              href="https://github.com/masst/masst"
+              href="https://github.com/AdityaNarayan29/masst"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 text-muted-foreground hover:text-foreground transition-colors duration-200"
@@ -221,14 +221,14 @@ export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }: Naviga
             </a>
           ))}
           <a
-            href="https://github.com/masst/masst"
+            href="https://github.com/AdityaNarayan29/masst"
             target="_blank"
             rel="noopener noreferrer"
             onClick={() => setMobileMenuOpen(false)}
             className="flex items-center gap-2 px-3 py-2 text-muted-foreground hover:text-foreground hover:bg-muted rounded-md transition-all duration-200"
           >
             <Github className="w-4 h-4" />
-            <span>github.com/masst</span>
+            <span>github.com/AdityaNarayan29/masst</span>
           </a>
           <div className="pt-2 mt-2 border-t border-border">
             <a
