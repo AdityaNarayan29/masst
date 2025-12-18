@@ -130,7 +130,8 @@ export default function Terminal({
       <div
         className="absolute -inset-[1px] rounded-2xl opacity-60"
         style={{
-          background: 'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.2) 100%)',
+          background:
+            'linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(6, 182, 212, 0.1) 50%, rgba(16, 185, 129, 0.2) 100%)',
         }}
       />
 
@@ -152,7 +153,9 @@ export default function Terminal({
           <div className="flex-1 text-center">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-white/[0.03]">
               <div className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-[11px] text-white/40 font-mono tracking-wide">masst-cli — zsh</span>
+              <span className="text-[11px] text-white/40 font-mono tracking-wide">
+                masst-cli — zsh
+              </span>
             </div>
           </div>
 
@@ -171,7 +174,8 @@ export default function Terminal({
           <div
             className="absolute inset-0 pointer-events-none opacity-[0.02]"
             style={{
-              backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
+              backgroundImage:
+                'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)',
             }}
           />
 

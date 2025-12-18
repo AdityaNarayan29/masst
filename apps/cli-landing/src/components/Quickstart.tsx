@@ -126,8 +126,7 @@ export default function Quickstart() {
       <div
         className="absolute inset-0 terminal-grid opacity-20"
         style={{
-          maskImage:
-            'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+          maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
           WebkitMaskImage:
             'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
         }}

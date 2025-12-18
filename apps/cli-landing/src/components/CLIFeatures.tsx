@@ -199,8 +199,7 @@ export default function CLIFeatures() {
       <div
         className="absolute inset-0 terminal-grid opacity-30"
         style={{
-          maskImage:
-            'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
+          maskImage: 'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
           WebkitMaskImage:
             'linear-gradient(to bottom, transparent, black 20%, black 80%, transparent)',
         }}
@@ -226,9 +225,7 @@ export default function CLIFeatures() {
                 <div className="terminal-dot terminal-dot-yellow" />
                 <div className="terminal-dot terminal-dot-green" />
               </div>
-              <span className="text-xs text-muted-foreground font-mono ml-4">
-                ~/masst --help
-              </span>
+              <span className="text-xs text-muted-foreground font-mono ml-4">~/masst --help</span>
             </div>
             <div className="terminal-body space-y-2">
               <div className="font-mono text-sm">

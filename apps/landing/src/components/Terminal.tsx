@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { gsap } from '@/lib/animations';
 
 interface TerminalProps {
   commands?: {
@@ -22,7 +21,6 @@ export default function Terminal({
   const [visibleLines, setVisibleLines] = useState<
     { type: 'input' | 'output'; content: string; color?: string }[]
   >([]);
-  const [currentIndex, setCurrentIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(false);
 
   useEffect(() => {

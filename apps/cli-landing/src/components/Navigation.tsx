@@ -11,10 +11,7 @@ interface NavigationProps {
   setDarkMode: (dark: boolean) => void;
 }
 
-export default function Navigation({
-  mobileMenuOpen,
-  setMobileMenuOpen,
-}: NavigationProps) {
+export default function Navigation({ mobileMenuOpen, setMobileMenuOpen }: NavigationProps) {
   const navRef = useRef<HTMLElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const navLinksRef = useRef<HTMLDivElement>(null);
@@ -119,19 +116,14 @@ export default function Navigation({
       <div
         className={`absolute top-0 left-0 right-0 h-[1px] transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
         style={{
-          background:
-            'linear-gradient(90deg, transparent, hsl(142 70% 45% / 0.5), transparent)',
+          background: 'linear-gradient(90deg, transparent, hsl(142 70% 45% / 0.5), transparent)',
         }}
       />
 
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo - terminal style */}
-          <a
-            ref={logoRef}
-            href="#home"
-            className="flex items-center gap-2 font-mono text-sm group"
-          >
+          <a ref={logoRef} href="#home" className="flex items-center gap-2 font-mono text-sm group">
             <Terminal className="w-5 h-5 term-green" />
             <span className="text-foreground font-bold">masst</span>
             <span className="text-muted-foreground hidden sm:inline">cli</span>
