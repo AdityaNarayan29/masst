@@ -61,29 +61,29 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Premium custom scrollbar */
+/* Terminal-themed custom scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: hsl(var(--muted));
+  background: hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, hsl(270 60% 50% / 0.4), hsl(320 60% 50% / 0.4));
+  background: hsl(var(--terminal-green) / 0.3);
   border-radius: 5px;
-  border: 2px solid hsl(var(--muted));
+  border: 2px solid hsl(var(--background));
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, hsl(270 60% 50% / 0.6), hsl(320 60% 50% / 0.6));
+  background: hsl(var(--terminal-green) / 0.5);
 }
 
-/* Premium selection */
+/* Terminal-themed selection */
 ::selection {
-  background: hsl(270 60% 50% / 0.3);
+  background: hsl(var(--terminal-green) / 0.3);
   color: hsl(var(--foreground));
 }
 
