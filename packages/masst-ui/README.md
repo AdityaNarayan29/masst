@@ -25,7 +25,7 @@ npm install react react-dom tailwindcss class-variance-authority tailwind-merge
 ## Usage
 
 ```tsx
-import { Button, Card, Input } from "@masst/ui";
+import { Button, Card, Input } from '@masst/ui';
 
 export default function App() {
   return (

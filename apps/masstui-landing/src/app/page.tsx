@@ -175,12 +175,7 @@ function ComponentShowcase() {
             </CardHeader>
             <CardContent className="space-y-4">
               <Alert>
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -192,12 +187,7 @@ function ComponentShowcase() {
                 <AlertDescription>You can add components using the CLI.</AlertDescription>
               </Alert>
               <Alert variant="destructive">
-                <svg
-                  className="h-4 w-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

@@ -1,7 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
-    "types": ["tailwindcss","node"],
+    "types": ["tailwindcss", "node"],
     "moduleResolution": "bundler"
   }
 }

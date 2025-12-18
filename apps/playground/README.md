@@ -39,7 +39,7 @@ Use this app to:
 Import components directly from `@masst/ui`:
 
 ```tsx
-import { Button, Card, Input } from "@masst/ui";
+import { Button, Card, Input } from '@masst/ui';
 
 export default function Page() {
   return (

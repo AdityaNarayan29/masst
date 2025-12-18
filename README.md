@@ -37,20 +37,20 @@ masst/
 
 ### Apps
 
-| App | Description | Port |
-|-----|-------------|------|
-| [landing](apps/landing/) | Masst ecosystem marketing website | 3000 |
-| [masstui-landing](apps/masstui-landing/) | UI library showcase and demo | 3002 |
-| [playground](apps/playground/) | Component testing environment | 3001 |
+| App                                      | Description                       | Port |
+| ---------------------------------------- | --------------------------------- | ---- |
+| [landing](apps/landing/)                 | Masst ecosystem marketing website | 3000 |
+| [masstui-landing](apps/masstui-landing/) | UI library showcase and demo      | 3002 |
+| [playground](apps/playground/)           | Component testing environment     | 3001 |
 
 ### Packages
 
-| Package | Description | npm |
-|---------|-------------|-----|
-| [@masst/ui](packages/masst-ui/) | Core UI component library | [![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui) |
-| [@masst/cli](packages/masst-cli/) | CLI tool for Masst | - |
-| [@repo/eslint-config](packages/eslint-config/) | Shared ESLint config | - |
-| [@repo/typescript-config](packages/typescript-config/) | Shared TypeScript config | - |
+| Package                                                | Description               | npm                                                                                                         |
+| ------------------------------------------------------ | ------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| [@masst/ui](packages/masst-ui/)                        | Core UI component library | [![npm](https://img.shields.io/npm/v/@masst/ui?style=flat-square)](https://www.npmjs.com/package/@masst/ui) |
+| [@masst/cli](packages/masst-cli/)                      | CLI tool for Masst        | -                                                                                                           |
+| [@repo/eslint-config](packages/eslint-config/)         | Shared ESLint config      | -                                                                                                           |
+| [@repo/typescript-config](packages/typescript-config/) | Shared TypeScript config  | -                                                                                                           |
 
 ---
 
@@ -77,19 +77,19 @@ pnpm dev
 
 ### Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all apps in development mode |
-| `pnpm dev:landing` | Start Masst landing only |
-| `pnpm dev:ui-landing` | Start MasstUI landing only |
-| `pnpm dev:playground` | Start playground only |
-| `pnpm build` | Build all packages and apps |
-| `pnpm test` | Run tests |
-| `pnpm lint` | Run ESLint |
-| `pnpm format` | Format code with Prettier |
-| `pnpm check-types` | TypeScript type checking |
-| `pnpm storybook` | Start Storybook for component development |
-| `pnpm clean` | Clean all build artifacts |
+| Command               | Description                               |
+| --------------------- | ----------------------------------------- |
+| `pnpm dev`            | Start all apps in development mode        |
+| `pnpm dev:landing`    | Start Masst landing only                  |
+| `pnpm dev:ui-landing` | Start MasstUI landing only                |
+| `pnpm dev:playground` | Start playground only                     |
+| `pnpm build`          | Build all packages and apps               |
+| `pnpm test`           | Run tests                                 |
+| `pnpm lint`           | Run ESLint                                |
+| `pnpm format`         | Format code with Prettier                 |
+| `pnpm check-types`    | TypeScript type checking                  |
+| `pnpm storybook`      | Start Storybook for component development |
+| `pnpm clean`          | Clean all build artifacts                 |
 
 ### Releasing
 
