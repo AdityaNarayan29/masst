@@ -190,11 +190,9 @@ export default function Terminal({
                   )}
                 </div>
               ) : (
-                <pre
-                className={`pl-6 whitespace-pre m-0 ${line.color || 'text-white/60'}`}
-              >
-                {line.content}
-              </pre>
+                <pre className={`pl-6 whitespace-pre m-0 ${line.color || 'text-white/60'}`}>
+                  {line.content}
+                </pre>
               )}
             </div>
           ))}
@@ -235,17 +233,9 @@ function getOutputColor(line: string): string {
   if (line.includes('→')) return 'text-white/70';
   if (line.includes('http://') || line.includes('https://')) return 'text-cyan-400';
   // Info
-  if (
-    line.includes('Demo:') ||
-    line.includes('demo@') ||
-    line.includes('Demo credentials')
-  )
+  if (line.includes('Demo:') || line.includes('demo@') || line.includes('Demo credentials'))
     return 'text-amber-400';
-  if (
-    line.includes('Project:') ||
-    line.includes('Database:') ||
-    line.includes('Redis:')
-  )
+  if (line.includes('Project:') || line.includes('Database:') || line.includes('Redis:'))
     return 'text-white/50';
   if (line.includes('Next steps:')) return 'text-white/70';
   // Progress
