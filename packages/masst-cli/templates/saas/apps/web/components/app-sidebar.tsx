@@ -92,7 +92,7 @@ export function AppSidebar({ user }: AppSidebarProps) {
                   </svg>
                 </div>
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="font-semibold">{{ PROJECT_NAME_PASCAL }}</span>
+                  <span className="font-semibold">{{PROJECT_NAME_PASCAL}}</span>
                   <span className="text-xs text-muted-foreground">Dashboard</span>
                 </div>
               </Link>

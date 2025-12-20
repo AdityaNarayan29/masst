@@ -21,7 +21,7 @@ export default function LoginPage() {
               <path d="m2 12 10 5 10-5" />
             </svg>
           </div>
-          {{ PROJECT_NAME_PASCAL }}
+          {{PROJECT_NAME_PASCAL}}
         </a>
         <LoginForm />
       </div>

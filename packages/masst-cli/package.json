@@ -1,6 +1,6 @@
 {
   "name": "@masst/cli",
-  "version": "0.0.3",
+  "version": "0.0.7",
   "description": "SaaS Starter Kit Generator - scaffold production-ready monorepos in seconds",
   "type": "module",
   "repository": {

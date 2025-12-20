@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@masst/ui": "^0.0.1",
+    "@masst/ui": "^0.1.0",
     "@{{PROJECT_NAME}}/database": "workspace:*",
     "bcryptjs": "^2.4.3",
     "next": "^15.1.0",
