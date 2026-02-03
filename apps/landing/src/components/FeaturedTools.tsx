@@ -31,7 +31,7 @@ const projects = [
     name: 'Masst UI',
     description: '50+ accessible React components with A11y support.',
     video: '/ui.mp4',
-    url: 'https://www.npmjs.com/package/masst',
+    url: 'https://ui.masst.dev/',
     github: 'https://github.com/AdityaNarayan29/masst',
     tags: ['React', 'Tailwind', 'A11y'],
     featured: false,
@@ -41,7 +41,7 @@ const projects = [
     name: 'Masst CLI',
     description: 'SaaS monorepo scaffolding in 60 seconds.',
     video: '/cli.mp4',
-    url: 'https://www.npmjs.com/package/masst',
+    url: 'https://cli.masst.dev/',
     github: 'https://github.com/AdityaNarayan29/masst',
     tags: ['Node.js', 'CLI', 'Docker'],
     featured: false,
@@ -52,7 +52,7 @@ const projects = [
     description: 'Multi-database backup CLI with AWS S3 integration.',
     video: '/db.mp4',
     url: 'https://db.masst.dev/',
-    github: 'https://github.com/AdityaNarayan29',
+    github: 'https://github.com/AdityaNarayan29/masstDB',
     tags: ['Go', 'AWS', 'Backup'],
     featured: false,
   },
@@ -61,7 +61,7 @@ const projects = [
     name: 'Masst Campus',
     description: 'Student management system with role-based access control.',
     video: '/campus.mp4',
-    github: 'https://github.com/AdityaNarayan29',
+    github: 'https://github.com/AdityaNarayan29/masstCampus',
     tags: ['Next.js', 'PostgreSQL', 'RBAC'],
     featured: false,
   },
@@ -100,20 +100,20 @@ function BrowserMockup({ project }: { project: (typeof projects)[0] }) {
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Card background with gradient border effect */}
-      <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-black/[0.08] dark:from-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      <div className="relative h-full bg-white dark:bg-[#111] border border-black/[0.06] dark:border-white/[0.06] rounded-2xl overflow-hidden group-hover:border-black/[0.12] dark:group-hover:border-white/[0.12] transition-colors duration-500">
+      <div className="relative h-full bg-[#1a1a1a] border border-white/[0.08] rounded-2xl overflow-hidden group-hover:border-white/[0.15] transition-all duration-500">
         {/* Browser chrome */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-[#0a0a0a] border-b border-black/[0.06] dark:border-white/[0.06]">
+        <div className="flex items-center gap-2 px-4 py-3 bg-[#0d0d0d] border-b border-white/[0.06]">
           <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
-            <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
-            <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+            <div className="w-3 h-3 rounded-full bg-white/20" />
+            <div className="w-3 h-3 rounded-full bg-white/20" />
+            <div className="w-3 h-3 rounded-full bg-white/20" />
           </div>
           <div className="flex-1 mx-4">
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-black/[0.03] dark:bg-white/[0.03] rounded-md max-w-[200px]">
-              <div className="w-3 h-3 rounded-full border border-black/20 dark:border-white/20" />
-              <span className="text-[11px] text-black/30 dark:text-white/30 truncate">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-white/[0.05] rounded-md max-w-[200px]">
+              <div className="w-3 h-3 rounded-full border border-white/20" />
+              <span className="text-[11px] text-white/50 truncate">
                 {project.url || 'github.com'}
               </span>
             </div>
@@ -150,15 +150,15 @@ function BrowserMockup({ project }: { project: (typeof projects)[0] }) {
           </div>
 
           {/* Gradient overlay at bottom */}
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white dark:from-[#111] to-transparent" />
+          <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#141414] to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="p-5">
+        <div className="p-5 bg-[#141414]">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h3 className="font-semibold text-black dark:text-white text-lg">{project.name}</h3>
-              <p className="mt-1.5 text-black/40 dark:text-white/40 leading-relaxed text-sm">
+              <h3 className="font-semibold text-white text-lg">{project.name}</h3>
+              <p className="mt-1.5 text-white/50 leading-relaxed text-sm">
                 {project.description}
               </p>
             </div>
@@ -167,9 +167,9 @@ function BrowserMockup({ project }: { project: (typeof projects)[0] }) {
               href={project.url || project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="shrink-0 w-9 h-9 rounded-full bg-black/[0.05] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center hover:bg-black/[0.1] dark:hover:bg-white/[0.1] hover:border-black/[0.15] dark:hover:border-white/[0.15] transition-all duration-200"
+              className="shrink-0 w-9 h-9 rounded-full bg-white/[0.05] border border-white/[0.1] flex items-center justify-center hover:bg-white/[0.1] hover:border-white/[0.2] transition-all duration-200"
             >
-              <ArrowUpRight className="w-4 h-4 text-black/60 dark:text-white/60" />
+              <ArrowUpRight className="w-4 h-4 text-white/70" />
             </a>
           </div>
 
@@ -178,7 +178,7 @@ function BrowserMockup({ project }: { project: (typeof projects)[0] }) {
             {project.tags.map((tag) => (
               <span
                 key={tag}
-                className="px-2.5 py-1 text-[11px] font-medium text-black/40 dark:text-white/40 bg-black/[0.03] dark:bg-white/[0.03] rounded-md"
+                className="px-2.5 py-1 text-[11px] font-medium text-white/50 bg-white/[0.05] rounded-md"
               >
                 {tag}
               </span>
