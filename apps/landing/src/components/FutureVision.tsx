@@ -161,7 +161,7 @@ export default function FutureVision() {
           <div ref={expRef}>
             <h3 className="text-xl font-semibold text-black dark:text-white mb-8">Why Masst?</h3>
             <div className="space-y-8">
-              {features.map((feature, index) => (
+              {features.map((feature) => (
                 <div key={feature.title} className="exp-item relative pl-6">
                   {/* Timeline line */}
                   <div className="absolute left-0 top-2 bottom-0 w-px bg-gradient-to-b from-violet-500/50 to-transparent" />

@@ -158,9 +158,7 @@ function BrowserMockup({ project }: { project: (typeof projects)[0] }) {
           <div className="flex items-start justify-between gap-4">
             <div>
               <h3 className="font-semibold text-white text-lg">{project.name}</h3>
-              <p className="mt-1.5 text-white/50 leading-relaxed text-sm">
-                {project.description}
-              </p>
+              <p className="mt-1.5 text-white/50 leading-relaxed text-sm">{project.description}</p>
             </div>
 
             <a
