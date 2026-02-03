@@ -61,6 +61,7 @@ const projects = [
     name: 'Masst Campus',
     description: 'Student management system with role-based access control.',
     video: '/campus.mp4',
+    url: 'https://campus.masst.dev/',
     github: 'https://github.com/AdityaNarayan29/masstCampus',
     tags: ['Next.js', 'PostgreSQL', 'RBAC'],
     featured: false,
