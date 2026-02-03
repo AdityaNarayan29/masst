@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -27,11 +28,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             __html: `
               (function() {
                 try {
-                  var darkMode = localStorage.getItem('darkMode');
-                  if (darkMode === null || JSON.parse(darkMode) === true) {
-                    document.documentElement.classList.add('dark');
-                  } else {
+                  var theme = localStorage.getItem('theme');
+                  if (theme === 'light') {
                     document.documentElement.classList.remove('dark');
+                    document.documentElement.classList.add('light');
+                  } else {
+                    document.documentElement.classList.remove('light');
+                    document.documentElement.classList.add('dark');
                   }
                 } catch (e) {
                   document.documentElement.classList.add('dark');
@@ -41,7 +44,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           }}
         />
       </head>
-      <body className={`${inter.variable} font-sans antialiased`}>{children}</body>
+      <body
+        className={`${inter.variable} font-sans antialiased bg-white dark:bg-black transition-colors duration-300`}
+      >
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

@@ -1,218 +1,49 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
+import { ArrowRight, MousePointer2 } from 'lucide-react';
 import { gsap, ScrollTrigger } from '@/lib/animations';
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headingRef = useRef<HTMLHeadingElement>(null);
-  const headingLine1Ref = useRef<HTMLSpanElement>(null);
-  const headingLine2Ref = useRef<HTMLSpanElement>(null);
-  const badgeRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const scrollIndicatorRef = useRef<HTMLDivElement>(null);
-  const orb1Ref = useRef<HTMLDivElement>(null);
-  const orb2Ref = useRef<HTMLDivElement>(null);
-  const orb3Ref = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const glowRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
 
     const ctx = gsap.context(() => {
-      // Register ScrollTrigger
       gsap.registerPlugin(ScrollTrigger);
 
-      // Set initial states
-      gsap.set(
-        [
-          badgeRef.current,
-          headingLine1Ref.current,
-          headingLine2Ref.current,
-          subtitleRef.current,
-          ctaRef.current,
-          statsRef.current,
-        ],
-        {
-          opacity: 0,
-          y: 60,
-          filter: 'blur(10px)',
-        }
-      );
-
-      gsap.set(scrollIndicatorRef.current, {
+      // Initial states
+      gsap.set([badgeRef.current, titleRef.current, subtitleRef.current, ctaRef.current], {
         opacity: 0,
-        y: 20,
+        y: 30,
       });
 
-      gsap.set([orb1Ref.current, orb2Ref.current, orb3Ref.current], {
-        scale: 0.8,
-        opacity: 0,
-      });
+      gsap.set(glowRef.current, { opacity: 0, scale: 0.8 });
 
-      gsap.set(gridRef.current, {
-        opacity: 0,
-      });
+      // Entrance timeline
+      const tl = gsap.timeline({ delay: 0.2 });
 
-      // Create master timeline for hero entrance
-      const masterTL = gsap.timeline({
-        defaults: {
-          ease: 'expo.out',
-        },
-      });
+      tl.to(glowRef.current, {
+        opacity: 1,
+        scale: 1,
+        duration: 2,
+        ease: 'power2.out',
+      })
+        .to(badgeRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.3)
+        .to(titleRef.current, { opacity: 1, y: 0, duration: 1, ease: 'power3.out' }, 0.5)
+        .to(subtitleRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.7)
+        .to(ctaRef.current, { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }, 0.9);
 
-      // Animate background elements first
-      masterTL
-        .to(
-          gridRef.current,
-          {
-            opacity: 1,
-            duration: 1.5,
-            ease: 'power2.out',
-          },
-          0
-        )
-        .to(
-          orb1Ref.current,
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 2,
-            ease: 'power3.out',
-          },
-          0.2
-        )
-        .to(
-          orb2Ref.current,
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 2,
-            ease: 'power3.out',
-          },
-          0.4
-        )
-        .to(
-          orb3Ref.current,
-          {
-            scale: 1,
-            opacity: 1,
-            duration: 2,
-            ease: 'power3.out',
-          },
-          0.6
-        );
-
-      // Animate content with staggered reveal
-      const contentTL = gsap.timeline({
-        defaults: {
-          ease: 'expo.out',
-          duration: 1.2,
-        },
-      });
-
-      contentTL
-        .to(
-          badgeRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-            duration: 1,
-          },
-          0.3
-        )
-        .to(
-          headingLine1Ref.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-          },
-          0.5
-        )
-        .to(
-          headingLine2Ref.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-          },
-          0.7
-        )
-        .to(
-          subtitleRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-          },
-          0.9
-        )
-        .to(
-          ctaRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-          },
-          1.1
-        )
-        .to(
-          statsRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            filter: 'blur(0px)',
-          },
-          1.3
-        )
-        .to(
-          scrollIndicatorRef.current,
-          {
-            opacity: 1,
-            y: 0,
-            duration: 0.8,
-          },
-          1.5
-        );
-
-      // Continuous floating animation for orbs
-      gsap.to(orb1Ref.current, {
-        y: -30,
-        x: 15,
-        duration: 6,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-
-      gsap.to(orb2Ref.current, {
-        y: 25,
-        x: -20,
-        duration: 8,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: 1,
-      });
-
-      gsap.to(orb3Ref.current, {
-        y: -20,
-        x: 10,
-        duration: 7,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: 2,
-      });
-
-      // Parallax effect on scroll
-      gsap.to(headingRef.current, {
-        y: 100,
+      // Parallax
+      gsap.to(containerRef.current, {
+        y: 150,
         ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
@@ -222,209 +53,179 @@ export default function Hero() {
         },
       });
 
-      gsap.to([orb1Ref.current, orb2Ref.current, orb3Ref.current], {
-        y: -150,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 0.5,
-        },
-      });
+      // Glow follow mouse
+      const handleMouseMove = (e: MouseEvent) => {
+        const rect = sectionRef.current?.getBoundingClientRect();
+        if (!rect || !glowRef.current) return;
 
-      // Fade out on scroll
-      gsap.to(sectionRef.current, {
-        opacity: 0.3,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: '60% top',
-          end: 'bottom top',
-          scrub: true,
-        },
-      });
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        gsap.to(glowRef.current, {
+          x: x - 400,
+          y: y - 400,
+          duration: 1.5,
+          ease: 'power2.out',
+        });
+      };
+
+      sectionRef.current?.addEventListener('mousemove', handleMouseMove);
+
+      return () => {
+        sectionRef.current?.removeEventListener('mousemove', handleMouseMove);
+      };
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Magnetic button effect
-  const handleMouseMove = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-    const button = e.currentTarget;
-    const rect = button.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-
-    gsap.to(button, {
-      x: x * 0.2,
-      y: y * 0.2,
-      duration: 0.4,
-      ease: 'power2.out',
-    });
-  };
-
-  const handleMouseLeave = (e: React.MouseEvent<HTMLButtonElement | HTMLAnchorElement>) => {
-    gsap.to(e.currentTarget, {
-      x: 0,
-      y: 0,
-      duration: 0.6,
-      ease: 'elastic.out(1, 0.5)',
-    });
-  };
-
   return (
     <section
       ref={sectionRef}
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background"
+      className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-white to-gray-50 dark:from-black dark:to-[#0a0a0a]"
     >
-      {/* Animated gradient orbs with enhanced visuals */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div
-          ref={orb1Ref}
-          className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full will-animate gpu-accelerate"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, rgba(139, 92, 246, 0.1) 40%, transparent 70%)',
-            filter: 'blur(60px)',
-          }}
-        />
-        <div
-          ref={orb2Ref}
-          className="absolute top-1/4 -right-20 w-[500px] h-[500px] rounded-full will-animate gpu-accelerate"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(59, 130, 246, 0.1) 40%, transparent 70%)',
-            filter: 'blur(50px)',
-          }}
-        />
-        <div
-          ref={orb3Ref}
-          className="absolute -bottom-40 left-1/3 w-[700px] h-[700px] rounded-full will-animate gpu-accelerate"
-          style={{
-            background:
-              'radial-gradient(circle, rgba(244, 63, 94, 0.15) 0%, rgba(249, 115, 22, 0.08) 40%, transparent 70%)',
-            filter: 'blur(70px)',
-          }}
-        />
-      </div>
-
-      {/* Grid pattern overlay */}
+      {/* Animated glow that follows cursor */}
       <div
-        ref={gridRef}
-        className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"
+        ref={glowRef}
+        className="pointer-events-none absolute w-[800px] h-[800px] rounded-full dark:opacity-100 opacity-50"
+        style={{
+          background:
+            'radial-gradient(circle, rgba(124, 58, 237, 0.15) 0%, rgba(124, 58, 237, 0.05) 25%, transparent 50%)',
+          filter: 'blur(40px)',
+        }}
       />
 
-      {/* Subtle noise texture */}
-      <div className="absolute inset-0 opacity-[0.015] pointer-events-none noise-overlay" />
-
+      {/* Grain overlay */}
       <div
-        ref={headingRef}
-        className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
-      >
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        }}
+      />
+
+      {/* Subtle grid */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.02]"
+        style={{
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+          backgroundSize: '100px 100px',
+        }}
+      />
+
+      {/* Content */}
+      <div ref={containerRef} className="relative z-10 w-full max-w-[1200px] mx-auto px-6">
         {/* Badge */}
-        <div
-          ref={badgeRef}
-          className="inline-flex items-center gap-2 px-5 py-2.5 mb-10 rounded-full bg-gradient-to-r from-violet-500/10 via-fuchsia-500/10 to-violet-500/10 border border-violet-500/20 backdrop-blur-sm will-animate"
-        >
-          <Sparkles className="w-4 h-4 text-violet-400 animate-breathe" />
-          <span className="text-sm font-medium bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-            Developer-first tools
-          </span>
+        <div ref={badgeRef} className="flex justify-center mb-8">
+          <div className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.02] dark:bg-white/[0.02] backdrop-blur-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+            </span>
+            <span className="text-[13px] text-black/60 dark:text-white/60 font-medium">
+              Free to Use
+            </span>
+            <span className="text-black/20 dark:text-white/20">·</span>
+            <span className="text-[13px] text-black/40 dark:text-white/40">Now on NPM</span>
+          </div>
         </div>
 
-        {/* Main heading with split animation */}
-        <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-bold mb-8 tracking-tight leading-[1.1]">
-          <span ref={headingLine1Ref} className="block text-foreground will-animate">
-            Dev tools you&apos;ll
-          </span>
-          <span
-            ref={headingLine2Ref}
-            className="block bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent will-animate gradient-text-animated"
-          >
-            actually love
+        {/* Main Title */}
+        <h1
+          ref={titleRef}
+          className="text-center font-bold tracking-[-0.04em] leading-[0.95]"
+          style={{ fontSize: 'clamp(3rem, 10vw, 7rem)' }}
+        >
+          <span className="block text-black dark:text-white">Dev tools you&apos;ll</span>
+          <span className="block mt-2">
+            <span className="text-black dark:text-white">actually </span>
+            <span
+              className="bg-clip-text text-transparent"
+              style={{
+                backgroundImage: 'linear-gradient(135deg, #a855f7 0%, #6366f1 50%, #0ea5e9 100%)',
+              }}
+            >
+              love
+            </span>
           </span>
         </h1>
 
-        {/* Subheading */}
+        {/* Subtitle */}
         <p
           ref={subtitleRef}
-          className="text-lg sm:text-xl lg:text-2xl text-muted-foreground mb-12 max-w-2xl mx-auto leading-relaxed will-animate"
+          className="mt-8 text-center text-lg sm:text-xl text-black/40 dark:text-white/40 max-w-[600px] mx-auto leading-relaxed font-light"
         >
-          A modern ecosystem of handcrafted developer tools — minimal, blazing fast, and growing
-          with you.
+          A modern ecosystem of{' '}
+          <span className="text-black/60 dark:text-white/60">handcrafted developer tools</span> —{' '}
+          <span className="text-black/60 dark:text-white/60">minimal</span>,{' '}
+          <span className="text-black/60 dark:text-white/60">fast</span>, and growing with you.
         </p>
 
-        {/* CTA Buttons */}
+        {/* CTA */}
         <div
           ref={ctaRef}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center will-animate"
+          className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <button
             onClick={() => document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth' })}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="group relative px-8 py-4 rounded-2xl font-semibold text-lg overflow-hidden transition-all duration-500 hover:scale-105 active:scale-95 hover-glow"
+            className="group relative h-12 px-8 rounded-full font-medium text-[15px] text-white overflow-hidden transition-transform duration-200 hover:scale-[1.02] active:scale-[0.98]"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 animate-gradient" />
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-600 via-fuchsia-600 to-cyan-600 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" />
-            <span className="relative flex items-center gap-2 text-white">
-              Explore Tools
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            <div
+              className="absolute inset-0"
+              style={{
+                background: 'linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)',
+              }}
+            />
+            <div
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+              style={{
+                background: 'linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%)',
+              }}
+            />
+            <span className="relative flex items-center gap-2">
+              View Projects
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
             </span>
           </button>
 
           <a
-            href="https://github.com/AdityaNarayan29"
+            href="https://github.com/AdityaNarayan29/masst"
             target="_blank"
             rel="noopener noreferrer"
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            className="group px-8 py-4 rounded-2xl font-semibold text-lg border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 hover:border-white/20 transition-all duration-500 hover:scale-105 active:scale-95"
+            className="group h-12 px-8 rounded-full font-medium text-[15px] text-black/70 dark:text-white/70 hover:text-black dark:hover:text-white border border-black/[0.08] dark:border-white/[0.08] hover:border-black/[0.15] dark:hover:border-white/[0.15] bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] flex items-center gap-2 transition-all duration-200"
           >
-            <span className="flex items-center gap-2 text-foreground">
-              View on GitHub
-              <ArrowRight className="w-5 h-5 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+            Star on GitHub
+            <span className="text-black/30 dark:text-white/30 group-hover:text-black/50 dark:group-hover:text-white/50 transition-colors">
+              →
             </span>
           </a>
         </div>
 
         {/* Stats */}
-        <div ref={statsRef} className="mt-20 pt-8 border-t border-white/10 will-animate">
-          <div className="flex flex-wrap justify-center gap-12 sm:gap-20 text-center">
-            <div className="group">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                5+
+        <div className="mt-24 flex items-center justify-center gap-12 sm:gap-20">
+          {[
+            { value: '50+', label: 'Components' },
+            { value: '6', label: 'Products' },
+            { value: '100%', label: 'Free' },
+          ].map((stat) => (
+            <div key={stat.label} className="text-center">
+              <div className="text-3xl sm:text-4xl font-semibold text-black dark:text-white tracking-tight">
+                {stat.value}
               </div>
-              <div className="text-sm text-muted-foreground mt-1">Dev Tools</div>
+              <div className="mt-1 text-sm text-black/30 dark:text-white/30">{stat.label}</div>
             </div>
-            <div className="group">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-fuchsia-500 to-cyan-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                Open
-              </div>
-              <div className="text-sm text-muted-foreground mt-1">Source</div>
-            </div>
-            <div className="group">
-              <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-cyan-500 to-violet-500 bg-clip-text text-transparent group-hover:scale-110 transition-transform duration-300">
-                MIT
-              </div>
-              <div className="text-sm text-muted-foreground mt-1">Licensed</div>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <div
-        ref={scrollIndicatorRef}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 will-animate"
-      >
-        <span className="text-xs text-muted-foreground/60 uppercase tracking-widest">Scroll</span>
-        <div className="w-6 h-10 rounded-full border-2 border-muted-foreground/30 flex justify-center pt-2">
-          <ChevronDown className="w-4 h-4 text-muted-foreground/50 animate-bounce" />
-        </div>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-black/20 dark:text-white/20">
+        <MousePointer2 className="w-4 h-4 animate-bounce" />
       </div>
+
+      {/* Bottom fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-white dark:from-black to-transparent pointer-events-none" />
     </section>
   );
 }

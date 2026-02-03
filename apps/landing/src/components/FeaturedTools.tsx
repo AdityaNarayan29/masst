@@ -1,113 +1,199 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import {
-  ExternalLink,
-  Github,
-  Zap,
-  Terminal,
-  FileText,
-  Eye,
-  Layers,
-  Flame,
-  Globe,
-  Globe2,
-  ArrowUpRight,
-  Sparkles,
-} from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { ArrowUpRight, Play, Pause } from 'lucide-react';
 import { gsap, ScrollTrigger } from '@/lib/animations';
 
-const tools = [
+const projects = [
   {
-    name: 'Masst Docs',
-    subtitle: 'System Design',
-    description: 'AI-powered, minimal documentation viewer with blazing fast search.',
-    icon: FileText,
-    gradient: 'from-blue-500 to-cyan-500',
-    glowColor: 'rgba(59, 130, 246, 0.5)',
-    links: [
-      { label: 'Project', url: 'https://docs.masst.dev/', icon: Globe2 },
-      { label: 'GitHub', url: 'https://github.com/AdityaNarayan29/masstDocs', icon: Github },
-    ],
-    status: 'available',
-  },
-  {
+    id: 'leetdaily',
     name: 'LeetDaily',
-    subtitle: 'Chrome Extension',
     description:
-      'Track your LeetCode streak. Chrome extension that glows red if you forget to solve.',
-    icon: Flame,
-    gradient: 'from-orange-500 to-red-500',
-    glowColor: 'rgba(249, 115, 22, 0.5)',
-    links: [
-      {
-        label: 'Chrome Store',
-        url: 'https://chromewebstore.google.com/detail/leetdaily-%E2%80%94-daily-leetcod/kpmmlpoonleloofchbbfnmicchmhehcf',
-        icon: ExternalLink,
-      },
-      { label: 'Landing', url: 'https://leetdaily.masst.dev/', icon: Globe },
-      { label: 'GitHub', url: 'https://github.com/AdityaNarayan29/leetDaily', icon: Github },
-    ],
-    status: 'available',
+      'Chrome extension for tracking your LeetCode streak with analytics and study plans.',
+    video: '/leetdaily.mp4',
+    url: 'https://leetdaily.masst.dev/',
+    github: 'https://github.com/AdityaNarayan29/leetDaily',
+    tags: ['Chrome Extension', 'React', 'Analytics'],
+    featured: true,
   },
   {
-    name: 'Masst Events',
-    subtitle: 'Event Bus',
-    description: 'A reliable event bus for structured, reactive flows.',
-    icon: Zap,
-    gradient: 'from-yellow-500 to-amber-500',
-    glowColor: 'rgba(234, 179, 8, 0.5)',
-    links: [
-      {
-        label: 'GitHub',
-        url: 'https://github.com/AdityaNarayan29/event-planner-monorepo',
-        icon: Github,
-      },
-      { label: 'Website', url: 'https://mast-events.framer.website/', icon: Globe },
-    ],
-    status: 'available',
+    id: 'docs',
+    name: 'Masst Docs',
+    description: '35+ system design roadmaps powered by AI with semantic search.',
+    video: '/docs.mp4',
+    url: 'https://docs.masst.dev/',
+    github: 'https://github.com/AdityaNarayan29/masstDocs',
+    tags: ['LangChain', 'Pinecone', 'Next.js'],
+    featured: true,
   },
   {
+    id: 'ui',
     name: 'Masst UI',
-    subtitle: 'Component Library',
-    description: 'Lightweight component library, built for speed and clarity.',
-    icon: Layers,
-    gradient: 'from-violet-500 to-purple-500',
-    glowColor: 'rgba(139, 92, 246, 0.5)',
-    links: [
-      { label: 'Docs', url: '#', icon: FileText },
-      { label: 'GitHub', url: '#', icon: Github },
-    ],
-    status: 'available',
+    description: '50+ accessible React components with A11y support.',
+    video: '/ui.mp4',
+    url: 'https://www.npmjs.com/package/masst',
+    github: 'https://github.com/AdityaNarayan29/masst',
+    tags: ['React', 'Tailwind', 'A11y'],
+    featured: false,
   },
   {
+    id: 'cli',
     name: 'Masst CLI',
-    subtitle: 'Developer Tool',
-    description: 'CLI for scaffolding and automation, plug-and-play simplicity.',
-    icon: Terminal,
-    gradient: 'from-emerald-500 to-green-500',
-    glowColor: 'rgba(16, 185, 129, 0.5)',
-    links: [{ label: 'GitHub', url: '#', icon: Github }],
-    status: 'available',
+    description: 'SaaS monorepo scaffolding in 60 seconds.',
+    video: '/cli.mp4',
+    url: 'https://www.npmjs.com/package/masst',
+    github: 'https://github.com/AdityaNarayan29/masst',
+    tags: ['Node.js', 'CLI', 'Docker'],
+    featured: false,
   },
   {
-    name: 'Glass UI',
-    subtitle: 'Design System',
-    description: "Next-gen glassmorphism UI system inspired by Apple's design system.",
-    icon: Eye,
-    gradient: 'from-pink-500 to-rose-500',
-    glowColor: 'rgba(236, 72, 153, 0.5)',
-    links: [],
-    status: 'coming-soon',
+    id: 'db',
+    name: 'Masst DB',
+    description: 'Multi-database backup CLI with AWS S3 integration.',
+    video: '/db.mp4',
+    url: 'https://db.masst.dev/',
+    github: 'https://github.com/AdityaNarayan29',
+    tags: ['Go', 'AWS', 'Backup'],
+    featured: false,
+  },
+  {
+    id: 'campus',
+    name: 'Masst Campus',
+    description: 'Student management system with role-based access control.',
+    video: '/campus.mp4',
+    github: 'https://github.com/AdityaNarayan29',
+    tags: ['Next.js', 'PostgreSQL', 'RBAC'],
+    featured: false,
   },
 ];
+
+function BrowserMockup({ project }: { project: (typeof projects)[0] }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  useEffect(() => {
+    if (isHovered && videoRef.current) {
+      videoRef.current.play();
+      setIsPlaying(true);
+    } else if (!isHovered && videoRef.current) {
+      videoRef.current.pause();
+      setIsPlaying(false);
+    }
+  }, [isHovered]);
+
+  return (
+    <div
+      className="group project-card relative rounded-2xl overflow-hidden transition-all duration-500"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
+      {/* Card background with gradient border effect */}
+      <div className="absolute inset-0 rounded-2xl bg-gradient-to-b from-black/[0.08] dark:from-white/[0.08] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      <div className="relative h-full bg-white dark:bg-[#111] border border-black/[0.06] dark:border-white/[0.06] rounded-2xl overflow-hidden group-hover:border-black/[0.12] dark:group-hover:border-white/[0.12] transition-colors duration-500">
+        {/* Browser chrome */}
+        <div className="flex items-center gap-2 px-4 py-3 bg-gray-100 dark:bg-[#0a0a0a] border-b border-black/[0.06] dark:border-white/[0.06]">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+            <div className="w-3 h-3 rounded-full bg-[#febc2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#28c840]" />
+          </div>
+          <div className="flex-1 mx-4">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-black/[0.03] dark:bg-white/[0.03] rounded-md max-w-[200px]">
+              <div className="w-3 h-3 rounded-full border border-black/20 dark:border-white/20" />
+              <span className="text-[11px] text-black/30 dark:text-white/30 truncate">
+                {project.url || 'github.com'}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Video container */}
+        <div className="relative aspect-video">
+          <video
+            ref={videoRef}
+            src={project.video}
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+          />
+
+          {/* Play/Pause overlay */}
+          <div
+            className={`absolute inset-0 flex items-center justify-center bg-black/40 transition-opacity duration-300 ${
+              isPlaying ? 'opacity-0' : 'opacity-100'
+            }`}
+          >
+            <button
+              onClick={togglePlay}
+              className="w-14 h-14 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center hover:bg-white/20 transition-colors duration-200"
+            >
+              {isPlaying ? (
+                <Pause className="w-6 h-6 text-white" />
+              ) : (
+                <Play className="w-6 h-6 text-white ml-1" />
+              )}
+            </button>
+          </div>
+
+          {/* Gradient overlay at bottom */}
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white dark:from-[#111] to-transparent" />
+        </div>
+
+        {/* Content */}
+        <div className="p-5">
+          <div className="flex items-start justify-between gap-4">
+            <div>
+              <h3 className="font-semibold text-black dark:text-white text-lg">{project.name}</h3>
+              <p className="mt-1.5 text-black/40 dark:text-white/40 leading-relaxed text-sm">
+                {project.description}
+              </p>
+            </div>
+
+            <a
+              href={project.url || project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 w-9 h-9 rounded-full bg-black/[0.05] dark:bg-white/[0.05] border border-black/[0.08] dark:border-white/[0.08] flex items-center justify-center hover:bg-black/[0.1] dark:hover:bg-white/[0.1] hover:border-black/[0.15] dark:hover:border-white/[0.15] transition-all duration-200"
+            >
+              <ArrowUpRight className="w-4 h-4 text-black/60 dark:text-white/60" />
+            </a>
+          </div>
+
+          {/* Tags */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {project.tags.map((tag) => (
+              <span
+                key={tag}
+                className="px-2.5 py-1 text-[11px] font-medium text-black/40 dark:text-white/40 bg-black/[0.03] dark:bg-white/[0.03] rounded-md"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function FeaturedTools() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-  const orb1Ref = useRef<HTMLDivElement>(null);
-  const orb2Ref = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
@@ -115,20 +201,15 @@ export default function FeaturedTools() {
     const ctx = gsap.context(() => {
       gsap.registerPlugin(ScrollTrigger);
 
-      // Animate header on scroll
+      // Header animation
       gsap.fromTo(
         headerRef.current,
-        {
-          opacity: 0,
-          y: 80,
-          filter: 'blur(10px)',
-        },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
-          filter: 'blur(0px)',
-          duration: 1.2,
-          ease: 'expo.out',
+          duration: 0.8,
+          ease: 'power3.out',
           scrollTrigger: {
             trigger: headerRef.current,
             start: 'top 85%',
@@ -137,301 +218,66 @@ export default function FeaturedTools() {
         }
       );
 
-      // Animate cards with stagger
-      const cards = cardsRef.current?.querySelectorAll('.tool-card');
+      // Cards stagger
+      const cards = gridRef.current?.querySelectorAll('.project-card');
       if (cards) {
         gsap.fromTo(
           cards,
-          {
-            opacity: 0,
-            y: 100,
-            scale: 0.9,
-            filter: 'blur(10px)',
-          },
+          { opacity: 0, y: 60, scale: 0.98 },
           {
             opacity: 1,
             y: 0,
             scale: 1,
-            filter: 'blur(0px)',
-            duration: 1,
-            stagger: 0.15,
-            ease: 'expo.out',
+            duration: 0.7,
+            stagger: 0.1,
+            ease: 'power3.out',
             scrollTrigger: {
-              trigger: cardsRef.current,
+              trigger: gridRef.current,
               start: 'top 80%',
               toggleActions: 'play none none reverse',
             },
           }
         );
       }
-
-      // Floating animation for orbs
-      gsap.to(orb1Ref.current, {
-        y: -40,
-        x: 20,
-        duration: 8,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
-
-      gsap.to(orb2Ref.current, {
-        y: 30,
-        x: -25,
-        duration: 10,
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-        delay: 2,
-      });
-
-      // Parallax for orbs on scroll
-      gsap.to([orb1Ref.current, orb2Ref.current], {
-        y: -100,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
-  // Card hover animation
-  const handleCardHover = (index: number, isEntering: boolean) => {
-    const card = cardsRef.current?.querySelectorAll('.tool-card')[index];
-    if (!card) return;
-
-    const icon = card.querySelector('.tool-icon');
-    const glow = card.querySelector('.card-glow');
-
-    if (isEntering) {
-      gsap.to(card, {
-        y: -8,
-        duration: 0.4,
-        ease: 'power2.out',
-      });
-      if (icon) {
-        gsap.to(icon, {
-          scale: 1.1,
-          rotate: 5,
-          duration: 0.4,
-          ease: 'back.out(2)',
-        });
-      }
-      if (glow) {
-        gsap.to(glow, {
-          opacity: 0.4,
-          scale: 1.1,
-          duration: 0.5,
-          ease: 'power2.out',
-        });
-      }
-    } else {
-      gsap.to(card, {
-        y: 0,
-        duration: 0.5,
-        ease: 'elastic.out(1, 0.5)',
-      });
-      if (icon) {
-        gsap.to(icon, {
-          scale: 1,
-          rotate: 0,
-          duration: 0.5,
-          ease: 'elastic.out(1, 0.5)',
-        });
-      }
-      if (glow) {
-        gsap.to(glow, {
-          opacity: 0,
-          scale: 1,
-          duration: 0.4,
-          ease: 'power2.out',
-        });
-      }
-    }
-  };
-
-  // Link hover animation
-  const handleLinkHover = (e: React.MouseEvent, isEntering: boolean) => {
-    const link = e.currentTarget;
-    const arrow = link.querySelector('.link-arrow');
-
-    if (isEntering) {
-      gsap.to(link, {
-        scale: 1.05,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-      gsap.to(arrow, {
-        x: 3,
-        y: -3,
-        opacity: 1,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    } else {
-      gsap.to(link, {
-        scale: 1,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-      gsap.to(arrow, {
-        x: 0,
-        y: 0,
-        opacity: 0,
-        duration: 0.3,
-        ease: 'power2.out',
-      });
-    }
-  };
-
   return (
-    <section ref={sectionRef} id="tools" className="relative py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
-
-      {/* Gradient orbs */}
+    <section
+      ref={sectionRef}
+      id="tools"
+      className="relative py-32 bg-gradient-to-b from-gray-50 to-white dark:from-[#0a0a0a] dark:to-black"
+    >
+      {/* Grain overlay */}
       <div
-        ref={orb1Ref}
-        className="absolute top-0 left-1/4 w-[600px] h-[600px] rounded-full will-animate gpu-accelerate"
+        className="pointer-events-none absolute inset-0 opacity-[0.02]"
         style={{
-          background: 'radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%)',
-          filter: 'blur(80px)',
-        }}
-      />
-      <div
-        ref={orb2Ref}
-        className="absolute bottom-0 right-1/4 w-[600px] h-[600px] rounded-full will-animate gpu-accelerate"
-        style={{
-          background: 'radial-gradient(circle, rgba(217, 70, 239, 0.15) 0%, transparent 70%)',
-          filter: 'blur(80px)',
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         }}
       />
 
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px]" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section header */}
-        <div ref={headerRef} className="text-center mb-20">
-          <div className="inline-flex items-center gap-2 px-5 py-2.5 mb-6 rounded-full bg-violet-500/10 border border-violet-500/20 backdrop-blur-sm">
-            <Sparkles className="w-4 h-4 text-violet-400 animate-breathe" />
-            <span className="text-sm font-medium bg-gradient-to-r from-violet-400 to-fuchsia-400 bg-clip-text text-transparent">
-              Our Ecosystem
-            </span>
-          </div>
-
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 tracking-tight">
-            <span className="text-foreground">Crafted with</span>
-            <br />
-            <span className="bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500 bg-clip-text text-transparent gradient-text-animated">
-              obsessive purpose
-            </span>
+      <div className="relative max-w-7xl mx-auto px-6">
+        {/* Header */}
+        <div ref={headerRef} className="mb-16">
+          <span className="text-sm font-medium text-violet-500 dark:text-violet-400 tracking-wider uppercase">
+            Projects
+          </span>
+          <h2 className="mt-4 text-4xl sm:text-5xl font-bold text-black dark:text-white tracking-tight">
+            Featured Work
           </h2>
-
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Each tool in the Masst ecosystem is built with obsessive attention to detail, developer
-            experience, and performance.
+          <p className="mt-4 text-lg text-black/40 dark:text-white/40 max-w-xl">
+            Developer tools and products built with obsessive attention to detail.
           </p>
         </div>
 
-        {/* Tools grid */}
-        <div ref={cardsRef} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool, index) => {
-            const IconComponent = tool.icon;
-            return (
-              <div
-                key={tool.name}
-                className="tool-card group relative will-animate"
-                onMouseEnter={() => handleCardHover(index, true)}
-                onMouseLeave={() => handleCardHover(index, false)}
-              >
-                {/* Card glow effect */}
-                <div
-                  className="card-glow absolute -inset-1 rounded-3xl opacity-0 will-animate"
-                  style={{
-                    background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), ${tool.glowColor}, transparent 40%)`,
-                    filter: 'blur(20px)',
-                  }}
-                />
-
-                {/* Gradient border on hover */}
-                <div
-                  className={`absolute -inset-[1px] bg-gradient-to-r ${tool.gradient} rounded-3xl opacity-0 group-hover:opacity-30 transition-opacity duration-500`}
-                />
-
-                {/* Card */}
-                <div className="relative h-full bg-background/60 backdrop-blur-xl border border-white/10 rounded-3xl p-6 transition-all duration-500 group-hover:border-white/20 group-hover:bg-background/80">
-                  {/* Header */}
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-4">
-                      {/* Icon with gradient background */}
-                      <div
-                        className={`tool-icon relative p-3.5 rounded-2xl bg-gradient-to-br ${tool.gradient} shadow-lg`}
-                        style={{
-                          boxShadow: `0 10px 40px -10px ${tool.glowColor}`,
-                        }}
-                      >
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-foreground">{tool.name}</h3>
-                        <p className="text-xs text-muted-foreground">{tool.subtitle}</p>
-                      </div>
-                    </div>
-
-                    {tool.status === 'coming-soon' && (
-                      <span className="px-3 py-1.5 bg-gradient-to-r from-violet-500/20 to-fuchsia-500/20 border border-violet-500/30 text-violet-400 rounded-full text-xs font-medium animate-border-glow">
-                        Soon
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Description */}
-                  <p className="text-muted-foreground mb-6 leading-relaxed text-sm">
-                    {tool.description}
-                  </p>
-
-                  {/* Links */}
-                  <div className="flex gap-2 flex-wrap">
-                    {tool.links.map((link) => {
-                      const LinkIcon = link.icon;
-                      return (
-                        <a
-                          key={link.label}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          onMouseEnter={(e) => handleLinkHover(e, true)}
-                          onMouseLeave={(e) => handleLinkHover(e, false)}
-                          className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-white/5 hover:bg-white/10 border border-white/10 hover:border-white/20 rounded-xl text-xs font-medium text-muted-foreground hover:text-foreground transition-all duration-300"
-                        >
-                          <LinkIcon className="w-3.5 h-3.5" />
-                          {link.label}
-                          <ArrowUpRight className="link-arrow w-3 h-3 opacity-0 -translate-x-1" />
-                        </a>
-                      );
-                    })}
-                  </div>
-
-                  {/* Decorative gradient corner */}
-                  <div
-                    className={`absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl ${tool.gradient} opacity-[0.03] rounded-tr-3xl rounded-bl-[100px] group-hover:opacity-[0.08] transition-opacity duration-500`}
-                  />
-
-                  {/* Shimmer effect on hover */}
-                  <div className="absolute inset-0 rounded-3xl overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 translate-x-[-100%] group-hover:animate-shimmer bg-gradient-to-r from-transparent via-white/5 to-transparent" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
+        {/* Bento Grid */}
+        <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* All projects - uniform sizing */}
+          {projects.map((project) => (
+            <BrowserMockup key={project.id} project={project} />
+          ))}
         </div>
       </div>
     </section>
