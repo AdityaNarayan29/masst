@@ -35,7 +35,10 @@ ${brand.primary('  ╚═╝     ╚═╝')}${brand.secondary('╚═╝  ╚�
 const TAGLINE = brand.muted('  Ship your SaaS in days, not months');
 
 // Version badge
-const VERSION = '0.0.2';
+// Read the version from package.json so it never drifts from the published release
+const VERSION: string = JSON.parse(
+  fs.readFileSync(path.join(__dirname, '..', 'package.json'), 'utf8')
+).version;
 const versionBadge = `${brand.muted('v')}${brand.accent(VERSION)}`;
 
 const program = new Command();
