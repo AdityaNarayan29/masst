@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Masst — Tools with gravity</title>
-<meta name="description" content="Masst is a set of free, open-source developer tools: a SaaS scaffolding CLI, a React UI kit, system design docs, LeetDaily, database backups and more.">
+<meta name="description" content="Masst is a set of free, open-source developer tools: a SaaS scaffolding CLI, a React UI kit, system design docs, LeetDaily, database backups, a dev team made of agents and more.">
 <meta name="theme-color" content="#020203">
 <link rel="icon" href="/logo.png">
 <link rel="canonical" href="https://www.masst.dev/">
 <meta property="og:type" content="website"><meta property="og:url" content="https://www.masst.dev/">
-<meta property="og:title" content="Masst — Tools with gravity"><meta property="og:description" content="Six free, open-source developer tools by Aditya Narayan.">
+<meta property="og:title" content="Masst — Tools with gravity"><meta property="og:description" content="Seven free, open-source developer tools by Aditya Narayan.">
 <meta property="og:image" content="https://www.masst.dev/og"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Masst — Tools with gravity"><meta name="twitter:description" content="Six free, open-source developer tools by Aditya Narayan."><meta name="twitter:image" content="https://www.masst.dev/og">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="Masst — Tools with gravity"><meta name="twitter:description" content="Seven free, open-source developer tools by Aditya Narayan."><meta name="twitter:image" content="https://www.masst.dev/og">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@400;500&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -134,6 +134,15 @@ footer a:hover{color:var(--fg)}
 .tbl td:last-child{text-align:right}
 .role{font-size:10.5px;border:1px solid var(--line);border-radius:4px;padding:1px 5px;color:var(--mute)}
 .tree div{white-space:pre}
+.kb{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;min-height:150px;align-items:start}
+.kb .kc{min-width:0;display:flex;flex-direction:column;gap:5px}
+.kb .kh{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);display:flex;justify-content:space-between;padding:0 2px 3px;border-bottom:1px solid var(--line)}
+.kb .kh b{color:var(--mute);font-weight:400}
+.kb .kt{border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:#0e0d10;font-size:10.5px;line-height:1.35;color:var(--fg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;animation:kin .5s cubic-bezier(.2,.7,.1,1)}
+.kb .kt em{display:block;font-style:normal;color:var(--dim);font-size:9.5px}
+.kb .kc:nth-child(4) .kt{border-color:rgba(127,217,154,.35)}.kb .kc:nth-child(4) .kt em{color:#7FD99A}
+.kb .kc:nth-child(2) .kt em,.kb .kc:nth-child(3) .kt em{color:var(--ember)}
+@keyframes kin{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
 .search{border:1px solid var(--line);border-radius:8px;padding:6px 10px;margin-bottom:8px;color:var(--fg)}
 #hud3d{position:fixed;inset:0;z-index:5;pointer-events:none}
 #hud3d .lock{position:absolute;transition:opacity .5s}
@@ -166,13 +175,14 @@ footer a:hover{color:var(--fg)}
   nav ul{display:none}
   #hud3d svg,#hud3d .tag,#hud3d .lock b{display:none}
   .demo{font-size:11.5px}
+  .kb .kh{letter-spacing:.06em;font-size:9px}
   .tool.r{justify-content:flex-start}
   .tool.r .card{border-right:0;border-left:1px solid rgba(255,74,28,.55);padding-right:0;padding-left:20px;text-align:left}
   .tool.r .meta{justify-content:flex-start}
   .hud{display:none}
   .facts{gap:30px}
 }
-@media (prefers-reduced-motion: reduce){.fade{display:none}.card>*{opacity:1;transform:none;filter:none;transition:none}}
+@media (prefers-reduced-motion: reduce){.fade{display:none}.kb .kt{animation:none}.card>*{opacity:1;transform:none;filter:none;transition:none}}
 </style>
 </head>
 <body>
@@ -193,7 +203,7 @@ footer a:hover{color:var(--fg)}
     <div class="card">
       <div class="credit mono">Masst presents</div>
       <h1 class="serif">Tools with<br><em>gravity.</em></h1>
-      <p>Six developer tools, one obsessive builder. Each one does a single job so well you stop thinking about it.</p>
+      <p>Seven developer tools, one obsessive builder. Each one does a single job so well you stop thinking about it.</p>
       <div class="row"><a class="btn solid" href="#tools">Enter the system</a><a class="btn" href="https://github.com/AdityaNarayan29/masst">GitHub</a></div>
     </div>
     <div class="cue mono">Scroll</div>
@@ -267,11 +277,21 @@ footer a:hover{color:var(--fg)}
     <a class="go" href="https://campus.masst.dev">campus.masst.dev</a>
   </div></section>
 
-  <section class="scene final" data-scene="8" data-name="your turn">
+  <section class="scene tool" data-scene="8" data-name="xtruct"><div class="card">
+    <div class="credit mono"><b>07</b> · Agents</div>
+    <h2 class="serif">Xtruct</h2>
+    <div class="line">A dev team made of agents.</div>
+    <p>You approve the spec. An architect plans it, leads split it into ClickUp tasks, juniors build each one in its own worktree, and gated merges land it on main one PR at a time.</p>
+    <div class="meta mono"><span><b>npx @masst/xtruct</b></span><span>Claude Code</span><span>ClickUp</span><span>GitHub</span></div>
+    <div class="demo" data-demo="xtruct"><div class="bar"><i></i><i></i><i></i><span>xtruct dashboard · demo</span></div><div class="body"><div class="kb" aria-label="Sample task board: agents moving tasks from building to merged"></div></div></div>
+    <a class="go" href="https://xtruct.masst.dev">xtruct.masst.dev</a>
+  </div></section>
+
+  <section class="scene final" data-scene="9" data-name="your turn">
     <div class="card">
       <h2 class="serif">Start<br><em>building.</em></h2>
       <div class="term"><span><b>$</b> npx @masst/cli</span><button type="button" data-copy="npx @masst/cli">Copy</button></div>
-      <div class="facts"><div><b>6</b>tools</div><div><b>50+</b>components</div><div><b>MIT</b>licensed</div></div>
+      <div class="facts"><div><b>7</b>tools</div><div><b>50+</b>components</div><div><b>MIT</b>licensed</div></div>
       <div class="also">Also from Masst: <a href="https://masst.ai">masst.ai</a>, a company brain for your product.</div>
     </div>
   </section>
@@ -290,7 +310,7 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting) e.tar
 scenes.forEach(s=>io.observe(s));
 let sceneT=0, lastIdx=-1;
 function onScroll(){ const mid=innerHeight*.5; let best=0,f=0; scenes.forEach((s,i)=>{ const r=s.getBoundingClientRect(); if(r.top<=mid){ best=i; f=Math.min(1,(mid-r.top)/Math.max(1,r.height)); } }); sceneT=best+f-.5;
-  hud.style.opacity=best>=8?0:1; if(best!==lastIdx){ lastIdx=best; hud.innerHTML='<b>'+String(best).padStart(2,'0')+'</b> · '+scenes[best].dataset.name; } }
+  hud.style.opacity=best>=9?0:1; if(best!==lastIdx){ lastIdx=best; hud.innerHTML='<b>'+String(best).padStart(2,'0')+'</b> · '+scenes[best].dataset.name; } }
 addEventListener('scroll',onScroll,{passive:true}); onScroll();
 
 
@@ -322,6 +342,11 @@ const dio=new IntersectionObserver(es=>es.forEach(e=>{ if(!e.isIntersecting||dem
   if(k==='cli') typeLines(b,['<span class="ac">$</span> <span class="fg">npx @masst/cli</span> my-saas','<span class="ok">✓</span> Next.js web app','<span class="ok">✓</span> NestJS API','<span class="ok">✓</span> Prisma + PostgreSQL','<span class="ok">✓</span> Docker Compose','<span class="fg">Ready.</span> cd my-saas && pnpm dev'],reduce?0:520);
   if(k==='db') typeLines(b,['<span class="ac">$</span> <span class="fg">masst-db backup</span> --all','postgres  users_db   <span class="ok">✓ compressed</span>','mongodb   events     <span class="ok">✓ compressed</span>','mysql     billing    <span class="ok">✓ compressed</span>','<span class="fg">→ s3://backups/2026-11-05/</span> <span class="ok">uploaded</span>','next run: daily 02:00'],reduce?0:620);
   if(k==='docs'){ const q=b.querySelector('.q'), txt='how does consistent hashing work?'; let n=0; const ty=()=>{ q.textContent=txt.slice(0,n++); if(n<=txt.length) setTimeout(ty,reduce?0:45); else setTimeout(()=>{n=0;ty();},3800); }; ty(); }
+  if(k==='xtruct'){ const kb=b.querySelector('.kb'), ST=['building','review','approved','merged'], WHO=['jr-1 · worktree','reviewer + lead','CI green · gate','integrator'];
+    const POOL=['Auth: magic link sign-in','DB schema: bookings','Booking form validation','Availability API','Stripe deposit checkout','Email confirmations','Staff schedule grid','Calendar sync worker','Refund webhook handler','Playwright smoke test'];
+    let nx=0; const mk=s=>({t:POOL[nx++%POOL.length],s}); let T=[mk(0),mk(0),mk(1),mk(1),mk(2),mk(3)];
+    const draw=()=>{ kb.innerHTML=ST.map((name,i)=>{ const L=T.filter(x=>x.s===i); return '<div class="kc"><div class="kh">'+name+'<b>'+L.length+'</b></div>'+L.map(x=>'<div class="kt">'+x.t+'<em>'+(i===0?'jr-'+(1+POOL.indexOf(x.t)%4)+' · worktree':WHO[i])+'</em></div>').join('')+'</div>'; }).join(''); };
+    draw(); if(!reduce){ let turn=0; setInterval(()=>{ if(document.hidden) return; const cand=T.filter(x=>x.s<3); const pick=cand.sort((a,b)=>b.s-a.s)[turn++%cand.length]; pick.s++; if(pick.s===3){ T=T.filter(x=>x!==pick); T.push(pick); const m=T.filter(x=>x.s===3); if(m.length>2) T=T.filter(x=>x!==m[0]); T.push(mk(0)); } draw(); },1500); } }
   if(k==='leet'){ const h=b.querySelector('.heat'); let seed=7; const rnd=()=>{ seed=(seed*9301+49297)%233280; return seed/233280; }; for(let i=0;i<100;i++){ const r=rnd(), c=i>88?'l3':r>.72?'l3':r>.5?'l2':r>.3?'l1':''; const d=document.createElement('i'); if(c) d.className=c; h.appendChild(d); } }
 }),{threshold:.4});
 document.querySelectorAll('[data-demo]').forEach(d=>dio.observe(d));
@@ -337,18 +362,19 @@ cv.addEventListener('webglcontextlost',e=>{ e.preventDefault(); noGL(); });
 let PR=Math.min(devicePixelRatio||1,innerWidth<820?1.25:1.75); renderer.setPixelRatio(PR); renderer.setSize(innerWidth,innerHeight,false); renderer.setClearColor(0x020203,1);
 const scene=new T3.Scene(), camera=new T3.PerspectiveCamera(40,innerWidth/innerHeight,.05,500);
 
-// ---- masses (core + 6 bodies) shared by fabric shader and JS
-const ORB=[[3.4,.9,.05],[4.7,2.6,.04],[6.0,4.4,.032],[7.3,.3,.026],[8.6,3.4,.021],[10.0,5.6,.017]];
-const PAL=[[.92,.89,.84],[.86,.74,.58],[.66,.72,.8],[.93,.58,.42],[.58,.57,.55],[.88,.84,.7]];
-const SIZE=[.34,.3,.42,.27,.31,.29];
-const NAMES=['cli','ui','docs','leetdaily','db','campus'];
-const MB=new Float32Array(28); // 7 x vec4(x,z,mass,soft)
-const wellAt=(x,z)=>{ let y=0; for(let i=0;i<7;i++){ const dx=x-MB[i*4], dz=z-MB[i*4+1]; y-=MB[i*4+2]/Math.sqrt(dx*dx+dz*dz+MB[i*4+3]*MB[i*4+3]); } return y*.85; };
+// ---- masses (core + 7 bodies) shared by fabric shader and JS
+const ORB=[[3.4,.9,.05],[4.7,2.6,.04],[6.0,4.4,.032],[7.3,.3,.026],[8.6,3.4,.021],[10.0,5.6,.017],[11.3,1.9,.014]];
+const PAL=[[.92,.89,.84],[.86,.74,.58],[.66,.72,.8],[.93,.58,.42],[.58,.57,.55],[.88,.84,.7],[.36,.35,.37]];
+const SIZE=[.34,.3,.42,.27,.31,.29,.33];
+const NAMES=['cli','ui','docs','leetdaily','db','campus','xtruct'];
+const NB=8; // core + 7 bodies
+const MB=new Float32Array(NB*4); // NB x vec4(x,z,mass,soft)
+const wellAt=(x,z)=>{ let y=0; for(let i=0;i<NB;i++){ const dx=x-MB[i*4], dz=z-MB[i*4+1]; y-=MB[i*4+2]/Math.sqrt(dx*dx+dz*dz+MB[i*4+3]*MB[i*4+3]); } return y*.85; };
 const bodyXZ=(i,t)=>{ const o=ORB[i], a=o[1]+t*o[2]; return [Math.cos(a)*o[0], Math.sin(a)*o[0]]; };
 
 // ---- spacetime fabric: dense mesh, analytic anti-aliased grid lines
-const WELL=`uniform vec4 uB[7]; float well(vec2 q){ float y=0.; for(int i=0;i<7;i++){ vec2 d=q-uB[i].xy; y-=uB[i].z/sqrt(dot(d,d)+uB[i].w*uB[i].w);} return y*.85; }`;
-const fabricMat=new T3.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uB:{value:Array.from({length:7},()=>new T3.Vector4())},uT:{value:0},uCam:{value:new T3.Vector3()},uFab:{value:0},uRip:{value:new T3.Vector4(0,0,-99,0)}},
+const WELL=`uniform vec4 uB[8]; float well(vec2 q){ float y=0.; for(int i=0;i<8;i++){ vec2 d=q-uB[i].xy; y-=uB[i].z/sqrt(dot(d,d)+uB[i].w*uB[i].w);} return y*.85; }`;
+const fabricMat=new T3.ShaderMaterial({transparent:true,depthWrite:false,uniforms:{uB:{value:Array.from({length:NB},()=>new T3.Vector4())},uT:{value:0},uCam:{value:new T3.Vector3()},uFab:{value:0},uRip:{value:new T3.Vector4(0,0,-99,0)}},
  vertexShader:`${WELL} uniform float uT; uniform vec4 uRip; varying vec3 vW; varying float vDepth; varying float vWave;
   void main(){ vec3 p=position; float y=well(p.xz)+sin(p.x*.32+uT*.22)*sin(p.z*.28-uT*.18)*.035;
    float dR=distance(p.xz,uRip.xy), age=uT-uRip.z, front=dR-age*5.5; float w=sin(front*2.6)*exp(-abs(front)*1.1)*exp(-age*.55)*uRip.w*step(0.,age); y+=w*.32; vWave=abs(w);
@@ -407,12 +433,13 @@ float n3(vec3 x){ vec3 i=floor(x), f=fract(x); f=f*f*(3.-2.*f);
   return mix(mix(mix(h3(i),h3(i+vec3(1,0,0)),f.x),mix(h3(i+vec3(0,1,0)),h3(i+vec3(1,1,0)),f.x),f.y),
              mix(mix(h3(i+vec3(0,0,1)),h3(i+vec3(1,0,1)),f.x),mix(h3(i+vec3(0,1,1)),h3(i+vec3(1,1,1)),f.x),f.y),f.z); }
 float fbm(vec3 p){ float s=0.,a=.5; for(int i=0;i<5;i++){ s+=a*n3(p); p=p*2.02+vec3(1.7,9.2,3.1); a*=.5; } return s; }`;
-// planet types: 0 cratered rock, 1 banded gas giant, 2 icy ringed giant, 3 rust desert, 4 ocean world, 5 cloud world
-const PTYPE=[0,1,2,3,4,5];
+// planet types: 0 cratered rock, 1 banded gas giant, 2 icy ringed giant, 3 rust desert, 4 ocean world, 5 cloud world, 6 machine world
+const PTYPE=[0,1,2,3,4,5,6];
 const planetMat=i=>new T3.ShaderMaterial({uniforms:{uL:{value:new T3.Vector3()},uOn:{value:0},uSeed:{value:i*3.17+.5},uType:{value:PTYPE[i]},uT:{value:0}},
  vertexShader:`varying vec3 vN; varying vec3 vWP; varying vec3 vO; void main(){ vO=position; vN=normalize(mat3(modelMatrix)*normal); vec4 w=modelMatrix*vec4(position,1.); vWP=w.xyz; gl_Position=projectionMatrix*viewMatrix*w; }`,
  fragmentShader:`uniform vec3 uL; uniform float uOn; uniform float uSeed; uniform float uType; uniform float uT; varying vec3 vN; varying vec3 vWP; varying vec3 vO;
   ${NOISE}
+  float EM=0.;
   vec3 surface(vec3 o, out float spec){ spec=0.; vec3 q=o+uSeed; float t=uType;
    if(t<.5){ // cratered rock
      float n=fbm(q*3.); float cr=0.; for(int k=0;k<3;k++){ vec3 c=floor(q*(3.+float(k)*2.5)); vec3 f=fract(q*(3.+float(k)*2.5))-.5; float r=length(f); float hit=step(.72,h3(c+float(k)*7.)); cr+=hit*(smoothstep(.32,.26,r)*-.22+smoothstep(.36,.32,r)*smoothstep(.26,.3,r)*.18); }
@@ -430,6 +457,12 @@ const planetMat=i=>new T3.ShaderMaterial({uniforms:{uL:{value:new T3.Vector3()},
    if(t<4.5){ // ocean world: deep slate seas, pale islands, cloud wisps
      float land=smoothstep(.5,.56,fbm(q*2.2)); vec3 c=mix(vec3(.12,.17,.24),vec3(.66,.62,.52),land); spec=(1.-land)*.9;
      float cl=smoothstep(.55,.75,fbm(q*3.5+vec3(uT*.03,0.,0.))); return mix(c,vec3(.95),cl*.7); }
+   if(t>5.5){ // machine world: graphite plates with a lattice of lit ember seams (agents at work)
+     float n=fbm(q*3.); vec2 g=vec2(atan(o.z,o.x)*(12./3.14159),asin(clamp(o.y,-1.,1.))*(7./1.5708)); vec2 cell=floor(g), f=fract(g);
+     float lit=step(.5,h3(vec3(cell,uSeed))), e=min(min(f.x,1.-f.x),min(f.y,1.-f.y));
+     float node=smoothstep(.2,.1,length(f-.5))*step(.82,h3(vec3(cell+3.1,uSeed)));
+     EM=(smoothstep(.07,.0,e)*lit*.8+node*1.3)*(.55+.45*sin(uT*1.6+h3(vec3(cell,1.))*6.283))*smoothstep(.97,.85,abs(o.y));
+     return vec3(.3,.29,.31)*(.55+n*.7)*(1.-smoothstep(.07,.0,e)*.35); }
    // cloud world: soft swirling cream clouds
    float sw=fbm(q*2.+vec3(fbm(q*3.)*1.5,0.,uT*.02)); return mix(vec3(.86,.84,.76),vec3(.98,.96,.9),sw)*(.9+sw*.15); }
   void main(){ vec3 N=normalize(vN), L=normalize(uL-vWP), V=normalize(cameraPosition-vWP), H=normalize(L+V);
@@ -442,6 +475,7 @@ const planetMat=i=>new T3.ShaderMaterial({uniforms:{uL:{value:new T3.Vector3()},
    float fr=pow(1.-max(dot(N,V),0.),2.5);
    vec3 atm=mix(vec3(.95,.82,.65),vec3(.75,.85,1.),step(1.5,uType)*step(uType,2.5)+step(3.5,uType)*step(uType,4.5)*.8);
    col+=atm*fr*(.08+day*.55);                                          // atmosphere on the lit limb
+   col+=vec3(1.,.36,.12)*EM*(.35+.65*(1.-day));                        // machine world: seams glow, brightest on the night side
    col+=vec3(1.,.33,.1)*pow(fr,1.5)*uOn*.9;                            // ember rim when in focus
    gl_FragColor=vec4(col,1.); }`});
 const planets=ORB.map((o,i)=>{ const m=new T3.Mesh(new T3.SphereGeometry(1,64,48),planetMat(i)); m.scale.setScalar(SIZE[i]); m.rotation.z=.4*(i%2?1:-1); scene.add(m); return m; });
@@ -457,7 +491,7 @@ const ships=[0,1,2,3].map(n=>{ const m=new T3.Mesh(shipGeo,new T3.MeshBasicMater
   const beacon=new T3.Mesh(new T3.SphereGeometry(.012,8,6),new T3.MeshBasicMaterial({color:0xFF4A1C})); m.add(beacon); beacon.position.z=-.06;
   const TN=46, tg=new T3.BufferGeometry(); tg.setAttribute('position',new T3.BufferAttribute(new Float32Array(TN*3),3)); const tc=new Float32Array(TN*3); for(let i=0;i<TN;i++){ const k=Math.pow(1-i/TN,1.6); tc[i*3]=1*k; tc[i*3+1]=.42*k; tc[i*3+2]=.18*k; } tg.setAttribute('color',new T3.BufferAttribute(tc,3));
   const trail=new T3.Line(tg,new T3.LineBasicMaterial({vertexColors:true,transparent:true,blending:T3.AdditiveBlending,depthWrite:false})); scene.add(trail);
-  return {m,beacon,trail,TN,hist:[],from:n%6,to:(n*2+1)%6,t0:-n*2.7,dur:7+n*1.3}; });
+  return {m,beacon,trail,TN,hist:[],from:n%7,to:(n*2+1)%7,t0:-n*2.7,dur:7+n*1.3}; });
 const DUST=520, dustGeo=new T3.BufferGeometry(), dustP=new Float32Array(DUST*3), dustS=[]; for(let i=0;i<DUST;i++) dustS.push([Math.random()*6.283,1.2+Math.random()*4.2,.05+Math.random()*.12,(Math.random()-.5)*.08]);
 dustGeo.setAttribute('position',new T3.BufferAttribute(dustP,3));
 const dotTex=(()=>{ const c=document.createElement('canvas'); c.width=c.height=32; const g=c.getContext('2d'), gr=g.createRadialGradient(16,16,0,16,16,16); gr.addColorStop(0,'rgba(255,255,255,1)'); gr.addColorStop(.35,'rgba(255,255,255,.55)'); gr.addColorStop(1,'rgba(255,255,255,0)'); g.fillStyle=gr; g.fillRect(0,0,32,32); return new T3.CanvasTexture(c); })();
@@ -470,10 +504,10 @@ let lastActive=-2;
 const bez=(a,c,b,u)=>[ (1-u)*(1-u)*a[0]+2*(1-u)*u*c[0]+u*u*b[0], (1-u)*(1-u)*a[1]+2*(1-u)*u*c[1]+u*u*b[1], (1-u)*(1-u)*a[2]+2*(1-u)*u*c[2]+u*u*b[2] ];
 function life(t,appear){
   // ripple when the focused tool changes
-  const act=(s>1.5&&s<7.6)?clamp(Math.round(s-2),0,5):-1;
+  const act=(s>1.5&&s<8.6)?clamp(Math.round(s-2),0,6):-1;
   if(act!==lastActive){ if(act>=0){ const p=planets[act].position; fabricMat.uniforms.uRip.value.set(p.x,p.z,t,1); } lastActive=act; }
   // ships hop between planets on arcs above the fabric
-  ships.forEach((sh,n)=>{ let u=(t-sh.t0)/sh.dur; if(u>=1){ sh.from=sh.to; sh.to=(sh.to+1+((n+Math.floor(t))%4))%6; sh.t0=t; sh.dur=6+Math.random()*4; u=0; }
+  ships.forEach((sh,n)=>{ let u=(t-sh.t0)/sh.dur; if(u>=1){ sh.from=sh.to; sh.to=(sh.to+1+((n+Math.floor(t))%4))%7; sh.t0=t; sh.dur=6+Math.random()*4; u=0; }
     const vis=appear>.3&&u>=0; sh.m.visible=vis; sh.trail.visible=vis; if(!vis){ sh.hist.length=0; return; }
     const A=planets[sh.from].position, B=planets[sh.to].position, e=u*u*(3-2*u);
     const a=[A.x,A.y+.25,A.z], b=[B.x,B.y+.25,B.z], c=[(A.x+B.x)/2*.8,Math.max(A.y,B.y)+1.4+n*.25,(A.z+B.z)/2*.8];
@@ -523,7 +557,7 @@ function shot(k,t){
   const narrow=camera.aspect<.9;
   if(k<=0) return narrow?[[0,cy+3.6,-10.5],[0,cy-2.6,0]]:[[-.8,cy+3.1,-8.0],[2.45,cy-.35,0]];
   if(k===1) return [[-8.5,3.2,-12],[0,-.8,0]];
-  if(k>=8) return narrow?[[0,cy+3.6,-12.5],[0,cy-3.9,0]]:[[.8,cy+3.1,-8.0],[-2.45,cy-.35,0]];
+  if(k>=9) return narrow?[[0,cy+3.6,-12.5],[0,cy-3.9,0]]:[[.8,cy+3.1,-8.0],[-2.45,cy-.35,0]];
   const i=k-2, b=bodyXZ(i,t), y=wellAt(b[0],b[1]);
   const dir=Math.atan2(b[1],b[0]), side=(i%2===0)?1:-1, a=i===0?dir-1.05:dir+Math.PI-side*.8;
   const D=2.9+SIZE[i]*3.2;
@@ -550,23 +584,23 @@ function frame(now){
   fpsAvg+=((1000/Math.max(1,dt))-fpsAvg)*.05; fpsT+=dt;
   if(fpsT>2000){ fpsT=0; if(fpsAvg<42&&PR>.6){ PR=Math.max(.6,PR*.8); renderer.setPixelRatio(PR); resize(); } else if(fpsAvg>57&&PR<Math.min(devicePixelRatio||1,1.75)-.05){ PR=Math.min(Math.min(devicePixelRatio||1,1.75),PR*1.1); renderer.setPixelRatio(PR); resize(); } }
   const k=1-Math.exp(-dt/(reduce?1:600)); s=lerp(s,sceneT,reduce?1:k); mx=lerp(mx,tmx,k); my=lerp(my,tmy,k);
-  const appear=sm(clamp(s-.35,0,1))*(1-sm(clamp((s-7.3)/.55,0,1))), active=(s>1.5&&s<7.6)?clamp(Math.round(s-2),0,5):-1;
+  const appear=sm(clamp(s-.35,0,1))*(1-sm(clamp((s-8.3)/.55,0,1))), active=(s>1.5&&s<8.6)?clamp(Math.round(s-2),0,6):-1;
   // masses
   MB[0]=0;MB[1]=0;MB[2]=3.1;MB[3]=.62;
-  for(let i=0;i<6;i++){ const b=bodyXZ(i,t); MB[4+i*4]=b[0]; MB[5+i*4]=b[1]; MB[6+i*4]=(.26+SIZE[i]*.5+(i===active?.22:0))*appear; MB[7+i*4]=.4; }
+  for(let i=0;i<7;i++){ const b=bodyXZ(i,t); MB[4+i*4]=b[0]; MB[5+i*4]=b[1]; MB[6+i*4]=(.26+SIZE[i]*.5+(i===active?.22:0))*appear; MB[7+i*4]=.4; }
   fabricMat.uniforms.uB.value.forEach((v,i)=>v.set(MB[i*4],MB[i*4+1],MB[i*4+2],MB[i*4+3]));
-  fabricMat.uniforms.uT.value=t; const fab=sm(clamp((s-.2)/.9,0,1))*(1-sm(clamp((s-7.35)/.6,0,1))); fabricMat.uniforms.uFab.value=fab;
+  fabricMat.uniforms.uT.value=t; const fab=sm(clamp((s-.2)/.9,0,1))*(1-sm(clamp((s-8.35)/.6,0,1))); fabricMat.uniforms.uFab.value=fab;
   // black hole sits in the throat of its well
   const coreY=wellAt(2.4,0)+.1; core.position.set(0,coreY,0); coreLight.set(0,coreY+.4,0);
   diskMat.uniforms.uT.value=t;
   // planets
-  for(let i=0;i<6;i++){ const b=bodyXZ(i,t), on=i===active, sc=SIZE[i]*(on?1.18:1)*Math.max(.001,appear);
+  for(let i=0;i<7;i++){ const b=bodyXZ(i,t), on=i===active, sc=SIZE[i]*(on?1.18:1)*Math.max(.001,appear);
     planets[i].scale.setScalar(lerp(planets[i].scale.x,sc,.08)); planets[i].position.set(b[0],wellAt(b[0],b[1])+planets[i].scale.x*.95+.05,b[1]); planets[i].rotation.y=t*.06+i;
     const u=planets[i].material.uniforms; u.uL.value.copy(coreLight); u.uT.value=t; u.uOn.value=lerp(u.uOn.value,on?1:0,.06); planets[i].visible=appear>.01; }
   // orbit paths hug the fabric
   orbits.forEach((l,i)=>{ const a=l.geometry.attributes.position.array, R=ORB[i][0]; for(let j=0;j<=256;j++){ const th=j/256*6.283, x=Math.cos(th)*R, z=Math.sin(th)*R; a[j*3]=x; a[j*3+1]=-MB[2]/Math.sqrt(R*R+MB[3]*MB[3])*.85+.03; a[j*3+2]=z; } l.geometry.attributes.position.needsUpdate=true; l.material.opacity=.1*appear*fab; });
   // camera
-  const a=clamp(Math.floor(s),0,8), b=clamp(a+1,0,8), f=sm(clamp(s-a,0,1)), A=shot(a,t), Bs=shot(b,t);
+  const a=clamp(Math.floor(s),0,9), b=clamp(a+1,0,9), f=sm(clamp(s-a,0,1)), A=shot(a,t), Bs=shot(b,t);
   { const ra=Math.hypot(A[0][0],A[0][2]), rb=Math.hypot(Bs[0][0],Bs[0][2]); let ta=Math.atan2(A[0][2],A[0][0]), tb=Math.atan2(Bs[0][2],Bs[0][0]); let dth=tb-ta; while(dth>Math.PI) dth-=6.2832; while(dth<-Math.PI) dth+=6.2832;
     const r=Math.max(lerp(ra,rb,f), 5.6+2.4*Math.sin(Math.PI*f)*(Math.abs(dth)>.6?1:0)), th=ta+dth*f;
     eye.set(Math.cos(th)*r+mx*1.1, lerp(A[0][1],Bs[0][1],f)+Math.sin(Math.PI*f)*1.2-my*.7, Math.sin(th)*r); }
@@ -575,7 +609,7 @@ function frame(now){
   halo.lookAt(camera.position); glow.lookAt(camera.position); fabricMat.uniforms.uCam.value.copy(camera.position);
   v4.copy(camera.position).sub(core.position); diskMat.uniforms.uView.value.set(Math.atan2(v4.z,v4.x),0,0);
   if(!reduce) life(t,appear); else ships.forEach(sh=>{sh.m.visible=false;sh.trail.visible=false;});
-  { const SIDE=[-1,-1,-1,1,-1,1,-1,1,1]; const a=clamp(Math.floor(s+.5),0,8); const want=camera.aspect<.9?1:SIDE[a]; const u=finish.uniforms; u.uSide.value=lerp(u.uSide.value,want,k*1.4); u.uNarrow.value=camera.aspect<.9?1:0; }
+  { const SIDE=[-1,-1,-1,1,-1,1,-1,1,-1,1]; const a=clamp(Math.floor(s+.5),0,9); const want=camera.aspect<.9?1:SIDE[a]; const u=finish.uniforms; u.uSide.value=lerp(u.uSide.value,want,k*1.4); u.uNarrow.value=camera.aspect<.9?1:0; }
   finish.uniforms.uT.value=t%10;
   composer.render();
   if(firstFrame){ firstFrame=false; requestAnimationFrame(()=>document.body.classList.add('gl-ready')); }

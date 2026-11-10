@@ -69,7 +69,7 @@ export function GET() {
           gravity.
         </div>
         <div style={{ fontSize: 26, color: '#8C887F', marginTop: 30, fontFamily: 'sans-serif' }}>
-          Six free, open-source developer tools · masst.dev
+          Seven free, open-source developer tools · masst.dev
         </div>
       </div>
     </div>,
