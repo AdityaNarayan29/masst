@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Xtruct — Describe it. Watch it get built.</title>
+<meta name="description" content="Xtruct turns an idea into a spec, a living map of how your product works, and the software itself. A team of Claude Code agents plans, builds, reviews and merges. You sign off.">
+<meta name="theme-color" content="#0C0A0B">
+<link rel="icon" href="/logo.png">
+<link rel="canonical" href="https://xtruct.masst.dev/">
+<meta property="og:type" content="website"><meta property="og:url" content="https://xtruct.masst.dev/">
+<meta property="og:title" content="Xtruct — Describe it. Watch it get built.">
+<meta property="og:description" content="A team of Claude Code agents that designs, maps and builds your product. You approve the spec and sign off.">
+<meta property="og:image" content="https://xtruct.masst.dev/og"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://xtruct.masst.dev/og">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..800,0..100,0..1;1,9..144,300..800,0..100,0..1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C0A0B;--clay:#1A1517;--clay2:#1F191C;--clay3:#241D21;--well:#141012;--tube:#3A2F33;
+  --fg:#EEEAE2;--mute:#B9B4AA;--dim:#8C887F;--ember:#FF5A2E;--ember-t:#FF6A3D;--ember-l:#FF7A55;
+  --ivory:#E9E3D8;--mint:#8FD9B0;--lilac:#C9B8F2;--amber:#F2D08A;--pink:#F3B6C8;--peach:#F5AE7E;
+  --raised:18px 20px 44px rgba(0,0,0,.6),-10px -10px 30px rgba(255,240,230,.03),inset 2px 2px 4px rgba(255,240,230,.07),inset -5px -7px 12px rgba(0,0,0,.5);
+  --raised-s:8px 10px 20px rgba(0,0,0,.55),inset 2px 2px 3px rgba(255,240,230,.07),inset -3px -5px 8px rgba(0,0,0,.5);
+  --well-sh:inset 6px 6px 14px rgba(0,0,0,.7),inset -4px -4px 10px rgba(255,240,230,.04);
+  color-scheme:dark;box-sizing:border-box
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0C0A0B;--fg:#EEEAE2}}
+:root[data-theme="dark"]{--bg:#0C0A0B;--fg:#EEEAE2}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth;scroll-padding-top:110px}
+body{margin:0;background:radial-gradient(ellipse 120% 60% at 50% 0%,#1C1517 0%,var(--bg) 60%) no-repeat,var(--bg);color:var(--fg);font-family:'Geist',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--ember);color:#1A0A04}
+:focus-visible{outline:2px solid var(--ember-l);outline-offset:3px;border-radius:8px}
+.skip{position:absolute;left:16px;top:-60px;z-index:70;background:var(--fg);color:#0b0a09;padding:10px 14px;border-radius:10px;font-size:14px}
+.skip:focus{top:12px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 clamp(16px,4vw,32px)}
+.serif{font-family:'Fraunces',Georgia,serif;font-variation-settings:'SOFT' 100,'WONK' 0;font-weight:400}
+.serif em{font-style:italic;color:var(--ember-t)}
+.kicker{margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+h1,h2,h3{margin:0;font-weight:400}
+p{margin:0}
+
+/* clay surfaces */
+.clay{background:var(--clay);box-shadow:var(--raised)}
+.well{background:var(--well);box-shadow:var(--well-sh)}
+.pebble{box-shadow:var(--raised-s)}
+.c-ember{background:var(--ember);color:#2A0D03;box-shadow:0 12px 24px rgba(255,74,28,.3),inset 3px 4px 6px rgba(255,214,196,.6),inset -4px -6px 10px rgba(140,30,5,.5)}
+.c-ivory{background:var(--ivory);color:#1A1517;box-shadow:8px 10px 20px rgba(0,0,0,.5),inset 3px 3px 5px rgba(255,255,255,.8),inset -4px -6px 10px rgba(90,80,70,.45)}
+.c-mint{background:var(--mint);color:#0D3322;box-shadow:8px 10px 20px rgba(0,0,0,.5),inset 3px 4px 6px rgba(255,255,255,.6),inset -4px -6px 10px rgba(30,100,60,.45)}
+.c-lilac{background:var(--lilac);color:#22164A;box-shadow:8px 10px 20px rgba(0,0,0,.5),inset 3px 4px 6px rgba(255,255,255,.6),inset -4px -6px 10px rgba(80,60,150,.45)}
+.c-amber{background:var(--amber);color:#3D2A06;box-shadow:8px 10px 20px rgba(0,0,0,.5),inset 3px 4px 6px rgba(255,255,255,.6),inset -4px -6px 10px rgba(150,100,20,.45)}
+.c-pink{background:var(--pink);color:#3A0F1E;box-shadow:8px 10px 20px rgba(0,0,0,.5),inset 3px 4px 6px rgba(255,255,255,.6),inset -4px -6px 10px rgba(150,50,80,.45)}
+.c-peach{background:var(--peach);color:#3D1A06;box-shadow:8px 10px 20px rgba(0,0,0,.5),inset 3px 4px 6px rgba(255,255,255,.6),inset -4px -6px 10px rgba(150,70,20,.45)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:12px 24px;border:0;border-radius:999px;font:600 15px/1 'Geist',sans-serif;cursor:pointer;transition:transform .2s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(1px)}
+.btn-ghost{background:var(--clay);color:var(--fg);box-shadow:var(--raised-s)}
+
+/* nav */
+.nav{position:sticky;top:12px;z-index:40;padding-top:12px}
+.nav-bar{display:flex;align-items:center;gap:20px;flex-wrap:wrap;padding:10px 10px 10px 22px;border-radius:999px;background:rgba(26,21,23,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--raised)}
+.logo{display:flex;align-items:center;gap:10px;font-size:24px}
+.logo i{width:14px;height:14px;border-radius:50%;background:var(--ember);box-shadow:inset 2px 2px 3px rgba(255,210,190,.7),inset -2px -3px 4px rgba(140,30,5,.6)}
+.logo small{font:600 11px 'Geist',sans-serif;letter-spacing:.14em;color:var(--dim);text-transform:uppercase}
+.nav-links{display:flex;gap:28px;margin-left:auto;font-size:14px;color:var(--mute)}
+.nav-links a:hover{color:var(--fg)}
+@media (max-width:820px){.nav-links{display:none}.nav-bar .btn{margin-left:auto}}
+
+/* hero */
+.hero{padding:96px 0 0;text-align:center}
+.badge{display:inline-block;margin-bottom:32px;padding:10px 18px;border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.16em;color:var(--mute)}
+.hero h1{max-width:980px;margin:0 auto;font-size:clamp(54px,9.4vw,124px);line-height:.95;letter-spacing:-.02em}
+.hero .lede{max-width:620px;margin:36px auto 0;font-size:clamp(17px,1.6vw,20px);line-height:1.6;color:var(--mute);font-weight:300}
+.install{margin-top:44px;display:inline-flex;align-items:center;gap:14px;padding:8px 8px 8px 24px;border-radius:999px;max-width:100%}
+.install code{font:15px 'Geist Mono',ui-monospace,Menlo,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.install code b{color:var(--ember-t);font-weight:500}
+.prerelease{margin-top:16px;font-size:13px;color:var(--dim)}
+
+/* scaled diagram hosts */
+.fit{position:relative;margin:0 auto;overflow:visible}
+.fit>.stage{position:absolute;left:0;top:0;transform-origin:0 0}
+.scroll-x{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+.stage .card{position:absolute;box-sizing:border-box;display:flex;align-items:center;font-size:15px;line-height:1.3}
+.stage .card.center{justify-content:center;text-align:center}
+.stage .card small{display:block;font-size:12px;opacity:.75;font-weight:400}
+.stage .lbl{position:absolute;font-size:12px;line-height:16px}
+
+/* tubes + flowing light */
+.tube{position:absolute;background:var(--tube);border-radius:4px;overflow:hidden;--c:var(--ember)}
+.tube.h{height:8px;box-shadow:inset 0 2px 2px rgba(255,240,230,.12),inset 0 -2px 3px rgba(0,0,0,.6)}
+.tube.v{width:8px;box-shadow:inset 2px 0 2px rgba(255,240,230,.12),inset -2px 0 3px rgba(0,0,0,.6)}
+.tube::after{content:"";position:absolute;inset:1px;border-radius:inherit;opacity:.85}
+.tube.r::after{background:linear-gradient(90deg,transparent 0,transparent 45%,var(--c) 92%,transparent 100%) 0 0/90px 100% repeat-x;animation:flowx 1.8s linear infinite}
+.tube.l::after{background:linear-gradient(270deg,transparent 0,transparent 45%,var(--c) 92%,transparent 100%) 0 0/90px 100% repeat-x;animation:flowx 1.8s linear infinite reverse}
+.tube.d::after{background:linear-gradient(180deg,transparent 0,transparent 45%,var(--c) 92%,transparent 100%) 0 0/100% 90px repeat-y;animation:flowy 1.8s linear infinite}
+.tube.u::after{background:linear-gradient(0deg,transparent 0,transparent 45%,var(--c) 92%,transparent 100%) 0 0/100% 90px repeat-y;animation:flowy 1.8s linear infinite reverse}
+.tube.mint{--c:var(--mint)}.tube.lilac{--c:var(--lilac)}.tube.amber{--c:var(--amber)}.tube.peach{--c:var(--peach)}
+.dash-h{position:absolute;height:0;border-top:3px dashed rgba(243,182,200,.65)}
+.dash-v{position:absolute;width:0;border-left:3px dashed rgba(243,182,200,.65)}
+@keyframes flowx{from{background-position:0 0}to{background-position:90px 0}}
+@keyframes flowy{from{background-position:0 0}to{background-position:0 90px}}
+
+/* motion */
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes breathe{0%,100%{box-shadow:0 12px 24px rgba(255,74,28,.25),inset 3px 4px 6px rgba(255,214,196,.6),inset -4px -6px 10px rgba(140,30,5,.5)}50%{box-shadow:0 0 0 6px rgba(255,90,46,.18),0 18px 46px rgba(255,74,28,.55),inset 3px 4px 6px rgba(255,214,196,.6),inset -4px -6px 10px rgba(140,30,5,.5)}}
+@keyframes fill{from{width:8%}to{width:58%}}
+@keyframes caret{50%{opacity:0}}
+.float{animation:float 6s ease-in-out infinite}
+.spin-a{animation:spin 38s linear infinite}
+.spin-b{animation:spin 24s linear infinite reverse}
+.pulse{animation:pulse 1.4s ease-in-out infinite}
+.breathe{animation:breathe 5s ease-in-out infinite}
+.fillbar{animation:fill 6s ease-out infinite alternate}
+.caret{animation:caret 1s steps(1) infinite;color:var(--ember)}
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}
+.js .reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  .float,.spin-a,.spin-b,.pulse,.breathe,.fillbar,.caret,.tube::after{animation:none !important}
+  .js .reveal{opacity:1;transform:none;transition:none}
+}
+
+/* sections */
+section{scroll-margin-top:110px}
+.sec{padding-top:150px}
+.sec-head{text-align:center;margin-bottom:56px}
+.sec-head h2{max-width:840px;margin:0 auto;font-size:clamp(38px,5.4vw,68px);line-height:1.02}
+.sec-head p.sub{max-width:600px;margin:22px auto 0;font-size:17px;line-height:1.6;color:var(--mute)}
+.tray{border-radius:40px;padding:20px}
+.tray>.well{border-radius:26px;padding:24px 0}
+
+/* how-it-works flow */
+.flow{display:flex;align-items:center}
+.flow>.node{flex:0 0 auto;border-radius:26px;padding:18px}
+.flow>.tube{position:relative;flex:1 1 40px;min-width:32px}
+.node .tag{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--ember-l)}
+.node.c-ivory .tag,.node.c-ember .tag{color:inherit;opacity:.65}
+.chip{display:flex;gap:8px;align-items:center;padding:7px 10px;border-radius:10px;background:#2A2226;font-size:13px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--mint);flex:none}
+@media (max-width:900px){
+  .flow{flex-direction:column;align-items:stretch;max-width:420px;margin:0 auto}
+  .flow>.tube{flex:0 0 40px;width:8px;height:40px;min-width:0;align-self:center;box-shadow:inset 2px 0 2px rgba(255,240,230,.12),inset -2px 0 3px rgba(0,0,0,.6)}
+  .flow>.tube.r::after{background:linear-gradient(180deg,transparent 0,transparent 45%,var(--c) 92%,transparent 100%) 0 0/100% 90px repeat-y;animation:flowy 1.8s linear infinite}
+}
+@media (max-width:900px){.flow>.node{width:auto !important}}
+
+/* phone-only layouts: vertical diagrams instead of scaled desktop ones */
+.mob{display:none}
+.mcard{display:flex;align-items:center;justify-content:space-between;gap:10px;border-radius:18px;padding:12px 14px;font-size:14px;line-height:1.3;text-align:left}
+.mcard small{display:block;font-size:12px;opacity:.75;font-weight:400}
+.mchip{flex:none;padding:6px 10px;border-radius:999px;font-size:11px;font-weight:600;line-height:1.2}
+.tube.vt{position:relative;display:block;height:26px;margin:0 auto}
+.fan{position:relative;height:32px}
+.mgrid{display:grid;gap:0}
+.mgrid>*{margin:0 4px}
+.mgrid.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.mgrid.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.mgrid.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.mgrid.g4>*{margin:0 3px}
+.mgrid>.fan{margin:0}
+.mgrid>.tube.vt{margin:0 auto}
+.mgrid .mcard{justify-content:center;text-align:center;padding:10px 6px;font-size:13px}
+.orbit-m{position:relative;width:320px;height:320px;margin:24px auto 0}
+.steps-m{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:8px auto 0}
+.steps-m>div{display:flex;align-items:baseline;gap:12px;padding:14px 18px;border-radius:20px}
+.steps-m b{flex:none;font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ember-l)}
+@media (max-width:700px){
+  .desk{display:none !important}
+  .mob{display:block}
+  .sec{padding-top:96px}
+  .sec-head{margin-bottom:32px}
+  .sec-head p.sub{font-size:16px}
+  .nav{top:8px;padding-top:8px}
+  .nav-bar{gap:12px;padding:8px 8px 8px 16px;box-shadow:var(--raised-s)}
+  .logo{font-size:22px}
+  .logo small{display:none}
+  .nav-bar .btn{min-height:40px;padding:10px 16px;font-size:14px}
+  .hero{padding-top:64px}
+  .badge{margin-bottom:24px;font-size:11px;letter-spacing:.12em}
+  .install{padding:6px 6px 6px 16px;gap:10px}
+  .install code{font-size:13px}
+  .install .btn{min-height:40px;padding:10px 16px}
+  .tray{border-radius:28px;padding:12px}
+  .cta{border-radius:32px}
+  .reqs{margin:22px auto 28px}
+  .flow .node>div[aria-hidden]{width:164px;margin-left:auto;margin-right:auto}
+  footer{padding:48px 0 36px}
+}
+
+/* dashboard + memory */
+.duo{display:flex;flex-wrap:wrap;gap:32px}
+.duo>figure{margin:0;min-width:0}
+.dash-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.stat{padding:14px;border-radius:18px;background:var(--clay2);box-shadow:var(--raised-s)}
+.stat p:first-child{font-size:11px;color:var(--dim)}
+.stat p:last-child{margin-top:6px;font-size:26px;font-weight:600}
+@media (max-width:560px){.dash-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.bar{height:12px;border-radius:6px;background:#2A2226;box-shadow:inset 2px 2px 4px rgba(0,0,0,.6)}
+.bar>span{display:block;width:58%;height:12px;border-radius:6px;background:var(--ember);box-shadow:inset 0 3px 3px rgba(255,214,196,.6),inset 0 -3px 4px rgba(140,30,5,.5)}
+figcaption{margin:18px 8px 0;font-size:14px;line-height:1.55;color:var(--dim)}
+figcaption b{color:var(--ember-l);font-weight:500}
+
+/* cta */
+.cta{position:relative;overflow:hidden;border-radius:48px;padding:clamp(64px,9vw,100px) clamp(20px,4vw,40px);text-align:center}
+.cta h2{font-size:clamp(52px,8vw,96px);line-height:1}
+.reqs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:28px auto 36px;max-width:760px}
+.reqs span{padding:10px 16px;border-radius:999px;font-size:13px;color:var(--mute);background:var(--clay2);box-shadow:var(--raised-s)}
+footer{padding:64px 0 48px;color:var(--dim);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center}
+footer a:hover{color:var(--fg)}
+footer .copy{margin-left:auto}
+@media (max-width:700px){footer .wrap{flex-direction:column;align-items:flex-start;gap:10px}footer .copy{margin-left:0}}
+</style>
+</head>
+<body>
+<script>document.documentElement.classList.add('js')</script>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="nav wrap">
+  <nav class="nav-bar" aria-label="Main">
+    <a class="logo serif" href="#top" aria-label="Xtruct home"><i aria-hidden="true"></i>Xtruct <small>by masst</small></a>
+    <div class="nav-links">
+      <a href="#how">How it works</a><a href="#map">The map</a><a href="#team">The team</a><a href="#start">Requirements</a>
+    </div>
+    <a class="btn c-ember" href="#start">Get started</a>
+  </nav>
+</div>
+
+<main id="main">
+  <section class="hero wrap" id="top">
+    <p class="badge clay">EARLY PREVIEW · BUILT ON CLAUDE CODE</p>
+    <h1 class="serif">Describe it.<br>Watch it get <em>built.</em></h1>
+    <p class="lede">Xtruct turns an idea into a spec, a living map of how your product works, and the software itself. A team of AI agents plans, builds, reviews and merges. You sign off.</p>
+    <div class="install well">
+      <code><b>$</b> npx @masst/xtruct new my-app</code>
+      <button class="btn c-ember" type="button" data-copy="npx @masst/xtruct new my-app">Copy</button>
+    </div>
+    <p class="prerelease">Pre-release: the npm package isn’t published yet.</p>
+  </section>
+
+  <section class="wrap" aria-label="Your idea at the centre, with design, build and ship in orbit">
+    <div class="mob" aria-hidden="true" style="overflow:hidden">
+      <div class="orbit-m">
+        <div style="position:absolute;left:10px;top:10px;width:300px;height:300px;border-radius:50%;box-shadow:inset 8px 8px 24px rgba(0,0,0,.55),inset -6px -6px 18px rgba(255,240,230,.035)"></div>
+        <div style="position:absolute;left:60px;top:60px;width:200px;height:200px;border-radius:50%;box-shadow:10px 10px 24px rgba(0,0,0,.5),-6px -6px 18px rgba(255,240,230,.035),inset 2px 2px 4px rgba(255,240,230,.05)"></div>
+        <div class="spin-a" style="position:absolute;left:10px;top:10px;width:300px;height:300px;border-radius:50%">
+          <span class="c-ivory" style="position:absolute;left:139px;top:-11px;width:22px;height:22px;border-radius:50%"></span>
+          <span class="c-mint" style="position:absolute;left:142px;bottom:-8px;width:16px;height:16px;border-radius:50%"></span>
+        </div>
+        <div class="spin-b" style="position:absolute;left:60px;top:60px;width:200px;height:200px;border-radius:50%">
+          <span class="c-lilac" style="position:absolute;left:-9px;top:91px;width:18px;height:18px;border-radius:50%"></span>
+          <span class="c-amber" style="position:absolute;right:-7px;top:93px;width:14px;height:14px;border-radius:50%"></span>
+        </div>
+        <div class="float" style="position:absolute;left:-10px;top:60px;width:340px;height:200px">
+          <div style="position:absolute;inset:0;transform:scale(.72)">
+            <div style="position:absolute;left:5px;top:52px;width:330px;height:96px;border-radius:50%;border:14px solid #E9B8A3;transform:rotate(-16deg);box-shadow:0 18px 30px rgba(0,0,0,.55),inset 0 4px 5px rgba(255,255,255,.45),inset 0 -5px 8px rgba(120,40,20,.55)"></div>
+            <div style="position:absolute;left:85px;top:15px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#FF9673 0%,#FF5A2E 42%,#C9380F 78%,#8E2407 100%);box-shadow:0 34px 60px rgba(0,0,0,.6),inset 10px 12px 20px rgba(255,214,196,.55),inset -16px -22px 30px rgba(110,24,4,.65)"></div>
+            <div style="position:absolute;left:5px;top:52px;width:330px;height:96px;border-radius:50%;border:14px solid #E9B8A3;border-top-color:transparent;border-left-color:transparent;border-right-color:transparent;transform:rotate(-16deg)"></div>
+            <p class="serif" style="position:absolute;left:85px;top:74px;width:170px;text-align:center;font-size:26px;line-height:1;color:#2A0D03">Your<br>idea</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="steps-m mob">
+      <div class="clay"><b>01</b><span class="serif" style="font-size:22px">Design: spec and map</span></div>
+      <div class="clay"><b>02</b><span class="serif" style="font-size:22px">Build: agents at work</span></div>
+      <div class="clay"><b>03</b><span class="serif" style="font-size:22px">Ship: gated, then yours</span></div>
+    </div>
+    <div class="fit desk" data-w="900" data-h="620" data-min="0.3">
+      <div class="stage" style="width:900px;height:620px">
+        <div aria-hidden="true" style="position:absolute;left:160px;top:20px;width:580px;height:580px;border-radius:50%;box-shadow:inset 10px 10px 30px rgba(0,0,0,.55),inset -8px -8px 24px rgba(255,240,230,.035)"></div>
+        <div aria-hidden="true" style="position:absolute;left:250px;top:110px;width:400px;height:400px;border-radius:50%;box-shadow:12px 12px 30px rgba(0,0,0,.5),-8px -8px 22px rgba(255,240,230,.035),inset 2px 2px 4px rgba(255,240,230,.05)"></div>
+        <div aria-hidden="true" class="spin-a" style="position:absolute;left:160px;top:20px;width:580px;height:580px;border-radius:50%">
+          <span class="c-ivory" style="position:absolute;left:277px;top:-13px;width:26px;height:26px;border-radius:50%"></span>
+          <span class="c-mint" style="position:absolute;left:281px;bottom:-9px;width:18px;height:18px;border-radius:50%"></span>
+        </div>
+        <div aria-hidden="true" class="spin-b" style="position:absolute;left:250px;top:110px;width:400px;height:400px;border-radius:50%">
+          <span class="c-lilac" style="position:absolute;left:-11px;top:189px;width:22px;height:22px;border-radius:50%"></span>
+          <span class="c-amber" style="position:absolute;right:-8px;top:192px;width:16px;height:16px;border-radius:50%"></span>
+        </div>
+        <div class="float" style="position:absolute;left:280px;top:210px;width:340px;height:200px">
+          <div aria-hidden="true" style="position:absolute;left:5px;top:52px;width:330px;height:96px;border-radius:50%;border:14px solid #E9B8A3;transform:rotate(-16deg);box-shadow:0 18px 30px rgba(0,0,0,.55),inset 0 4px 5px rgba(255,255,255,.45),inset 0 -5px 8px rgba(120,40,20,.55)"></div>
+          <div aria-hidden="true" style="position:absolute;left:85px;top:15px;width:170px;height:170px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#FF9673 0%,#FF5A2E 42%,#C9380F 78%,#8E2407 100%);box-shadow:0 34px 60px rgba(0,0,0,.6),0 18px 50px rgba(255,74,28,.25),inset 10px 12px 20px rgba(255,214,196,.55),inset -16px -22px 30px rgba(110,24,4,.65)"></div>
+          <div aria-hidden="true" style="position:absolute;left:5px;top:52px;width:330px;height:96px;border-radius:50%;border:14px solid #E9B8A3;border-top-color:transparent;border-left-color:transparent;border-right-color:transparent;transform:rotate(-16deg);filter:drop-shadow(0 6px 6px rgba(80,20,5,.45))"></div>
+          <p class="serif" style="position:absolute;left:85px;top:74px;width:170px;text-align:center;font-size:26px;line-height:1;color:#2A0D03">Your<br>idea</p>
+        </div>
+        <div class="clay" style="position:absolute;left:30px;top:96px;padding:16px 22px;border-radius:22px"><p class="kicker" style="margin:0;color:var(--ember-l);letter-spacing:.16em;font-size:11px">01 · Design</p><p class="serif" style="margin-top:6px;font-size:26px">Spec and map</p></div>
+        <div class="clay" style="position:absolute;left:690px;top:280px;padding:16px 22px;border-radius:22px"><p class="kicker" style="margin:0;color:var(--ember-l);letter-spacing:.16em;font-size:11px">02 · Build</p><p class="serif" style="margin-top:6px;font-size:26px">Agents at work</p></div>
+        <div class="clay" style="position:absolute;left:50px;top:450px;padding:16px 22px;border-radius:22px"><p class="kicker" style="margin:0;color:var(--ember-l);letter-spacing:.16em;font-size:11px">03 · Ship</p><p class="serif" style="margin-top:6px;font-size:26px">Gated, then yours</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="how">
+    <div class="sec-head reveal">
+      <p class="kicker">How it works</p>
+      <h2 class="serif">One sentence in. <em>A running system out.</em></h2>
+      <p class="sub">You write what you want. Agents turn it into a plan, draw the system, build it in parallel and merge it once every check passes.</p>
+    </div>
+    <div class="flow reveal" role="img" aria-label="Your sentence becomes a spec with epics, then an architecture map, then tasks built by agents, then merged code on main">
+      <div class="node c-ivory" style="width:230px;padding:20px">
+        <p class="tag">YOU WRITE</p>
+        <p class="serif" style="margin-top:8px;font-size:22px;line-height:1.15">“Clinics take bookings online and get paid upfront.”<span class="caret" aria-hidden="true">|</span></p>
+      </div>
+      <div class="tube h r" aria-hidden="true"></div>
+      <div class="node clay" style="width:190px;background:var(--clay2)">
+        <p class="tag">SPEC</p>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px"><span class="chip">E1 Foundation</span><span class="chip">E2 Booking flow</span><span class="chip">E3 Payments</span></div>
+      </div>
+      <div class="tube h r" aria-hidden="true"></div>
+      <div class="node clay" style="width:200px;background:var(--clay2)">
+        <p class="tag">MAP</p>
+        <div aria-hidden="true" style="position:relative;height:84px;margin-top:10px">
+          <span style="position:absolute;left:0;top:30px;width:44px;height:24px;border-radius:9px;background:var(--ivory)"></span>
+          <span style="position:absolute;left:44px;top:40px;width:28px;height:4px;background:var(--tube)"></span>
+          <span style="position:absolute;left:72px;top:28px;width:48px;height:28px;border-radius:10px;background:var(--ember)"></span>
+          <span style="position:absolute;left:120px;top:40px;width:20px;height:4px;background:var(--tube)"></span>
+          <span style="position:absolute;left:140px;top:4px;width:24px;height:22px;border-radius:8px;background:var(--lilac)"></span>
+          <span style="position:absolute;left:140px;top:32px;width:24px;height:22px;border-radius:8px;background:var(--amber)"></span>
+          <span style="position:absolute;left:140px;top:58px;width:24px;height:22px;border-radius:8px;background:var(--mint)"></span>
+        </div>
+      </div>
+      <div class="tube h r" aria-hidden="true"></div>
+      <div class="node clay" style="width:190px;background:var(--clay2)">
+        <p class="tag">AGENTS</p>
+        <div style="margin-top:10px;display:flex;flex-direction:column;gap:6px">
+          <span class="chip"><span class="dot pulse"></span>dev-1 · schema</span>
+          <span class="chip"><span class="dot pulse" style="animation-delay:.5s"></span>dev-2 · booking</span>
+          <span class="chip"><span class="dot pulse" style="animation-delay:1s"></span>dev-3 · stripe</span>
+        </div>
+      </div>
+      <div class="tube h r" aria-hidden="true"></div>
+      <div class="node c-ember breathe" style="width:150px;padding:22px 18px;text-align:center">
+        <p class="tag">MERGED</p>
+        <p class="serif" style="margin-top:6px;font-size:30px;line-height:1">main</p>
+        <p style="margin-top:6px;font-size:12px;opacity:.75">you sign off</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="map">
+    <div class="sec-head reveal">
+      <p class="kicker">The map</p>
+      <h2 class="serif">It draws your product <em>before it builds it.</em></h2>
+      <p class="sub">The architect maps every service and request path, so you can see the system before you approve it. Each epic gets a map of its own.</p>
+    </div>
+    <figure class="reveal" style="margin:0">
+      <div class="tray clay desk">
+        <div class="well scroll-x" style="padding:24px 12px">
+          <div class="fit" data-w="1130" data-h="540" data-min="0.6">
+            <div class="stage" role="img" aria-label="Example architecture map. A request goes from Users to CloudFront, the load balancer and the API server. The API reads Redis, writes PostgreSQL and queues jobs on SQS for a worker. CloudFront serves static files from S3. The API verifies sign-in tokens from the OAuth provider." style="width:1130px;height:540px">
+              <div aria-hidden="true" style="position:absolute;left:236px;top:216px;width:878px;height:312px;border-radius:30px;background:rgba(233,184,120,.05);box-shadow:inset 3px 3px 8px rgba(0,0,0,.5),inset -2px -2px 6px rgba(255,240,230,.04)"></div>
+              <div class="dash-h" aria-hidden="true" style="left:210px;top:91px;width:465px"></div>
+              <div class="dash-v" aria-hidden="true" style="left:674px;top:92px;height:178px"></div>
+              <div class="dash-h" aria-hidden="true" style="left:674px;top:268px;width:26px"></div>
+
+              <div class="tube h r mint" aria-hidden="true" style="left:210px;top:276px;width:50px"></div>
+              <div class="tube h r mint" aria-hidden="true" style="left:430px;top:276px;width:50px"></div>
+              <div class="tube v d amber" aria-hidden="true" style="left:341px;top:312px;height:124px"></div>
+              <div class="tube h r mint" aria-hidden="true" style="left:650px;top:287px;width:50px"></div>
+              <div class="tube v u lilac" aria-hidden="true" style="left:781px;top:124px;height:124px"></div>
+              <div class="tube h r lilac" aria-hidden="true" style="left:870px;top:276px;width:50px"></div>
+              <div class="tube v d peach" aria-hidden="true" style="left:781px;top:312px;height:124px"></div>
+              <div class="tube h r peach" aria-hidden="true" style="left:870px;top:464px;width:50px"></div>
+
+              <div class="card c-pink" style="left:40px;top:60px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>Auth Provider</b><small>OAuth 2.0</small></span></div>
+              <div class="card c-lilac" style="left:700px;top:60px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>Redis</b><small>cache · read-through</small></span></div>
+              <div class="card c-ivory" style="left:40px;top:248px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>Users</b><small>browser · mobile</small></span></div>
+              <div class="card c-amber" style="left:260px;top:248px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>CloudFront</b><small>CDN</small></span></div>
+              <div class="card c-amber" style="left:480px;top:248px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>Load Balancer</b><small>HTTPS :443</small></span></div>
+              <div class="card c-ember breathe" style="left:700px;top:248px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>API Server</b><small>FastAPI :8000</small></span></div>
+              <div class="card c-lilac" style="left:920px;top:248px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>PostgreSQL</b><small>primary</small></span></div>
+              <div class="card c-amber" style="left:260px;top:436px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>S3</b><small>static assets</small></span></div>
+              <div class="card c-peach" style="left:700px;top:436px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>SQS</b><small>job queue</small></span></div>
+              <div class="card c-mint" style="left:920px;top:436px;width:170px;height:64px;padding:8px 16px;border-radius:22px"><span><b>Worker</b><small>async jobs</small></span></div>
+
+              <p class="lbl" style="left:252px;top:224px;color:#C9A46A;font-weight:500">AWS · us-west-2</p>
+              <p class="lbl" style="left:686px;top:168px;color:var(--pink)">verify JWT</p>
+              <div class="lbl" style="left:40px;top:360px;width:170px;display:flex;flex-direction:column;gap:8px;color:var(--mute)">
+                <span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:var(--mint)"></span>Backend</span>
+                <span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:var(--lilac)"></span>Database</span>
+                <span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:var(--amber)"></span>Cloud</span>
+                <span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:var(--pink)"></span>Security</span>
+                <span style="display:flex;gap:8px;align-items:center"><span aria-hidden="true" style="width:12px;height:12px;border-radius:4px;background:var(--peach)"></span>Queue</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="tray clay mob">
+        <div class="well" role="img" aria-label="Example architecture map. A request goes from Users to CloudFront, which also serves static files from S3, then the load balancer and the API server, which verifies sign-in tokens from the OAuth provider. The API reads Redis, writes PostgreSQL and queues jobs on SQS for a worker." style="border-radius:20px;padding:20px 12px">
+          <div class="mcard c-ivory"><span><b>Users</b><small>browser · mobile</small></span></div>
+          <div class="tube v d mint vt" aria-hidden="true"></div>
+          <div class="mcard c-amber"><span><b>CloudFront</b><small>CDN</small></span><span class="mchip" style="background:rgba(61,42,6,.14)">serves S3 files</span></div>
+          <div class="tube v d mint vt" aria-hidden="true"></div>
+          <div class="mcard c-amber"><span><b>Load Balancer</b><small>HTTPS :443</small></span></div>
+          <div class="tube v d mint vt" aria-hidden="true"></div>
+          <div class="mcard c-ember breathe"><span><b>API Server</b><small>FastAPI :8000</small></span><span class="mchip c-pink" style="box-shadow:none">verify JWT · OAuth</span></div>
+          <div class="fan" aria-hidden="true">
+            <div class="tube v d lilac" style="left:calc(50% - 4px);top:0;height:32px"></div>
+            <div class="tube h l lilac" style="left:calc(16.667% - 4px);top:12px;width:calc(33.333% + 8px)"></div>
+            <div class="tube h r peach" style="left:calc(50% - 4px);top:12px;width:calc(33.333% + 8px)"></div>
+            <div class="tube v d lilac" style="left:calc(16.667% - 4px);top:12px;height:20px"></div>
+            <div class="tube v d peach" style="left:calc(83.333% - 4px);top:12px;height:20px"></div>
+          </div>
+          <div class="mgrid g3">
+            <div class="mcard c-lilac"><span><b>Redis</b><small>cache</small></span></div>
+            <div class="mcard c-lilac"><span><b>Postgres</b><small>primary</small></span></div>
+            <div class="mcard c-peach"><span><b>SQS</b><small>job queue</small></span></div>
+            <span></span><span></span>
+            <div class="tube v d peach vt" aria-hidden="true"></div>
+            <span></span><span></span>
+            <div class="mcard c-mint"><span><b>Worker</b><small>async jobs</small></span></div>
+          </div>
+        </div>
+      </div>
+      <figcaption><b>Example</b>  A map of a web app on AWS, drawn in Xtruct’s clay style. In the product you click any service to follow its requests.</figcaption>
+    </figure>
+  </section>
+
+  <section class="sec wrap" id="team">
+    <div class="sec-head reveal">
+      <p class="kicker">The team</p>
+      <h2 class="serif">You hold one seat. <em>Agents hold the rest.</em></h2>
+      <p class="sub">Work splits from you down to the developers, then merges back through review, CI and a merge gate before it reaches main.</p>
+    </div>
+    <div class="tray clay reveal desk" style="padding:28px 20px">
+      <div class="scroll-x">
+        <div class="fit" data-w="1080" data-h="744" data-min="0.6">
+          <div class="stage" role="img" aria-label="Org chart: you approve the spec; the architect writes the plan; it splits to two leads, each splitting into two developer agents; their work merges into one gate of reviewer, lead, CI and merge gate; it lands on main, QA walks it and you sign off" style="width:1080px;height:744px">
+            <div class="tube v d" aria-hidden="true" style="left:596px;top:76px;height:64px"></div>
+            <div class="tube v d" aria-hidden="true" style="left:596px;top:196px;height:46px"></div>
+            <div class="tube h l" aria-hidden="true" style="left:416px;top:234px;width:188px"></div>
+            <div class="tube h r" aria-hidden="true" style="left:596px;top:234px;width:188px"></div>
+            <div class="tube v d" aria-hidden="true" style="left:416px;top:234px;height:46px"></div>
+            <div class="tube v d" aria-hidden="true" style="left:776px;top:234px;height:46px"></div>
+            <div class="tube v d lilac" aria-hidden="true" style="left:416px;top:336px;height:46px"></div>
+            <div class="tube v d lilac" aria-hidden="true" style="left:776px;top:336px;height:46px"></div>
+            <div class="tube h l lilac" aria-hidden="true" style="left:326px;top:374px;width:98px"></div>
+            <div class="tube h r lilac" aria-hidden="true" style="left:416px;top:374px;width:98px"></div>
+            <div class="tube h l lilac" aria-hidden="true" style="left:686px;top:374px;width:98px"></div>
+            <div class="tube h r lilac" aria-hidden="true" style="left:776px;top:374px;width:98px"></div>
+            <div class="tube v d lilac" aria-hidden="true" style="left:326px;top:374px;height:46px"></div>
+            <div class="tube v d lilac" aria-hidden="true" style="left:506px;top:374px;height:46px"></div>
+            <div class="tube v d lilac" aria-hidden="true" style="left:686px;top:374px;height:46px"></div>
+            <div class="tube v d lilac" aria-hidden="true" style="left:866px;top:374px;height:46px"></div>
+            <div class="tube v d mint" aria-hidden="true" style="left:326px;top:472px;height:46px"></div>
+            <div class="tube v d mint" aria-hidden="true" style="left:506px;top:472px;height:46px"></div>
+            <div class="tube v d mint" aria-hidden="true" style="left:686px;top:472px;height:46px"></div>
+            <div class="tube v d mint" aria-hidden="true" style="left:866px;top:472px;height:46px"></div>
+            <div class="tube h r mint" aria-hidden="true" style="left:326px;top:510px;width:278px"></div>
+            <div class="tube h l mint" aria-hidden="true" style="left:596px;top:510px;width:278px"></div>
+            <div class="tube v d mint" aria-hidden="true" style="left:596px;top:510px;height:46px"></div>
+            <div class="tube v d" aria-hidden="true" style="left:596px;top:608px;height:60px"></div>
+            <div class="tube h r" aria-hidden="true" style="left:680px;top:692px;width:56px"></div>
+            <div class="tube h r mint" aria-hidden="true" style="left:872px;top:692px;width:48px"></div>
+
+            <div class="card center c-ember" style="left:460px;top:20px;width:280px;height:56px;border-radius:999px;font-weight:700">You · approve the spec</div>
+            <div class="card center c-ivory" style="left:450px;top:140px;width:300px;height:56px;border-radius:22px;font-weight:600">Architect · spec, stack, map</div>
+            <div class="card center" style="left:774px;top:152px;width:112px;height:32px;border-radius:999px;background:var(--clay3);font-size:12px;color:var(--mute);box-shadow:inset 2px 2px 4px rgba(0,0,0,.5)">+ 2 critics</div>
+            <div class="card center c-lilac" style="left:310px;top:280px;width:220px;height:56px;border-radius:22px;font-size:14px;font-weight:600">Lead · Booking flow</div>
+            <div class="card center c-lilac" style="left:670px;top:280px;width:220px;height:56px;border-radius:22px;font-size:14px;font-weight:600">Lead · Payments</div>
+            <div class="card center pebble" style="left:245px;top:420px;width:170px;height:52px;gap:8px;border-radius:18px;background:var(--clay3);font-size:14px"><span class="dot pulse" aria-hidden="true"></span><span>Dev · schema</span></div>
+            <div class="card center pebble" style="left:425px;top:420px;width:170px;height:52px;gap:8px;border-radius:18px;background:var(--clay3);font-size:14px"><span class="dot pulse" aria-hidden="true" style="animation-delay:.35s"></span><span>Dev · form</span></div>
+            <div class="card center pebble" style="left:605px;top:420px;width:170px;height:52px;gap:8px;border-radius:18px;background:var(--clay3);font-size:14px"><span class="dot pulse" aria-hidden="true" style="animation-delay:.7s"></span><span>Dev · checkout</span></div>
+            <div class="card center pebble" style="left:785px;top:420px;width:170px;height:52px;gap:8px;border-radius:18px;background:var(--clay3);font-size:14px"><span class="dot pulse" aria-hidden="true" style="animation-delay:1.05s"></span><span>Dev · deposits</span></div>
+            <div class="card center c-pink" style="left:330px;top:556px;width:540px;height:52px;border-radius:22px;font-size:14px;font-weight:600"><span>Reviewer ✓   ·   Lead ✓   ·   CI ✓   ·   Merge gate ✓</span></div>
+            <div class="card center c-ember breathe" style="left:520px;top:668px;width:160px;height:56px;border-radius:22px;font-weight:700">main</div>
+            <div class="card center c-mint" style="left:736px;top:668px;width:136px;height:56px;border-radius:999px;font-size:14px;font-weight:600">QA walks it</div>
+            <div class="card center c-ivory" style="left:920px;top:668px;width:150px;height:56px;border-radius:999px;font-size:14px;font-weight:600">You sign off</div>
+
+            <p class="lbl" style="left:0;top:40px;font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ember-l)">01 · DESIGN</p>
+            <p class="lbl" style="left:0;top:300px;font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ember-l)">02 · BUILD</p>
+            <p class="lbl" style="left:0;top:574px;font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ember-l)">03 · SHIP</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tray clay mob reveal">
+      <div class="well" role="img" aria-label="Org chart: you approve the spec; the architect writes the plan; it splits to two leads, each splitting into two developer agents; their work merges into one gate of reviewer, lead, CI and merge gate; it lands on main, QA walks it and you sign off" style="border-radius:20px;padding:20px 12px">
+        <div class="mcard c-ember" style="justify-content:center;border-radius:999px;font-weight:700">You · approve the spec</div>
+        <div class="tube v d vt" aria-hidden="true"></div>
+        <div class="mcard c-ivory" style="font-weight:600"><span>Architect · spec, stack, map</span><span class="mchip" style="background:rgba(26,21,23,.1)">+2 critics</span></div>
+        <div class="fan" aria-hidden="true">
+          <div class="tube v d" style="left:calc(50% - 4px);top:0;height:20px"></div>
+          <div class="tube h l" style="left:calc(25% - 4px);top:12px;width:calc(25% + 8px)"></div>
+          <div class="tube h r" style="left:calc(50% - 4px);top:12px;width:calc(25% + 8px)"></div>
+          <div class="tube v d" style="left:calc(25% - 4px);top:12px;height:20px"></div>
+          <div class="tube v d" style="left:calc(75% - 4px);top:12px;height:20px"></div>
+        </div>
+        <div class="mgrid g2">
+          <div class="mcard c-lilac" style="font-weight:600"><span>Lead<small>Booking flow</small></span></div>
+          <div class="mcard c-lilac" style="font-weight:600"><span>Lead<small>Payments</small></span></div>
+          <div class="fan" aria-hidden="true">
+            <div class="tube v d lilac" style="left:calc(50% - 4px);top:0;height:20px"></div>
+            <div class="tube h l lilac" style="left:calc(25% - 4px);top:12px;width:calc(25% + 8px)"></div>
+            <div class="tube h r lilac" style="left:calc(50% - 4px);top:12px;width:calc(25% + 8px)"></div>
+            <div class="tube v d lilac" style="left:calc(25% - 4px);top:12px;height:20px"></div>
+            <div class="tube v d lilac" style="left:calc(75% - 4px);top:12px;height:20px"></div>
+          </div>
+          <div class="fan" aria-hidden="true">
+            <div class="tube v d lilac" style="left:calc(50% - 4px);top:0;height:20px"></div>
+            <div class="tube h l lilac" style="left:calc(25% - 4px);top:12px;width:calc(25% + 8px)"></div>
+            <div class="tube h r lilac" style="left:calc(50% - 4px);top:12px;width:calc(25% + 8px)"></div>
+            <div class="tube v d lilac" style="left:calc(25% - 4px);top:12px;height:20px"></div>
+            <div class="tube v d lilac" style="left:calc(75% - 4px);top:12px;height:20px"></div>
+          </div>
+        </div>
+        <div class="mgrid g4">
+          <div class="mcard pebble" style="background:var(--clay3);flex-direction:column;gap:4px"><span class="dot pulse" aria-hidden="true"></span><span>schema</span></div>
+          <div class="mcard pebble" style="background:var(--clay3);flex-direction:column;gap:4px"><span class="dot pulse" aria-hidden="true" style="animation-delay:.35s"></span><span>form</span></div>
+          <div class="mcard pebble" style="background:var(--clay3);flex-direction:column;gap:4px"><span class="dot pulse" aria-hidden="true" style="animation-delay:.7s"></span><span>checkout</span></div>
+          <div class="mcard pebble" style="background:var(--clay3);flex-direction:column;gap:4px"><span class="dot pulse" aria-hidden="true" style="animation-delay:1.05s"></span><span>deposits</span></div>
+        </div>
+        <div class="fan" aria-hidden="true">
+          <div class="tube v d mint" style="left:calc(12.5% - 4px);top:0;height:20px"></div>
+          <div class="tube v d mint" style="left:calc(37.5% - 4px);top:0;height:20px"></div>
+          <div class="tube v d mint" style="left:calc(62.5% - 4px);top:0;height:20px"></div>
+          <div class="tube v d mint" style="left:calc(87.5% - 4px);top:0;height:20px"></div>
+          <div class="tube h r mint" style="left:calc(12.5% - 4px);top:12px;width:calc(37.5% + 8px)"></div>
+          <div class="tube h l mint" style="left:calc(50% - 4px);top:12px;width:calc(37.5% + 8px)"></div>
+          <div class="tube v d mint" style="left:calc(50% - 4px);top:12px;height:20px"></div>
+        </div>
+        <div class="mcard c-pink" style="justify-content:center;text-align:center;font-weight:600;font-size:13px">Reviewer ✓ · Lead ✓ · CI ✓ · Merge gate ✓</div>
+        <div class="tube v d vt" aria-hidden="true"></div>
+        <div class="mcard c-ember breathe" style="justify-content:center;font-weight:700">main</div>
+        <div class="tube v d vt" aria-hidden="true"></div>
+        <div class="mcard c-mint" style="justify-content:center;border-radius:999px;font-weight:600">QA walks it</div>
+        <div class="tube v d mint vt" aria-hidden="true"></div>
+        <div class="mcard c-ivory" style="justify-content:center;border-radius:999px;font-weight:600">You sign off</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec wrap" aria-label="Dashboard and memory">
+    <div class="duo">
+      <figure class="reveal" style="flex:1.3 1 560px">
+        <div class="tray clay" style="border-radius:34px;padding:16px">
+          <div class="well" style="border-radius:22px;padding:18px">
+            <div style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:16px">
+              <span style="font-size:14px;font-weight:600">acme-bookings</span>
+              <span class="c-amber" style="padding:4px 10px;border-radius:999px;font-size:11px;font-weight:600">Demo data</span>
+              <span style="margin-left:auto;display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--dim)"><span class="dot pulse" aria-hidden="true" style="width:7px;height:7px"></span>live</span>
+            </div>
+            <div class="dash-stats">
+              <div class="stat"><p>Agents working</p><p>11<span style="font-size:13px;color:var(--dim);font-weight:400"> / 25</span></p></div>
+              <div class="stat"><p>In review</p><p>3</p></div>
+              <div class="stat"><p>Merged · 24h</p><p>4</p></div>
+              <div class="stat"><p>CI</p><p style="color:#F39AB2">1 failing</p></div>
+            </div>
+            <div class="well" style="margin-top:14px;padding:14px 16px;border-radius:18px;background:#18131A">
+              <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--mute)"><span>E2 · Booking flow</span><span>7 / 12 merged</span></div>
+              <div class="bar" style="margin-top:10px"><span class="fillbar"></span></div>
+            </div>
+          </div>
+        </div>
+        <figcaption><b>The dashboard</b>  Every agent, pull request and epic, live on your machine with <code style="font-family:'Geist Mono',monospace;font-size:13px">xtruct dashboard</code>. Shown with demo data.</figcaption>
+      </figure>
+      <figure class="reveal" style="flex:1 1 380px">
+        <div class="clay" style="height:100%;border-radius:34px;padding:32px">
+          <h3 class="serif" style="font-size:34px;line-height:1.05">It remembers where you left off.</h3>
+          <div class="well" style="margin-top:18px;border-radius:20px;padding:18px;font-size:13px;line-height:1.55;color:var(--mute)">
+            <p style="margin-bottom:10px;color:var(--fg);font-weight:600">Where you left off · acme-bookings</p>
+            <p style="margin-bottom:6px"><span style="color:var(--amber)">● blocked</span>  Stripe keys for deposits</p>
+            <p style="margin-bottom:6px"><span style="color:var(--mint)">● doing</span>  E2 booking flow, 7 of 12</p>
+            <p><span style="color:var(--dim)">● last ask</span>  “add SMS reminders”</p>
+          </div>
+          <p style="margin-top:18px;font-size:14px;line-height:1.6;color:var(--dim)">Every Claude Code session opens with this, across every project on your machine.</p>
+        </div>
+      </figure>
+    </div>
+  </section>
+
+  <section class="sec wrap" id="start" style="padding-bottom:40px">
+    <div class="cta clay reveal">
+      <div aria-hidden="true" class="float desk" style="position:absolute;right:7%;top:40px;width:90px;height:90px;border-radius:50%;background:radial-gradient(circle at 34% 28%,#FF9673 0%,#FF5A2E 42%,#C9380F 78%,#8E2407 100%);box-shadow:0 20px 40px rgba(0,0,0,.6),inset 6px 8px 12px rgba(255,214,196,.55),inset -10px -14px 20px rgba(110,24,4,.65)"></div>
+      <div aria-hidden="true" class="float c-lilac desk" style="position:absolute;left:8%;bottom:50px;width:40px;height:40px;border-radius:50%;animation-delay:2s"></div>
+      <h2 class="serif" style="position:relative">Be the <em>founder.</em></h2>
+      <p style="position:relative;margin-top:24px;font-size:18px;color:var(--mute)">Free and MIT licensed. Here’s what you need before day one.</p>
+      <div class="reqs" style="position:relative">
+        <span>Claude Code with workflows</span><span>ClickUp connector</span><span>git + gh (logged in)</span><span>jq + make</span><span>Node 18.3+</span>
+      </div>
+      <div class="install well" style="position:relative;margin-top:0">
+        <code><b>$</b> npx @masst/xtruct new my-app</code>
+        <button class="btn c-ember" type="button" data-copy="npx @masst/xtruct new my-app">Copy</button>
+      </div>
+      <p class="prerelease" style="position:relative">Pre-release: not on npm yet.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo serif" href="#top" style="font-size:20px;color:var(--fg)"><i aria-hidden="true" style="width:10px;height:10px"></i>Xtruct</a>
+    <span>Part of <a href="https://masst.dev" style="color:var(--mute);text-decoration:underline;text-underline-offset:3px">masst.dev</a> · tools with gravity</span>
+    <span class="copy">© 2026 Masst · made by Aditya Narayan</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  // Scale fixed-size diagrams to fit their column, never below their minimum (then they scroll sideways).
+  var fits=[].slice.call(document.querySelectorAll('.fit'));
+  function layout(){
+    fits.forEach(function(f){
+      var w=+f.dataset.w,h=+f.dataset.h,min=+(f.dataset.min||0.5);
+      var p=f.parentElement,cs=getComputedStyle(p);
+      var avail=(p.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight))||w;
+      var s=Math.max(min,Math.min(1,avail/w));
+      var stage=f.firstElementChild;
+      stage.style.transform='scale('+s+')';
+      f.style.width=Math.round(w*s)+'px';
+      f.style.height=Math.round(h*s)+'px';
+    });
+  }
+  layout();
+  // Wide diagrams that still overflow on phones start scrolled to their middle.
+  document.querySelectorAll('.scroll-x').forEach(function(s){
+    if(s.scrollWidth>s.clientWidth)s.scrollLeft=(s.scrollWidth-s.clientWidth)/2;
+  });
+  window.addEventListener('resize',layout);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(layout);
+
+  // Reveal sections as they scroll into view.
+  var items=document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -10% 0px'});
+    items.forEach(function(el){io.observe(el)});
+  }else{items.forEach(function(el){el.classList.add('in')})}
+
+  // Copy buttons.
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.dataset.copy,done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)};
+      if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,done);else done();
+    });
+  });
+})();
+</script>
+</body>
+</html>
