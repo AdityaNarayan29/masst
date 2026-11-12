@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-pm="npm">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -78,6 +78,14 @@ p{margin:0}
 .install code{font:15px 'Geist Mono',ui-monospace,Menlo,monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .install code b{color:var(--ember-t);font-weight:500}
 .prerelease{margin-top:16px;font-size:13px;color:var(--dim)}
+.prerelease code{font-family:'Geist Mono',monospace;color:var(--mute)}
+.pm{display:inline-flex;gap:4px;margin-top:40px;padding:5px;border-radius:999px;background:var(--well);box-shadow:var(--well-sh)}
+.pm button{min-height:36px;padding:8px 18px;border:0;border-radius:999px;background:transparent;color:var(--dim);font:600 13px 'Geist',sans-serif;cursor:pointer;transition:color .2s,background .2s}
+.pm button:hover{color:var(--fg)}
+.pm button[aria-selected="true"]{background:var(--clay2);color:var(--fg);box-shadow:var(--raised-s)}
+.pm+.install{margin-top:14px}
+[data-pm-show]{display:none}
+html[data-pm="npm"] [data-pm-show="npm"],html[data-pm="py"] [data-pm-show="py"]{display:inline}
 
 /* scaled diagram hosts */
 .fit{position:relative;margin:0 auto;overflow:visible}
@@ -166,12 +174,13 @@ section{scroll-margin-top:110px}
 .mgrid>.tube.vt{margin:0 auto}
 .mgrid .mcard{justify-content:center;text-align:center;padding:10px 6px;font-size:13px}
 .orbit-m{position:relative;width:320px;height:320px;margin:24px auto 0}
-.steps-m{display:flex;flex-direction:column;gap:12px;max-width:340px;margin:8px auto 0}
+.steps-m{flex-direction:column;gap:12px;max-width:340px;margin:8px auto 0}
 .steps-m>div{display:flex;align-items:baseline;gap:12px;padding:14px 18px;border-radius:20px}
 .steps-m b{flex:none;font-size:11px;font-weight:600;letter-spacing:.16em;color:var(--ember-l)}
 @media (max-width:700px){
   .desk{display:none !important}
   .mob{display:block}
+  .steps-m.mob{display:flex}
   .sec{padding-top:96px}
   .sec-head{margin-bottom:32px}
   .sec-head p.sub{font-size:16px}
@@ -236,11 +245,15 @@ footer .copy{margin-left:auto}
     <p class="badge clay">EARLY PREVIEW · BUILT ON CLAUDE CODE</p>
     <h1 class="serif">Describe it.<br>Watch it get <em>built.</em></h1>
     <p class="lede">Xtruct turns an idea into a spec, a living map of how your product works, and the software itself. A team of AI agents plans, builds, reviews and merges. You sign off.</p>
-    <div class="install well">
-      <code><b>$</b> npx @masst/xtruct new my-app</code>
-      <button class="btn c-ember" type="button" data-copy="npx @masst/xtruct new my-app">Copy</button>
-    </div>
-    <p class="prerelease">Pre-release: the npm package isn’t published yet.</p>
+    <div><div class="pm" role="tablist" aria-label="Install with">
+        <button type="button" role="tab" data-pm-pick="npm" aria-selected="true">npm</button>
+        <button type="button" role="tab" data-pm-pick="py" aria-selected="false">Python</button>
+      </div>
+      <div class="install well">
+        <code><b>$</b> <span data-pm-show="npm">npx @masst/xtruct new my-app</span><span data-pm-show="py">uvx xtruct new my-app</span></code>
+        <button class="btn c-ember" type="button" data-copy-npm="npx @masst/xtruct new my-app" data-copy-py="uvx xtruct new my-app">Copy</button>
+      </div>
+      <p class="prerelease"><span data-pm-show="npm">Or install it: <code>npm i -g @masst/xtruct</code></span><span data-pm-show="py">Or install it: <code>uv tool install xtruct</code> · <code>pip install xtruct</code></span> · needs Node 18.3+</p></div>
   </section>
 
   <section class="wrap" aria-label="Your idea at the centre, with design, build and ship in orbit">
@@ -585,11 +598,15 @@ footer .copy{margin-left:auto}
       <div class="reqs" style="position:relative">
         <span>Claude Code with workflows</span><span>ClickUp connector</span><span>git + gh (logged in)</span><span>jq + make</span><span>Node 18.3+</span>
       </div>
-      <div class="install well" style="position:relative;margin-top:0">
-        <code><b>$</b> npx @masst/xtruct new my-app</code>
-        <button class="btn c-ember" type="button" data-copy="npx @masst/xtruct new my-app">Copy</button>
+      <div class="pm" role="tablist" aria-label="Install with" style="position:relative;margin-top:0">
+        <button type="button" role="tab" data-pm-pick="npm" aria-selected="true">npm</button>
+        <button type="button" role="tab" data-pm-pick="py" aria-selected="false">Python</button>
       </div>
-      <p class="prerelease" style="position:relative">Pre-release: not on npm yet.</p>
+      <div class="install well" style="position:relative">
+        <code><b>$</b> <span data-pm-show="npm">npx @masst/xtruct new my-app</span><span data-pm-show="py">uvx xtruct new my-app</span></code>
+        <button class="btn c-ember" type="button" data-copy-npm="npx @masst/xtruct new my-app" data-copy-py="uvx xtruct new my-app">Copy</button>
+      </div>
+      <p class="prerelease" style="position:relative"><span data-pm-show="npm">Or install it: <code>npm i -g @masst/xtruct</code></span><span data-pm-show="py">Or install it: <code>uv tool install xtruct</code> · <code>pip install xtruct</code></span> · needs Node 18.3+</p>
     </div>
   </section>
 </main>
@@ -633,10 +650,21 @@ footer .copy{margin-left:auto}
     items.forEach(function(el){io.observe(el)});
   }else{items.forEach(function(el){el.classList.add('in')})}
 
-  // Copy buttons.
-  document.querySelectorAll('[data-copy]').forEach(function(b){
+  // npm | Python switch: every install block on the page follows the same choice.
+  var root=document.documentElement;
+  function pick(pm){
+    root.dataset.pm=pm;
+    document.querySelectorAll('[data-pm-pick]').forEach(function(t){t.setAttribute('aria-selected',String(t.dataset.pmPick===pm))});
+    try{localStorage.setItem('xtruct-pm',pm)}catch(e){}
+  }
+  var saved='npm';try{saved=localStorage.getItem('xtruct-pm')||'npm'}catch(e){}
+  pick(saved==='py'?'py':'npm');
+  document.querySelectorAll('[data-pm-pick]').forEach(function(t){t.addEventListener('click',function(){pick(t.dataset.pmPick)})});
+
+  // Copy buttons copy the command for the chosen installer.
+  document.querySelectorAll('[data-copy-npm]').forEach(function(b){
     b.addEventListener('click',function(){
-      var t=b.dataset.copy,done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)};
+      var t=root.dataset.pm==='py'?b.dataset.copyPy:b.dataset.copyNpm,done=function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1600)};
       if(navigator.clipboard)navigator.clipboard.writeText(t).then(done,done);else done();
     });
   });
